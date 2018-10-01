@@ -1,9 +1,8 @@
 #include <iostream>
 #include <windows.h>
 #include <stdio.h>
+#include "Manager.h"
 #include "NYTimer.h"
-#define SCREEN_HEIGHT 500
-#define SCREEN_WIDTH 500
 
 using namespace std;
 
@@ -11,7 +10,7 @@ int main()
 {
     NYTimer time;
     time.start();
-    HANDLE hOutput = (HANDLE)GetStdHandle( STD_OUTPUT_HANDLE );
+    /*HANDLE hOutput = (HANDLE)GetStdHandle( STD_OUTPUT_HANDLE );
 
     COORD dwBufferSize = { SCREEN_WIDTH,SCREEN_HEIGHT };
     COORD dwBufferCoord = { 0, 0 };
@@ -30,7 +29,7 @@ int main()
     buffer[5][12].Attributes = 0x0A;
 
     WriteConsoleOutput( hOutput, (CHAR_INFO *)buffer, dwBufferSize,
-    dwBufferCoord, &rcRegion );
+    dwBufferCoord, &rcRegion );*/
     cout << time.getElapsedSeconds(false);
 
     return 0;

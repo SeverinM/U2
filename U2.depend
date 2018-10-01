@@ -1,8 +1,9 @@
 # depslib dependency file v1.0
-1538416335 source:c:\users\séverin\documents\u2\main.cpp
+1538418484 source:c:\users\séverin\documents\u2\main.cpp
 	<iostream>
 	<windows.h>
 	<stdio.h>
+	"Manager.h"
 	"NYTimer.h"
 
 1538415417 c:\users\séverin\documents\u2\nytimer.h
@@ -12,4 +13,10 @@
 
 1538417174 c:\users\séverin\documents\u2\include\nytimer.h
 	<windows.h>
+
+1538421516 c:\users\séverin\documents\u2\include\manager.h
+	<windows.h>
+
+1538418321 source:c:\users\séverin\documents\u2\src\manager.cpp
+	"Manager.h"
 
