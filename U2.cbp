@@ -37,6 +37,8 @@
 		<Unit filename="Manager.h" />
 		<Unit filename="include/NYTimer.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="moveMain.cpp" />
+		<Unit filename="moveMain.h" />
 		<Unit filename="src/NYTimer.cpp" />
 		<Extensions>
 			<code_completion />
