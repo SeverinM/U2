@@ -1,9 +1,14 @@
 #include "Perso.h"
 #include "Positionable.h"
 
-Perso::Perso()
+Perso::Perso() : Positionable(1,1)
 {
-    Positionable();
+
+}
+
+Perso::Perso(int posX,int posY) :  Positionable(posX, posY)
+{
+
 }
 
 Perso::~Perso()
@@ -23,3 +28,4 @@ void Perso::Mourir(){
 void Perso::Tirer(){
     //TO DO :
 }
+

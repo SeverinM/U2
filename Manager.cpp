@@ -8,6 +8,8 @@ Manager::Manager()
     iy = 5;
     memx = ix;
     memy = iy;
+    h = Hero(3,7);
+    e = Ennemi(12,12);
     id = (HANDLE)GetStdHandle(STD_OUTPUT_HANDLE);
     bufferSize = { SIZEX, SIZEY };
     bufferCoord = {0,0};
@@ -38,16 +40,16 @@ void Manager::MainLoop(float time)
         key =_getch();
         switch(key){
             case 'z':
-                ix--;
+                h.moveBy(0,-1);
                 break;
             case 's':
-                ix++;
+                h.moveBy(0,1);
                 break;
             case 'q':
-                iy--;
+                h.moveBy(-1,0);
                 break;
             case 'd':
-                iy++;
+                h.moveBy(1,0);
                 break;
             case ' ':
                 stopLoop();
@@ -56,6 +58,8 @@ void Manager::MainLoop(float time)
                     break;
         }
     }
+
+
 
     ReadConsoleOutput(id, (CHAR_INFO *)buffer, bufferSize, bufferCoord , &region);
     for (int x = 0; x < SIZEY; x++)
@@ -66,7 +70,12 @@ void Manager::MainLoop(float time)
             buffer[y][x].Attributes = x;
         }
     }
-    buffer[ix][iy].Char.AsciiChar = 'i';
-    buffer[ix][iy].Attributes = 0x0B;
+    std::pair<int,int> posToDraw =  h.getPos();
+    buffer[posToDraw.second][posToDraw.first].Char.AsciiChar = 'H';
+    buffer[posToDraw.second][posToDraw.first].Attributes = 0x0B;
+    posToDraw =  e.getPos();
+    buffer[posToDraw.second][posToDraw.first].Char.AsciiChar = 'e';
+    buffer[posToDraw.second][posToDraw.first].Attributes = 0x0E;
+
     WriteConsoleOutput(id, (CHAR_INFO *)buffer, bufferSize, bufferCoord, &region);
 }

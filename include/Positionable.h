@@ -6,9 +6,10 @@
 class Positionable
 {
     public:
-        Positionable();
-        virtual moveBy(int posXBy, int posY);
+        Positionable(int startPosX,int startPosY);
+        moveBy(int posXBy, int posY);
         float getVitesse();
+        std::pair<int,int> getPos();
     private:
         int posX;
         int posY;

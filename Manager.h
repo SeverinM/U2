@@ -3,6 +3,8 @@
 #define SIZEX 20
 #define SIZEY 20
 #include <windows.h>
+#include "Hero.h"
+#include "Ennemi.h"
 
 class Manager
 {
@@ -13,6 +15,8 @@ class Manager
         bool isStop();
         int ix;
         int iy;
+        /*test : */Hero h;
+        /*test : */Ennemi e;
     private:
         CHAR_INFO buffer[SIZEX][SIZEY];
         bool stop;
