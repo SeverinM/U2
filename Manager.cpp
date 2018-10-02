@@ -66,12 +66,7 @@ void Manager::MainLoop(float time)
             buffer[y][x].Attributes = x;
         }
     }
-
-    buffer[5][10].Char.AsciiChar = 'H';
-    buffer[5][10].Attributes = 0x0E;
-    buffer[iy][ix].Char.AsciiChar = 'i';
-    buffer[iy][ix].Attributes = 0x0B;
-    buffer[5][12].Char.AsciiChar = '!';
-    buffer[5][12].Attributes = 0x0A;
+    buffer[ix][iy].Char.AsciiChar = 'i';
+    buffer[ix][iy].Attributes = 0x0B;
     WriteConsoleOutput(id, (CHAR_INFO *)buffer, bufferSize, bufferCoord, &region);
 }
