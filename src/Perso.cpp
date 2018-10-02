@@ -1,5 +1,5 @@
-#include "Perso.h"
-#include "Positionable.h"
+#include "../include/Perso.h"
+#include "../include/Positionable.h"
 
 Perso::Perso() : Positionable(1,1)
 {

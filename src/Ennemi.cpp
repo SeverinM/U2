@@ -1,4 +1,4 @@
-#include "Ennemi.h"
+#include "../include/Ennemi.h"
 
 Ennemi::Ennemi() : Perso()
 {
