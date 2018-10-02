@@ -16,5 +16,5 @@ Ennemi::~Ennemi()
 }
 
 std::pair<int,int> Ennemi::directionTir(){
-    return std::pair<int,int>(-1,0);
+    return std::pair<int,int>(0,1);
 }
