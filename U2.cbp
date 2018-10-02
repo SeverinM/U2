@@ -33,6 +33,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Manager.cpp" />
+		<Unit filename="Manager.h" />
 		<Unit filename="NYTimer.cpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
