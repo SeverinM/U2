@@ -2,9 +2,10 @@
 #define MANAGER_H
 #define SIZEX 70
 #define SIZEY 70
-#include <windows.h>
-#include "Hero.h"
-#include "Ennemi.h"
+#define _WIN32_WINNT 0x0500
+#include<windows.h>
+#include "include/Hero.h"
+#include "include/Ennemi.h"
 
 class Manager
 {

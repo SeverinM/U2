@@ -76,7 +76,7 @@ void Manager::MainLoop(float time)
         }
     }
     buffer[ix][iy].Char.AsciiChar = 'i';
-    buffer[ix][iy].Attributes = Visuel::getColor(Visuel::Couleur::Violet, Visuel::Couleur::Violet);
+    buffer[ix][iy].Attributes = Visuel::getColor(Visuel::Violet, Visuel::Violet);
     std::pair<int,int> posToDraw =  h.getPos();
     buffer[posToDraw.second][posToDraw.first].Char.AsciiChar = 'H';
     buffer[posToDraw.second][posToDraw.first].Attributes = 0x0B;
