@@ -1,6 +1,7 @@
 #include "Manager.h"
 #include <conio.h>
 #include "include/Visuel.h"
+#include <iostream>
 
 Manager::Manager()
 {
@@ -23,6 +24,8 @@ Manager::Manager()
     GetConsoleCursorInfo(id, &cursorInfo);
     cursorInfo.bVisible = false;
     SetConsoleCursorInfo(id, &cursorInfo);
+    Visuel * vis = Visuel::createFromFile("Spaceship.txt");
+    h.addAnimation(vis);
 }
 
 
@@ -56,9 +59,6 @@ void Manager::MainLoop(float time)
             case 'd':
                 h.moveBy(1,0);
                 break;
-            case ' ':
-                stopLoop();
-                break;
             default :
                     break;
         }
@@ -67,6 +67,8 @@ void Manager::MainLoop(float time)
 
 
     ReadConsoleOutput(id, (CHAR_INFO *)buffer, bufferSize, bufferCoord , &region);
+
+
     for (int x = 0; x < SIZEY; x++)
     {
         for (int y = 0 ; y < SIZEY; y++)
@@ -75,14 +77,19 @@ void Manager::MainLoop(float time)
             buffer[y][x].Attributes = x;
         }
     }
-    buffer[ix][iy].Char.AsciiChar = 'i';
+
+    /*buffer[ix][iy].Char.AsciiChar = 'i';
     buffer[ix][iy].Attributes = Visuel::getColor(Visuel::Violet, Visuel::Violet);
     std::pair<int,int> posToDraw =  h.getPos();
     buffer[posToDraw.second][posToDraw.first].Char.AsciiChar = 'H';
-    buffer[posToDraw.second][posToDraw.first].Attributes = 0x0B;
-    posToDraw =  e.getPos();
-    buffer[posToDraw.second][posToDraw.first].Char.AsciiChar = 'e';
-    buffer[posToDraw.second][posToDraw.first].Attributes = 0x0E;
-
+    buffer[posToDraw.second][posToDraw.first].Attributes = 0x0B;*/
+    for (auto const& element : h.getAnimation(0))
+    {
+        if (element.first.first > 0 && element.first.first < SIZEX &&
+            element.first.second > 0 && element.first.second < SIZEY )
+        {
+            buffer[element.first.second][element.first.first] = *(element.second);
+        }
+    }
     WriteConsoleOutput(id, (CHAR_INFO *)buffer, bufferSize, bufferCoord, &region);
 }

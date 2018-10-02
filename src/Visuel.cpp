@@ -1,6 +1,6 @@
 #include "../include/Visuel.h"
 
-map<pair<int, int>, CHAR_INFO *> Visuel::getPositions()
+map<pair<int, int>, CHAR_INFO *>& Visuel::getPositions()
 {
     return positions;
 };
@@ -19,3 +19,6 @@ void Visuel::deleteValue(int x, int y)
         positions.erase(positions.find(pos));
     }
 };
+
+Visuel::Visuel(){
+}
