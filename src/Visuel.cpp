@@ -1,4 +1,4 @@
-#include "Visuel.h"
+#include "../include/Visuel.h"
 
 map<pair<int, int>, CHAR_INFO *> Visuel::getPositions()
 {

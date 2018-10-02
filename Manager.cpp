@@ -1,8 +1,13 @@
 #include "Manager.h"
 #include <conio.h>
+#include "include/Visuel.h"
 
 Manager::Manager()
 {
+    HWND console = GetConsoleWindow();
+    RECT r;
+    GetWindowRect(console, &r);
+    MoveWindow(console, r.left, r.top, SIZEX * 18, SIZEY * 18, true);
     stop = false;
     ix = 11;
     iy = 5;
@@ -16,7 +21,7 @@ Manager::Manager()
     region = {0,0, SIZEX - 1, SIZEY - 1};
     CONSOLE_CURSOR_INFO cursorInfo;
     GetConsoleCursorInfo(id, &cursorInfo);
-    cursorInfo.bVisible = false; // set the cursor visibility
+    cursorInfo.bVisible = false;
     SetConsoleCursorInfo(id, &cursorInfo);
 }
 
@@ -70,6 +75,8 @@ void Manager::MainLoop(float time)
             buffer[y][x].Attributes = x;
         }
     }
+    buffer[ix][iy].Char.AsciiChar = 'i';
+    buffer[ix][iy].Attributes = Visuel::getColor(Visuel::Couleur::Violet, Visuel::Couleur::Violet);
     std::pair<int,int> posToDraw =  h.getPos();
     buffer[posToDraw.second][posToDraw.first].Char.AsciiChar = 'H';
     buffer[posToDraw.second][posToDraw.first].Attributes = 0x0B;
