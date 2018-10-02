@@ -4,8 +4,8 @@
 Manager::Manager()
 {
     stop = false;
-    ix = 5;
-    iy = 11;
+    ix = 11;
+    iy = 5;
     memx = ix;
     memy = iy;
     id = (HANDLE)GetStdHandle(STD_OUTPUT_HANDLE);
@@ -38,16 +38,16 @@ void Manager::MainLoop(float time)
         key =_getch();
         switch(key){
             case 'z':
-                ix--;
-                break;
-            case 's':
-                ix++;
-                break;
-            case 'q':
                 iy--;
                 break;
-            case 'd':
+            case 's':
                 iy++;
+                break;
+            case 'q':
+                ix--;
+                break;
+            case 'd':
+                ix++;
                 break;
             case ' ':
                 break;
@@ -66,10 +66,11 @@ void Manager::MainLoop(float time)
             buffer[y][x].Attributes = x;
         }
     }
+
     buffer[5][10].Char.AsciiChar = 'H';
     buffer[5][10].Attributes = 0x0E;
-    buffer[ix][iy].Char.AsciiChar = 'i';
-    buffer[ix][iy].Attributes = 0x0B;
+    buffer[iy][ix].Char.AsciiChar = 'i';
+    buffer[iy][ix].Attributes = 0x0B;
     buffer[5][12].Char.AsciiChar = '!';
     buffer[5][12].Attributes = 0x0A;
     WriteConsoleOutput(id, (CHAR_INFO *)buffer, bufferSize, bufferCoord, &region);
