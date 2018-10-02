@@ -8,10 +8,11 @@ class Positionable
     public:
         Positionable();
         virtual moveBy(int posXBy, int posY);
-
+        float getVitesse();
     private:
         int posX;
         int posY;
+        float vitesse;
         Visuel * animations[5];
 };
 
