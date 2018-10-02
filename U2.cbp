@@ -35,13 +35,9 @@
 		</Compiler>
 		<Unit filename="Manager.cpp" />
 		<Unit filename="Manager.h" />
-		<Unit filename="NYTimer.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="NYTimer.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="include/NYTimer.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/NYTimer.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

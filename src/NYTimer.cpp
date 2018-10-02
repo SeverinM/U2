@@ -1,4 +1,4 @@
-#include "NYTimer.h"
+#include "../include/NYTimer.h"
 
 NYTimer::NYTimer()
 {

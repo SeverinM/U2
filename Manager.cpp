@@ -12,6 +12,10 @@ Manager::Manager()
     bufferSize = { SIZEX, SIZEY };
     bufferCoord = {0,0};
     region = {0,0, SIZEX - 1, SIZEY - 1};
+    CONSOLE_CURSOR_INFO cursorInfo;
+    GetConsoleCursorInfo(id, &cursorInfo);
+    cursorInfo.bVisible = false; // set the cursor visibility
+    SetConsoleCursorInfo(id, &cursorInfo);
 }
 
 
@@ -58,8 +62,8 @@ void Manager::MainLoop(float time)
     {
         for (int y = 0 ; y < SIZEY; y++)
         {
-            buffer[y][x].Char.AsciiChar = 'I';
-            buffer[y][x].Attributes = (x + y) / 2;
+            buffer[y][x].Char.AsciiChar = 'O';
+            buffer[y][x].Attributes = x;
         }
     }
     buffer[5][10].Char.AsciiChar = 'H';

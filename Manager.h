@@ -1,7 +1,7 @@
 #ifndef MANAGER_H
 #define MANAGER_H
-#define SIZEX 100
-#define SIZEY 100
+#define SIZEX 50
+#define SIZEY 50
 #include <windows.h>
 
 class Manager
