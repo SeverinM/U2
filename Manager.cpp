@@ -38,16 +38,16 @@ void Manager::MainLoop(float time)
         key =_getch();
         switch(key){
             case 'z':
-                iy--;
-                break;
-            case 's':
-                iy++;
-                break;
-            case 'q':
                 ix--;
                 break;
-            case 'd':
+            case 's':
                 ix++;
+                break;
+            case 'q':
+                iy--;
+                break;
+            case 'd':
+                iy++;
                 break;
             case ' ':
                 stopLoop();
