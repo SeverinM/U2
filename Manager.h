@@ -11,6 +11,8 @@ class Manager
         void MainLoop(float time);
         void stopLoop();
         bool isStop();
+        int ix;
+        int iy;
     private:
         CHAR_INFO buffer[SIZEX][SIZEY];
         bool stop;
@@ -18,6 +20,8 @@ class Manager
         COORD bufferCoord;
         HANDLE id;
         SMALL_RECT region;
+        int memx;
+        int memy;
 };
 
 #endif // MANAGER_H
