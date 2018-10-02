@@ -50,7 +50,7 @@ void Manager::MainLoop(float time)
                 ix++;
                 break;
             case ' ':
-                stop = true;
+                stopLoop();
                 break;
             default :
                     break;
