@@ -16,8 +16,9 @@ class Manager
         bool isStop();
         int ix;
         int iy;
-        /*test : */Hero h;
-        /*test : */Ennemi e;
+        Hero h;
+        Ennemi e;
+
     private:
         CHAR_INFO buffer[SIZEX][SIZEY];
         bool stop;

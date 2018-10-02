@@ -2,7 +2,8 @@
 #define VISUEL_H
 #include <windows.h>
 #include <map>
-
+#include <fstream>
+#include <string>
 using namespace std;
 
 class Visuel
@@ -28,7 +29,7 @@ class Visuel
             GrisClair
         };
         Visuel();
-        map<pair<int, int> , CHAR_INFO *> getPositions();
+        map<pair<int, int> , CHAR_INFO *>& getPositions();
         void addValue(int x , int y , CHAR_INFO * char_win);
         void deleteValue(int x, int y);
         static int getColor(Couleur devant , Couleur derriere)
@@ -36,6 +37,27 @@ class Visuel
             int output(0);
             output = devant + (derriere * 16);
             return output;
+        };
+
+        static Visuel * createFromFile(string fileName)
+        {
+            ifstream inFile(fileName);
+            string line;
+            int y(0);
+            Visuel * visu = new Visuel();
+            CHAR_INFO test;
+            while (getline(inFile,line))
+            {
+                for (int x = 0; x < line.length();x++)
+                {
+                    if (line[x] != ' ')
+                    {
+                        visu->addValue(x,y,&test);
+                    }
+                }
+                y++;
+            }
+            return visu;
         }
 
     private:
