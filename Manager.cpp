@@ -72,15 +72,11 @@ void Manager::MainLoop(float time)
 }
 
 void Manager::drawAllElementIn(Positionable * listElement[]){
-    /*for (auto& element : pros[i]->getAnimation(0))
-        {
-        for (auto& element : en.getAnimation(0))
-        {
-            int x(element.first.first);
-            int y(element.first.second);
-            bufferManager->placeInBuffer(element.second,x,y);
-        }
-    }*/
+    int sizeA(sizeof(listElement) / sizeof(listElement[0]));
+    for (int i = 0; i < sizeA ; i++)
+    {
+        map<pair<int,int>, CHAR_INFO *> temp(listElement[i]->getAnimation(0));
+    }
 }
 
 void Manager::init()
