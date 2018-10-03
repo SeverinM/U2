@@ -20,7 +20,10 @@ BufferManager::BufferManager()
 
 void BufferManager::placeInBuffer(CHAR_INFO * car, int &x, int &y)
 {
-    buffer[y][x]= *car;
+    if (x >= 0 && x < SIZEX && y >= 0 && y < SIZEY)
+    {
+        buffer[y][x]= *car;
+    }
 }
 
 void BufferManager::draw()

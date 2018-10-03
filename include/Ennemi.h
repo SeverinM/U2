@@ -10,9 +10,7 @@ class Ennemi : public Perso
         Ennemi(int posX,int posY);
         virtual ~Ennemi();
         virtual std::pair<int,int> directionTir();
-    protected:
-
-    private:
+        void update(float time);
 };
 
 #endif // ENNEMI_H

@@ -22,6 +22,12 @@ void Perso::takeDamage(int damage){
     }
 }
 
+void Perso::update(float time)
+{
+
+}
+
+
 void Perso::Mourir(){
     //TO DO :
 }

@@ -14,6 +14,8 @@ class Positionable
         std::pair<int,int> getPos();
         void addAnimation(Visuel * visu);
         map<pair<int,int>, CHAR_INFO *>& getAnimation(int index);
+        virtual void update(float time) = 0;
+        bool isEnabled;
 
     private:
         int posX;
