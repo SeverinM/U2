@@ -65,25 +65,16 @@ void Manager::MainLoop(float time)
         }
     }
 
-
-
     ReadConsoleOutput(id, (CHAR_INFO *)buffer, bufferSize, bufferCoord , &region);
-
 
     for (int x = 0; x < SIZEY; x++)
     {
         for (int y = 0 ; y < SIZEY; y++)
         {
             buffer[y][x].Char.AsciiChar = 'O';
-            buffer[y][x].Attributes = x;
+            buffer[y][x].Attributes = Visuel::getColor(Visuel::Couleur::Transparent,Visuel::Couleur::Transparent);
         }
     }
-
-    /*buffer[ix][iy].Char.AsciiChar = 'i';
-    buffer[ix][iy].Attributes = Visuel::getColor(Visuel::Violet, Visuel::Violet);
-    std::pair<int,int> posToDraw =  h.getPos();
-    buffer[posToDraw.second][posToDraw.first].Char.AsciiChar = 'H';
-    buffer[posToDraw.second][posToDraw.first].Attributes = 0x0B;*/
     map<pair<int,int>, CHAR_INFO *>::iterator i = h.getAnimation(0).begin();
     for (auto const& element : h.getAnimation(0))
     {

@@ -35,11 +35,21 @@
 		</Compiler>
 		<Unit filename="Manager.cpp" />
 		<Unit filename="Manager.h" />
+		<Unit filename="include/Ennemi.h" />
+		<Unit filename="include/Hero.h" />
 		<Unit filename="include/NYTimer.h" />
+		<Unit filename="include/Perso.h" />
+		<Unit filename="include/Positionable.h" />
+		<Unit filename="include/Visuel.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="moveMain.cpp" />
 		<Unit filename="moveMain.h" />
+		<Unit filename="src/Ennemi.cpp" />
+		<Unit filename="src/Hero.cpp" />
 		<Unit filename="src/NYTimer.cpp" />
+		<Unit filename="src/Perso.cpp" />
+		<Unit filename="src/Positionable.cpp" />
+		<Unit filename="src/Visuel.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

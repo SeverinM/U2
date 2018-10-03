@@ -52,7 +52,7 @@ class Visuel
                 {
                     car = new CHAR_INFO();
                     car->Char.AsciiChar = line[x];
-                    car->Attributes = Visuel::getColor(Couleur::Cyan, Couleur::Gris);
+                    car->Attributes = Visuel::getColor(Couleur::Cyan, Couleur::Transparent);
                     if (line[x] != ' ')
                     {
                         visu->addValue(x,y,car);
