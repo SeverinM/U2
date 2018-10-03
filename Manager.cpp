@@ -12,6 +12,7 @@ Manager::Manager()
     Visuel * vis = Visuel::createFromFile("Spaceship.txt");
     h.addAnimation(vis);
     bufferManager = new BufferManager();
+    poolManager = new PoolManager();
 }
 
 
@@ -58,4 +59,12 @@ void Manager::MainLoop(float time)
         bufferManager->placeInBuffer(element.second,x,y);
     }
     bufferManager->draw();
+}
+
+void Manager::init()
+{
+    Hero * h = poolManager->addHero();
+    h->moveBy(10,10);
+    Visuel * vis = Visuel::createFromFile("spaceship.txt");
+    h->addAnimation(vis);
 }

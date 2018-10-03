@@ -9,6 +9,7 @@ class Hero : public Perso
         Hero(int posX,int posY);
         virtual ~Hero();
         virtual std::pair<int,int> directionTir();
+        void update(float time);
 
     protected:
 

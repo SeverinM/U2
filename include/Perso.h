@@ -11,8 +11,9 @@ class Perso : public Positionable
         virtual ~Perso();
         void takeDamage(int damage);
         std::pair<int,int> hitbox;
-
+        void update(float time);
         virtual std::pair<int,int> directionTir() = 0;
+        bool isShot;
 
     private:
         int pv;

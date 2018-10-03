@@ -14,6 +14,10 @@ Hero::~Hero()
     //dtor
 }
 
+void Hero::update(float time)
+{
+
+}
 
 std::pair<int,int> Hero::directionTir(){
     return std::pair<int,int>(0,-1);

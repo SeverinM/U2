@@ -18,3 +18,8 @@ Ennemi::~Ennemi()
 std::pair<int,int> Ennemi::directionTir(){
     return std::pair<int,int>(0,1);
 }
+
+void Ennemi::update(float time)
+{
+
+}
