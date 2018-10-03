@@ -27,9 +27,9 @@ class PoolManager
 
     private:
         Positionable ** poolDecor;
-        Positionable ** poolEnnemi;
-        Positionable ** poolProjectile;
-        Positionable ** poolHero;
+        Ennemi       ** poolEnnemi;
+        Projectile   ** poolProjectile;
+        Hero         ** poolHero;
 
 };
 

@@ -1,5 +1,6 @@
 #ifndef BUFFERMANAGER_H
 #define BUFFERMANAGER_H
+#define _WIN32_WINNT 0x0500
 #include "Positionable.h"
 #include <vector>
 #include "PoolManager.h"

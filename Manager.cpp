@@ -63,8 +63,7 @@ void Manager::MainLoop(float time)
 
 void Manager::init()
 {
-    Hero * h = poolManager->addHero();
-    h->moveBy(10,10);
+    Hero * h = poolManager->addHero(10,10);
     Visuel * vis = Visuel::createFromFile("spaceship.txt");
     h->addAnimation(vis);
 }
