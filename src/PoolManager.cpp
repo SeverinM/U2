@@ -10,15 +10,14 @@ PoolManager::PoolManager()
 
 void PoolManager::addInPool(Positionable * element)
 {
-    std::string str(typeid(*element).name());
-    str = str.substr(1,str.size() -1);
-    if (str == "Hero")
+    const std::type_info& str = typeid(*element);
+    if (str == typeid(Hero))
     {
-        delete hero;
-        hero = (Hero *)element;
+        /*delete hero;
+        hero = (Hero *)element[0];*/
     }
 
-    if (str == "Projectile")
+    if (str == typeid(Projectile))
     {
         for (int i = 0; i < 25; i++)
         {
@@ -29,7 +28,7 @@ void PoolManager::addInPool(Positionable * element)
         }
     }
 
-    if (str == "Ennemi")
+    if (str == typeid(Ennemi))
     {
         for (int i = 0; i < 15 ; i++)
         {

@@ -11,11 +11,9 @@ class Projectile : public Positionable
         void goOn(float time);
         int hit();
     protected:
-        float timer;
-        float lastTime;
 
     private:
-        std::pair<int, int> direction;
+        std::pair<int, int> directionMove;
 };
 
 #endif // PROJECTILE_H

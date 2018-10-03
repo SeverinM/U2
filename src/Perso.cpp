@@ -15,6 +15,13 @@ Perso::~Perso()
 {
 }
 
+Perso::shootInfo Perso::Tirer(){
+    shootInfo sI;
+    sI.direction = directionTir();
+    sI.startPosition = getPos();
+    return sI;
+}
+
 void Perso::takeDamage(int damage){
     pv -= damage;
     if(pv < 0){
@@ -29,9 +36,6 @@ void Perso::update(float time)
 
 
 void Perso::Mourir(){
-    //TO DO :
-}
-void Perso::Tirer(){
     //TO DO :
 }
 

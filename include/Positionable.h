@@ -17,11 +17,17 @@ class Positionable
         virtual void update(float time) = 0;
         bool isEnabled;
 
+    protected:
+        float timer;
+        float lastTime;
+
     private:
         int posX;
         int posY;
         float vitesse;
         vector<Visuel *> animations;
+
+
 };
 
 #endif // POSITIONABLE_H

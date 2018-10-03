@@ -21,7 +21,7 @@ class Perso : public Positionable
         virtual std::pair<int,int> directionTir() = 0;
         bool isShot;
 
-    private:
+    protected:
         int pv;
         float timerShoot;
         float timerHit;

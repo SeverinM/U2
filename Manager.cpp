@@ -60,9 +60,9 @@ void Manager::MainLoop(float time)
     //Ennemi section
 
     bufferManager->resetScreen();
-    drawAllElementIn(poolManager->getProjectiles());
-    drawAllElementIn(poolManager->getEnnemies());
-    drawAllElementIn(poolManager->getHero());
+    //drawAllElementIn(poolManager->getProjectiles());
+   // drawAllElementIn(poolManager->getEnnemies());
+    //drawAllElementIn(poolManager->getHero());
     /*for (auto& element : h.getAnimation(0))
     {
         int x(element.first.first);
@@ -73,7 +73,7 @@ void Manager::MainLoop(float time)
 }
 
 void Manager::drawAllElementIn(Positionable ** listElement){
-    for (auto& element : pros[i]->getAnimation(0))
+    /*for (auto& en : listElement)
         {
         for (auto& element : en.getAnimation(0))
         {
@@ -81,7 +81,7 @@ void Manager::drawAllElementIn(Positionable ** listElement){
             int y(element.first.second);
             bufferManager->placeInBuffer(element.second,x,y);
         }
-    }
+    }*/
 }
 
 void Manager::init()
