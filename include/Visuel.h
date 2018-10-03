@@ -45,14 +45,17 @@ class Visuel
             string line;
             int y(0);
             Visuel * visu = new Visuel();
-            CHAR_INFO test;
+            CHAR_INFO * car;
             while (getline(inFile,line))
             {
                 for (int x = 0; x < line.length();x++)
                 {
+                    car = new CHAR_INFO();
+                    car->Char.AsciiChar = line[x];
+                    car->Attributes = Visuel::getColor(Couleur::Cyan, Couleur::Gris);
                     if (line[x] != ' ')
                     {
-                        visu->addValue(x,y,&test);
+                        visu->addValue(x,y,car);
                     }
                 }
                 y++;
