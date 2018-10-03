@@ -14,7 +14,7 @@ class Perso : public Positionable
         Perso(int posX,int posY);
         virtual ~Perso();
 
-        shootInfo Tirer();
+        void Tirer();
         void takeDamage(int damage);
         std::pair<int,int> hitbox;
         void update(float time);

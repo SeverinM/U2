@@ -72,8 +72,8 @@ void Manager::MainLoop(float time)
     bufferManager->draw();
 }
 
-void Manager::drawAllElementIn(Positionable ** listElement){
-    for (auto& element : pros[i]->getAnimation(0))
+void Manager::drawAllElementIn(Positionable * listElement[]){
+    /*for (auto& element : pros[i]->getAnimation(0))
         {
         for (auto& element : en.getAnimation(0))
         {
@@ -81,7 +81,7 @@ void Manager::drawAllElementIn(Positionable ** listElement){
             int y(element.first.second);
             bufferManager->placeInBuffer(element.second,x,y);
         }
-    }
+    }*/
 }
 
 void Manager::init()

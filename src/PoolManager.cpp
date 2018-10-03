@@ -15,7 +15,7 @@ void PoolManager::addInPool(Positionable * element)
     if (str == "Hero")
     {
         delete hero;
-        hero = (Hero *)element;
+        hero[0] = (Hero *)element;
     }
 
     if (str == "Projectile")
@@ -41,17 +41,17 @@ void PoolManager::addInPool(Positionable * element)
     }
 };
 
-Ennemi** PoolManager::getEnnemies()
+Positionable** PoolManager::getEnnemies()
 {
-    return poolEnnemi;
+    return (Positionable **)poolEnnemi;
 }
 
-Projectile ** PoolManager::getProjectiles()
+Positionable ** PoolManager::getProjectiles()
 {
-    return poolProjectile;
+    return (Positionable **)poolProjectile;
 }
 
-Hero ** PoolManager::getHero()
+Positionable ** PoolManager::getHero()
 {
-    return hero;
+    return (Positionable **)hero;
 }
