@@ -72,8 +72,8 @@ void Manager::MainLoop(float time)
     bufferManager->draw();
 }
 
-void Manager::drawAllElementIn(Positionable ** listElement){
-    /*for (auto& en : listElement)
+void Manager::drawAllElementIn(Positionable * listElement[]){
+    /*for (auto& element : pros[i]->getAnimation(0))
         {
         for (auto& element : en.getAnimation(0))
         {

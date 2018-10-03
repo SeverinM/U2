@@ -13,8 +13,8 @@ void PoolManager::addInPool(Positionable * element)
     const std::type_info& str = typeid(*element);
     if (str == typeid(Hero))
     {
-        /*delete hero;
-        hero = (Hero *)element[0];*/
+        delete hero;
+        hero[0] = (Hero *)element;
     }
 
     if (str == typeid(Projectile))
@@ -40,17 +40,17 @@ void PoolManager::addInPool(Positionable * element)
     }
 };
 
-Ennemi** PoolManager::getEnnemies()
+Positionable** PoolManager::getEnnemies()
 {
-    return poolEnnemi;
+    return (Positionable **)poolEnnemi;
 }
 
-Projectile ** PoolManager::getProjectiles()
+Positionable ** PoolManager::getProjectiles()
 {
-    return poolProjectile;
+    return (Positionable **)poolProjectile;
 }
 
-Hero ** PoolManager::getHero()
+Positionable ** PoolManager::getHero()
 {
-    return hero;
+    return (Positionable **)hero;
 }

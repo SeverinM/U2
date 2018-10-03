@@ -10,14 +10,14 @@ class PoolManager
     public:
         PoolManager();
         void addInPool(Positionable * element);
-        Ennemi** getEnnemies();
-        Projectile ** getProjectiles();
-        Hero ** getHero();
+        Positionable ** getEnnemies();
+        Positionable ** getProjectiles();
+        Positionable ** getHero();
 
     private:
         Ennemi       * poolEnnemi[15];
         Projectile   * poolProjectile[25];
-        Hero         * hero[1];
+        Hero        * hero[1];
 
 };
 
