@@ -49,26 +49,25 @@ void Manager::MainLoop(float time)
             case 'd':
                 h.moveBy(1,0);
                 break;
+                case ' ':
+            h.tryToShoot();
+                break;
             default :
                     break;
         }
     }
-
+    //Hero section
+    h.update(time);
     //Projectil section
 
 
     //Ennemi section
 
     bufferManager->resetScreen();
-    //drawAllElementIn(poolManager->getProjectiles());
-   // drawAllElementIn(poolManager->getEnnemies());
-    //drawAllElementIn(poolManager->getHero());
-    /*for (auto& element : h.getAnimation(0))
-    {
-        int x(element.first.first);
-        int y(element.first.second);
-        bufferManager->placeInBuffer(element.second,x,y);
-    }*/
+    drawAllElementIn(poolManager->getProjectiles());
+    drawAllElementIn(poolManager->getEnnemies());
+    drawAllElementIn(poolManager->getHero());
+
     bufferManager->draw();
 }
 
