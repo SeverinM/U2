@@ -18,11 +18,13 @@ PoolManager::~PoolManager()
 
 
 Positionable *  addDecor(/**/){
-    Positionable * result;
+    Positionable * result = nullptr;
 
     for(int index = 0; i < poolDecor.size; i++){
-        if()
-
+        if(!poolDecor[i].isEnabled){
+            result = poolDecor[i];
+            break;
+        }
     }
 
 
