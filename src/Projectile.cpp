@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Projectile.h"
+#include "../include/Projectile.h"
 
 Projectile::Projectile() : Positionable(0, 0)
 {
@@ -17,7 +17,7 @@ Projectile::~Projectile()
     //dtor
 }
 
-///Movement automatique via une direction en mémoire !
+///Movement automatique via une direction en mï¿½moire !
 void Projectile::goOn(float time){
     float deltaTime = time - lastTime;
     timer -= deltaTime;

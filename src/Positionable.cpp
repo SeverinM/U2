@@ -37,7 +37,7 @@ map<pair<int,int>, CHAR_INFO *>& Positionable::getAnimation(int index)
     map<pair<int,int>, CHAR_INFO *>::iterator i = inputRef.begin();
     while (i != inputRef.end())
     {
-        output[make_pair(i->first.second + posX,i->first.first + posY)] = i->second;
+        output[make_pair(i->first.first + posX,i->first.second + posY)] = i->second;
         i++;
     }
     return output;
