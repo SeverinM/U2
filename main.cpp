@@ -11,6 +11,7 @@ int main()
     NYTimer time;
     time.start();
     Manager man;
+    man.init();
     while (!man.isStop())
     {
         man.MainLoop(time.getElapsedSeconds(false));

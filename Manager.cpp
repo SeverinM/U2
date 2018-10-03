@@ -3,6 +3,7 @@
 #include "include/Visuel.h"
 #include <iostream>
 #include <map>
+#include <typeinfo>
 
 Manager::Manager()
 {
@@ -58,12 +59,11 @@ void Manager::MainLoop(float time)
         int y(element.first.second);
         bufferManager->placeInBuffer(element.second,x,y);
     }
-    bufferManager->draw();
+    //bufferManager->draw();
 }
 
 void Manager::init()
 {
-    Hero * h = poolManager->addHero(10,10);
-    Visuel * vis = Visuel::createFromFile("spaceship.txt");
-    h->addAnimation(vis);
+    Ennemi * enn = new Ennemi();
+    poolManager->addInPool(enn);
 }

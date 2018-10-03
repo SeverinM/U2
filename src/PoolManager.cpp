@@ -1,99 +1,57 @@
-#include "PoolManager.h"
+#include "../include/PoolManager.h"
+#include <typeinfo>
+#include <iostream>
+#include <string>
 
 PoolManager::PoolManager()
 {
-    poolDecor =      new Positionable *[25];
-    poolEnnemi =     new Ennemi *[15];
-    poolProjectile = new Projectile *[25];
-    poolHero =       new Hero *[1];
-}
+};
 
-PoolManager::~PoolManager()
+
+void PoolManager::addInPool(Positionable * element)
 {
-    //dtor
-}
+    std::string str(typeid(*element).name());
+    str = str.substr(1,str.size() -1);
+    if (str == "Hero")
+    {
+        delete hero;
+        hero = (Hero *)element;
+    }
 
-
-
-
-Positionable * PoolManager::addDecor(/**/){
-    Positionable * result = nullptr;
-    int emptySpace = -1;
-    for(int index = 0; index < sizeof(poolDecor)/sizeof(poolDecor[0]); index++){
-        if(poolDecor[index] != nullptr){
-            if(!poolDecor[index]->isEnabled){
-                result = poolDecor[index];
-                break;
+    if (str == "Projectile")
+    {
+        for (int i = 0; i < 25; i++)
+        {
+            if (poolProjectile[i] == 0)
+            {
+                poolProjectile[i] = (Projectile *)element;
             }
         }
-        else {
-            emptySpace = index;
-        }
-
     }
-    if(result == nullptr){
-        if(emptySpace != -1){
-            Hero d = * new Hero();
-            poolDecor[emptySpace] = &d;
-            result = &d;
-        }
-        else {
-            /*TO DO : construire un tableau plus grand de 25 */
-        }
-    }
-    result->isEnabled = true;
-    return result;
-}
 
-void PoolManager::remDecor(Positionable * decor){
-    decor->isEnabled = false;
-}
-
-Ennemi * PoolManager::addEnnemi(int posX,int posY){
-
-}
-
-void PoolManager::remEnnemi(Positionable * ennemi){
-
-}
-
-Projectile * PoolManager::addProjectile(int posX, int posY, std::pair<int, int> direction){
-
-}
-
-void PoolManager::remProjectile(Positionable * projec){
-
-}
-
-Hero * PoolManager::addHero(int posX,int posY){
-    Hero * result = nullptr;
-    int emptySpace = -1;
-    for(int index = 0; index < sizeof(poolHero)/sizeof(poolHero[0]); index++){
-        if(poolHero[index] != nullptr){
-            if(!poolHero[index]->isEnabled){
-                result = poolHero[index];
-                break;
+    if (str == "Ennemi")
+    {
+        for (int i = 0; i < 15 ; i++)
+        {
+            if (poolEnnemi[i] == 0)
+            {
+                poolEnnemi[i] = (Ennemi *)element;
             }
         }
-        else {
-            emptySpace = index;
-        }
+    }
+};
 
-    }
-    if(result == nullptr){
-        if(emptySpace != -1){
-            Hero h = * new Hero();
-            poolHero[emptySpace] = &h;
-            result = &h;
-        }
-        else {
-            /*TO DO : construire un tableau plus grand de 25 */
-        }
-    }
-    result->isEnabled = true;
-    return result;
+Ennemi** PoolManager::getEnnemies()
+{
+    return poolEnnemi;
 }
 
-void PoolManager::remHero(Positionable * hero){
+Projectile ** PoolManager::getProjectiles()
+{
+    return poolProjectile;
+}
 
+Hero * PoolManager::getHero()
+{
+    return hero;
 }

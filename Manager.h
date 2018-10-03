@@ -4,8 +4,8 @@
 #include<windows.h>
 #include "include/Hero.h"
 #include "include/Ennemi.h"
-#include "BufferManager.h"
-#include "PoolManager.h"
+#include "include/BufferManager.h"
+#include "include/PoolManager.h"
 
 class Manager
 {

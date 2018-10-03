@@ -33,3 +33,4 @@ void Projectile::goOn(float time){
 int Projectile::hit(){
     return 1;
 }
+

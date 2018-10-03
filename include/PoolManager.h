@@ -9,27 +9,15 @@ class PoolManager
 {
     public:
         PoolManager();
-        virtual ~PoolManager();
-
-
-        Positionable *  addDecor     (/*int posX,int posY*/);
-        void            remDecor     (Positionable * decor);
-        Ennemi *        addEnnemi    (int posX,int posY);
-        void            remEnnemi    (Positionable * ennemi);
-        Projectile *    addProjectile(int posX, int posY, std::pair<int, int> direction);
-        void            remProjectile(Positionable * projec);
-        Hero *          addHero      (int posX,int posY);
-        void            remHero      (Positionable * hero);
-
-        Positionable ** * getAllPosVector();
-
-    protected:
+        void addInPool(Positionable * element);
+        Ennemi** getEnnemies();
+        Projectile ** getProjectiles();
+        Hero * getHero();
 
     private:
-        Positionable ** poolDecor;
-        Ennemi       ** poolEnnemi;
-        Projectile   ** poolProjectile;
-        Hero         ** poolHero;
+        Ennemi       * poolEnnemi[15];
+        Projectile   * poolProjectile[25];
+        Hero         * hero;
 
 };
 
