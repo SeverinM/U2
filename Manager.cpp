@@ -2,6 +2,7 @@
 #include <conio.h>
 #include "include/Visuel.h"
 #include <iostream>
+#include <map>
 
 Manager::Manager()
 {
@@ -83,6 +84,7 @@ void Manager::MainLoop(float time)
     std::pair<int,int> posToDraw =  h.getPos();
     buffer[posToDraw.second][posToDraw.first].Char.AsciiChar = 'H';
     buffer[posToDraw.second][posToDraw.first].Attributes = 0x0B;*/
+    map<pair<int,int>, CHAR_INFO *>::iterator i = h.getAnimation(0).begin();
     for (auto const& element : h.getAnimation(0))
     {
         if (element.first.first > 0 && element.first.first < SIZEX &&
