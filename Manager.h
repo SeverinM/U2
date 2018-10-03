@@ -22,6 +22,7 @@ class Manager
         PoolManager * poolManager;
         Hero h;
         Ennemi e;
+        void drawAllElementIn(Positionable ** listElement);
 };
 
 #endif // MANAGER_H

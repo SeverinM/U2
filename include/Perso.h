@@ -6,9 +6,15 @@
 class Perso : public Positionable
 {
     public:
+        struct shootInfo {
+            std::pair<int,int> startPosition;
+            std::pair<int,int> direction;
+        } ;
         Perso();
         Perso(int posX,int posY);
         virtual ~Perso();
+
+        shootInfo Tirer();
         void takeDamage(int damage);
         std::pair<int,int> hitbox;
         void update(float time);
@@ -20,7 +26,6 @@ class Perso : public Positionable
         float timerShoot;
         float timerHit;
         void Mourir();
-        void Tirer();
 };
 
 #endif // PERSO_H

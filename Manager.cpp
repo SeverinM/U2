@@ -8,12 +8,13 @@
 Manager::Manager()
 {
     stop = false;
-    h = Hero(3,7);
-    e = Ennemi(12,12);
     Visuel * vis = Visuel::createFromFile("Spaceship.txt");
     h.addAnimation(vis);
     bufferManager = new BufferManager();
     poolManager = new PoolManager();
+
+    h = Hero(3,7);
+    e = Ennemi(12,12);
 }
 
 
@@ -30,6 +31,7 @@ bool Manager::isStop()
 
 void Manager::MainLoop(float time)
 {
+    //Input section
     int key = 0;
     if (_kbhit())
     {
@@ -52,14 +54,34 @@ void Manager::MainLoop(float time)
         }
     }
 
+    //Projectil section
+
+
+    //Ennemi section
+
     bufferManager->resetScreen();
-    for (auto& element : h.getAnimation(0))
+    drawAllElementIn(poolManager->getProjectiles());
+    drawAllElementIn(poolManager->getEnnemies());
+    drawAllElementIn(poolManager->getHero());
+    /*for (auto& element : h.getAnimation(0))
     {
         int x(element.first.first);
         int y(element.first.second);
         bufferManager->placeInBuffer(element.second,x,y);
+    }*/
+    bufferManager->draw();
+}
+
+void Manager::drawAllElementIn(Positionable ** listElement){
+    for (auto& element : pros[i]->getAnimation(0))
+        {
+        for (auto& element : en.getAnimation(0))
+        {
+            int x(element.first.first);
+            int y(element.first.second);
+            bufferManager->placeInBuffer(element.second,x,y);
+        }
     }
-    //bufferManager->draw();
 }
 
 void Manager::init()

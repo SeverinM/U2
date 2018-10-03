@@ -51,7 +51,7 @@ Projectile ** PoolManager::getProjectiles()
     return poolProjectile;
 }
 
-Hero * PoolManager::getHero()
+Hero ** PoolManager::getHero()
 {
     return hero;
 }
