@@ -87,4 +87,9 @@ void Manager::init()
 {
     h = (Hero *)poolManager->getInPool(PoolManager::Her);
     h->isEnabled = true;
+    h->addAnimation(Visuel::createFromFile("Spaceship.txt"));
+    Ennemi * e = (Ennemi *)poolManager->getInPool(PoolManager::Enn);
+    e->moveBy(10,10);
+    e->isEnabled = true;
+    e->addAnimation(Visuel::createFromFile("Spaceship.txt",Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));
 }

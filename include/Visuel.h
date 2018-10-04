@@ -28,7 +28,7 @@ class Visuel
             BlancClair,
             GrisClair
         };
-        Visuel();
+        Visuel(int colorD = Visuel::getColor(Couleur::Cyan,Couleur::Transparent));
         map<pair<int, int> , CHAR_INFO *>& getPositions();
         void addValue(int x , int y , CHAR_INFO * char_win);
         void deleteValue(int x, int y);
@@ -38,13 +38,14 @@ class Visuel
             output = devant + (derriere * 16);
             return output;
         };
+        int color;
 
-        static Visuel * createFromFile(string fileName)
+        static Visuel * createFromFile(string fileName, int color = Visuel::getColor(Couleur::Cyan,Couleur::Transparent))
         {
             ifstream inFile(fileName);
             string line;
             int y(0);
-            Visuel * visu = new Visuel();
+            Visuel * visu = new Visuel(color);
             CHAR_INFO * car;
             while (getline(inFile,line))
             {
@@ -52,7 +53,7 @@ class Visuel
                 {
                     car = new CHAR_INFO();
                     car->Char.AsciiChar = line[x];
-                    car->Attributes = Visuel::getColor(Couleur::Cyan, Couleur::Transparent);
+                    car->Attributes = visu->color;
                     if (line[x] != ' ')
                     {
                         visu->addValue(x,y,car);

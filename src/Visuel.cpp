@@ -20,5 +20,6 @@ void Visuel::deleteValue(int x, int y)
     }
 };
 
-Visuel::Visuel(){
+Visuel::Visuel(int colorD){
+    color = colorD;
 }
