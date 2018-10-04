@@ -70,7 +70,7 @@ Positionable * PoolManager::getInPool(PoolManager::typePool type)
     return output;
 }
 
-Positionable** PoolManager::getEnnemies()
+Positionable ** PoolManager::getEnnemies()
 {
     return (Positionable **)poolEnnemi;
 }

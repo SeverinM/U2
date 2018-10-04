@@ -1,4 +1,6 @@
 #include "../include/Ennemi.h"
+#define SIZEX 70
+#define SIZEY 70
 
 Ennemi::Ennemi() : Perso()
 {
@@ -26,5 +28,14 @@ std::pair<int,int> Ennemi::directionTir(){
 
 void Ennemi::update(float time)
 {
+    moveBy(0,1);
+}
 
+void Ennemi::setPosition(int newX, int newY)
+{
+    Positionable::setPosition(newX,newY);
+    if (posX < 0 || posX >= SIZEX || posY < 0 || posY >= SIZEY)
+    {
+        isEnabled = false;
+    }
 }

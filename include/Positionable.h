@@ -13,18 +13,21 @@ class Positionable
         void moveBy(int posXBy, int posY);
         float getVitesse();
         std::pair<int,int> getPos();
+        virtual void setPosition(int newX,int newY);
         void addAnimation(Visuel * visu);
         map<pair<int,int>, CHAR_INFO *> getAnimation(int index);
         virtual void update(float time) = 0;
         bool isEnabled;
+        inline int getX(){return posX;}
+        inline int getY(){return posY;}
 
     protected:
         float timer;
         float lastTime;
-
-    private:
         int posX;
         int posY;
+
+    private:
         float vitesse;
         vector<Visuel *> animations;
 

@@ -14,9 +14,8 @@ int main()
     man.init();
     while (!man.isStop())
     {
-        man.MainLoop(time.getElapsedSeconds(false));
+        man.MainLoop(time.getElapsedSeconds(true));
     }
-    cout << time.getElapsedSeconds(false);
 
     return 0;
 }

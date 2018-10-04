@@ -61,6 +61,7 @@ class Visuel
                 }
                 y++;
             }
+            inFile.close();
             return visu;
         }
 

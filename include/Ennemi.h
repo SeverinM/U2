@@ -12,6 +12,7 @@ class Ennemi : public Perso
         void init(int posX,int posY);
         virtual std::pair<int,int> directionTir();
         void update(float time);
+        void setPosition(int newX,int newY);
 };
 
 #endif // ENNEMI_H

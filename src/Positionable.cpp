@@ -14,8 +14,7 @@ Positionable::Positionable(int startPosX,int startPosY){
 
 void Positionable::moveBy(int posXBy, int posYBy)
 {
-    posX += posXBy;
-    posY += posYBy;
+    setPosition(posXBy + posX, posYBy + posY);
 };
 
 void Positionable::init(int startPosX,int startPosY){
@@ -49,5 +48,11 @@ map<pair<int,int>, CHAR_INFO *> Positionable::getAnimation(int index)
         i++;
     }
     return output;
+}
+
+void Positionable::setPosition(int newX, int newY)
+{
+    posX = newX;
+    posY = newY;
 }
 
