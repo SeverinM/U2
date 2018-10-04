@@ -9,7 +9,7 @@ class Positionable
 {
     public:
         Positionable(int startPosX,int startPosY);
-        void init(int posXBy, int posY);
+        void init(int posXBy, int posY, string spriteFileName = "Spaceship.txt");
         void moveBy(int posXBy, int posY);
         float getVitesse();
         std::pair<int,int> getPos();

@@ -1,5 +1,7 @@
 #include <iostream>
 #include "../include/Projectile.h"
+#define SIZEX 70
+#define SIZEY 70
 
 Projectile::Projectile() : Positionable(0, 0)
 {
@@ -19,14 +21,20 @@ Projectile::~Projectile()
 
 void Projectile::init(int posX, int posY, std::pair<int, int> dir)
 {
-    Positionable::init(posX, posY);
+    Positionable::init(posX, posY, "ProjectileHero.txt");
     directionMove = dir;
 }
 
 void Projectile::update(float time){
     goOn( time);
-
+    if (posX < 0 || posX >= SIZEX || posY < 0 || posY >= SIZEY)
+    {
+        isEnabled = false;
+    }
 }
+
+
+
 
 ///Movement automatique via une direction en memoire !
 void Projectile::goOn(float time){

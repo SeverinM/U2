@@ -17,11 +17,11 @@ void Positionable::moveBy(int posXBy, int posYBy)
     setPosition(posXBy + posX, posYBy + posY);
 };
 
-void Positionable::init(int startPosX,int startPosY){
+void Positionable::init(int startPosX,int startPosY, string spriteFileName){
     posX = startPosX;
     posY = startPosY;
     vitesse = 2; //TO DO : change this
-    animations.push_back(Visuel::createFromFile("Spaceship.txt"));
+    animations.push_back(Visuel::createFromFile(spriteFileName));
 }
 
 float Positionable::getVitesse(){

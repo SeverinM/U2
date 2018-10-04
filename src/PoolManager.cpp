@@ -5,12 +5,12 @@
 
 PoolManager::PoolManager()
 {
-    for (int i = 0 ; i < 25 ; i++)
+    for (int i = 0 ; i < sizePoolPro ; i++)
     {
         poolProjectile[i] = 0;
     }
 
-    for (int i = 0 ; i < 15 ; i++)
+    for (int i = 0 ; i < sizePoolEnn ; i++)
     {
         poolEnnemi[i] = 0;
     }
@@ -25,7 +25,7 @@ Positionable * PoolManager::getInPool(PoolManager::typePool type)
     switch (type)
     {
         case PoolManager::Enn:
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < sizePoolEnn; i++)
             {
                 if (poolEnnemi[i] == 0)
                 {
@@ -40,7 +40,7 @@ Positionable * PoolManager::getInPool(PoolManager::typePool type)
             break;
 
         case PoolManager::Proj:
-            for (int i = 0; i < 25; i++)
+            for (int i = 0; i < sizePoolPro; i++)
             {
                 if (poolProjectile[i] == 0)
                 {
@@ -84,3 +84,14 @@ Positionable ** PoolManager::getHero()
 {
     return (Positionable **)hero;
 }
+
+int PoolManager::getEnnPoolSize(){
+    return sizePoolEnn;
+}
+int PoolManager::getProPoolSize(){
+    return sizePoolPro;
+}
+int PoolManager::getHerPoolSize(){
+    return sizePoolHer;
+}
+

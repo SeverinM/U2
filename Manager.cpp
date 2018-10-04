@@ -59,6 +59,9 @@ void Manager::MainLoop(float time)
             case ' ':
                 h->tryToShoot();
                 break;
+            case 'p' :
+                cout << "decal" << endl;
+                break;
             case 27:
                 stopLoop();
                 break;
@@ -71,13 +74,15 @@ void Manager::MainLoop(float time)
         Perso::shootInfo info = h->Tirer();
         Projectile *proj = (Projectile*)poolManager->getInPool(PoolManager::typePool::Proj);
         proj->isEnabled = true;
-        proj->init(info.startPosition.first,info.startPosition.second,info.direction);
-        std::cout << "Create " << std::endl;
+        int offsetX = -1;
+        int offsetY = 2;
+        proj->init(info.startPosition.first+offsetY,info.startPosition.second+offsetX,info.direction);
+        //std::cout << "Create " << info.direction.first << ", " << info.direction.second << std::endl;
     }
 
     //Projectile section
     Positionable ** posList = poolManager->getProjectiles();
-    int sizeA = sizeof(posList)/sizeof(posList[0]);
+    int sizeA = poolManager->getProPoolSize();
     for(int i = 0; i < sizeA ; i ++){
         if(posList[i] != nullptr){
             if(posList[i]->isEnabled){
@@ -91,9 +96,9 @@ void Manager::MainLoop(float time)
 
     bufferManager->resetScreen();
 
-    drawAllElementIn(poolManager->getProjectiles(),25);
-    drawAllElementIn(poolManager->getEnnemies(),15);
-    drawAllElementIn(poolManager->getHero(),1);
+    drawAllElementIn(poolManager->getProjectiles(),poolManager->getProPoolSize());
+    drawAllElementIn(poolManager->getEnnemies(),poolManager->getEnnPoolSize());
+    drawAllElementIn(poolManager->getHero(),poolManager->getHerPoolSize());
 
     bufferManager->draw();
 
@@ -107,7 +112,7 @@ void Manager::MainLoop(float time)
         e->addAnimation(Visuel::createFromFile("Spaceship.txt",Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));
 
         Positionable ** ennemies = (Positionable **)poolManager->getEnnemies();
-        for (int i = 0; i < 15; i++)
+        for (int i = 0; i < poolManager->getEnnPoolSize(); i++)
         {
             if (ennemies[i] != nullptr && ennemies[i]->isEnabled)
             {

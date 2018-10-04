@@ -20,10 +20,17 @@ class PoolManager
         Positionable ** getProjectiles();
         Positionable ** getHero();
 
+        int             getEnnPoolSize();
+        int             getProPoolSize();
+        int             getHerPoolSize();
+
     private:
         Ennemi       * poolEnnemi[15];
-        Projectile   * poolProjectile[25];
+        Projectile   * poolProjectile[60];
         Hero         * hero[1];
+        int            sizePoolEnn = 15;
+        int            sizePoolPro = 60;
+        int            sizePoolHer = 1;
 
 };
 
