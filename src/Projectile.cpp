@@ -3,7 +3,7 @@
 
 Projectile::Projectile() : Positionable(0, 0)
 {
-    directionMove = std::pair<int, int>(0,0);
+    directionMove = std::pair<int, int>(0,1);
     timer = (1/getVitesse());
     lastTime = 0;
 }
@@ -17,8 +17,14 @@ Projectile::~Projectile()
     //dtor
 }
 
+void Projectile::update(float time){
+    goOn( time);
+
+}
+
 ///Movement automatique via une direction en memoire !
 void Projectile::goOn(float time){
+    //cout << "Hello, i'm  : " << timer << " at " << getVitesse() << endl;
     float deltaTime = time - lastTime;
     timer -= deltaTime;
 

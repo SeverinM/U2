@@ -9,6 +9,7 @@ class Projectile : public Positionable
         Projectile(int posX, int posY, std::pair<int, int> direction);
         virtual ~Projectile();
         void goOn(float time);
+        virtual void update(float time);
         int hit();
     protected:
 
