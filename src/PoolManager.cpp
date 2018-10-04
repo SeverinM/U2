@@ -5,6 +5,17 @@
 
 PoolManager::PoolManager()
 {
+    for (int i = 0 ; i < 25 ; i++)
+    {
+        poolProjectile[i] = 0;
+    }
+
+    for (int i = 0 ; i < 15 ; i++)
+    {
+        poolEnnemi[i] = 0;
+    }
+
+    hero[0] = 0;
 };
 
 
@@ -25,6 +36,7 @@ void PoolManager::addInPool(Positionable * element)
             {
                 poolProjectile[i] = (Projectile *)element;
             }
+            break;
         }
     }
 
@@ -35,6 +47,7 @@ void PoolManager::addInPool(Positionable * element)
             if (poolEnnemi[i] == 0)
             {
                 poolEnnemi[i] = (Ennemi *)element;
+                break;
             }
         }
     }

@@ -18,7 +18,7 @@ BufferManager::BufferManager()
     defaultCar.Attributes = Visuel::getColor(Visuel::Couleur::Transparent,Visuel::Couleur::Transparent);
 }
 
-void BufferManager::placeInBuffer(CHAR_INFO * car, int &x, int &y)
+void BufferManager::placeInBuffer(CHAR_INFO * car, int x, int y)
 {
     if (x >= 0 && x < SIZEX && y >= 0 && y < SIZEY)
     {

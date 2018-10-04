@@ -14,7 +14,7 @@ class BufferManager
 {
     public:
         BufferManager();
-        void placeInBuffer(CHAR_INFO * car, int &x, int &y);
+        void placeInBuffer(CHAR_INFO * car, int x, int y);
         void draw();
         void resetScreen();
 

@@ -15,6 +15,8 @@ Manager::Manager()
 
     h = Hero(3,7);
     e = Ennemi(12,12);
+    poolManager->addInPool(&h);
+    poolManager->addInPool(&e);
 }
 
 
@@ -49,39 +51,50 @@ void Manager::MainLoop(float time)
             case 'd':
                 h.moveBy(1,0);
                 break;
-                case ' ':
-            h.tryToShoot();
+            case ' ':
+                //h.tryToShoot();
+                stopLoop();
                 break;
             default :
                     break;
         }
     }
     //Hero section
-    h.update(time);
+    //h.update(time);
     //Projectil section
 
 
     //Ennemi section
 
     bufferManager->resetScreen();
-    drawAllElementIn(poolManager->getProjectiles());
+    //drawAllElementIn(poolManager->getProjectiles());
     drawAllElementIn(poolManager->getEnnemies());
-    drawAllElementIn(poolManager->getHero());
+    //drawAllElementIn(poolManager->getHero());
+    if (time > 2)
+    {
+        stopLoop();
+    }
 
     bufferManager->draw();
 }
 
 void Manager::drawAllElementIn(Positionable * listElement[]){
+
+    if (listElement[0] == nullptr)
+    {
+        return;
+    }
     int sizeA(sizeof(listElement) / sizeof(listElement[0]));
     for (int i = 0; i < sizeA ; i++)
     {
         map<pair<int,int>, CHAR_INFO *> temp(listElement[i]->getAnimation(0));
+        for (auto& a : temp)
+        {
+            bufferManager->placeInBuffer(a.second,a.first.first,a.first.second);
+        }
     }
 }
 
 void Manager::init()
 {
-    Positionable * h = poolManager->addHero(10,10);
-    Visuel * vis = Visuel::createFromFile("spaceship.txt");
-    h->addAnimation(vis);
 }
