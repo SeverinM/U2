@@ -72,6 +72,7 @@ void Manager::MainLoop(float time)
         Projectile *proj = (Projectile*)poolManager->getInPool(PoolManager::typePool::Proj);
         proj->isEnabled = true;
         proj->init(info.startPosition.first,info.startPosition.second,info.direction);
+        std::cout << "Create " << std::endl;
     }
 
     //Projectile section

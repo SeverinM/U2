@@ -21,10 +21,9 @@ void Hero::init(int posX,int posY)
 
 void Hero::update(float time)
 {
-    float deltaTime = time - lastTime;
-    if(timerShoot > 0)
-        timerShoot -= deltaTime;
-    lastTime = time;
+    if(timerShoot > 0){
+        timerShoot -= time;
+    }
 }
 
 void Hero::tryToShoot(){

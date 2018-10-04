@@ -31,15 +31,12 @@ void Projectile::update(float time){
 ///Movement automatique via une direction en memoire !
 void Projectile::goOn(float time){
     //cout << "Hello, i'm  : " << timer << " at " << getVitesse() << endl;
-    float deltaTime = time - lastTime;
-    timer -= deltaTime;
+    timer -= time;
 
     if(timer < 0){
         moveBy(directionMove.first,directionMove.second);
         timer = (1/getVitesse());;
     }
-    lastTime = time;
-    //std::cout << timer << std::endl ;
 }
 
 int Projectile::hit(){
