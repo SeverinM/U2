@@ -81,6 +81,7 @@ void Manager::drawAllElementIn(Positionable * listElement[]){
 
 void Manager::init()
 {
-    Ennemi * enn = new Ennemi();
-    poolManager->addInPool(enn);
+    Positionable * h = poolManager->addHero(10,10);
+    Visuel * vis = Visuel::createFromFile("spaceship.txt");
+    h->addAnimation(vis);
 }
