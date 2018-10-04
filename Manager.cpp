@@ -33,22 +33,24 @@ void Manager::MainLoop(float time)
         key =_getch();
         switch(key){
             case 'z':
-                h->moveBy(0,-1);
+                if (h != nullptr && h->isEnabled)
+                    h->moveBy(0,-1);
                 break;
             case 's':
-                h->moveBy(0,1);
+                if (h != nullptr && h->isEnabled)
+                    h->moveBy(0,1);
                 break;
             case 'q':
-                h->moveBy(-1,0);
+                if (h != nullptr && h->isEnabled)
+                    h->moveBy(-1,0);
                 break;
             case 'd':
-                h->moveBy(1,0);
+                if (h != nullptr && h->isEnabled)
+                    h->moveBy(1,0);
                 break;
             case ' ':
                 stopLoop();
                 break;
-            default :
-                    break;
         }
     }
 
@@ -70,10 +72,13 @@ void Manager::drawAllElementIn(Positionable * listElement[]){
     int sizeA(sizeof(listElement) / sizeof(listElement[0]));
     for (int i = 0; i < sizeA ; i++)
     {
-        map<pair<int,int>, CHAR_INFO *> temp(listElement[i]->getAnimation(0));
-        for (auto& a : temp)
+        if(listElement[i]->isEnabled)
         {
-            bufferManager->placeInBuffer(a.second,a.first.first,a.first.second);
+            map<pair<int,int>, CHAR_INFO *> temp(listElement[i]->getAnimation(0));
+            for (auto& a : temp)
+            {
+                bufferManager->placeInBuffer(a.second,a.first.first,a.first.second);
+            }
         }
     }
 }
