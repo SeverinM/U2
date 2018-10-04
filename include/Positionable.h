@@ -9,6 +9,7 @@ class Positionable
 {
     public:
         Positionable(int startPosX,int startPosY);
+        void init(int posXBy, int posY);
         void moveBy(int posXBy, int posY);
         float getVitesse();
         std::pair<int,int> getPos();

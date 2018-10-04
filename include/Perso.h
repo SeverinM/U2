@@ -12,6 +12,7 @@ class Perso : public Positionable
         } ;
         Perso();
         Perso(int posX,int posY);
+        void init(int posX,int posY);
         virtual ~Perso();
 
         shootInfo Tirer();

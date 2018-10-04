@@ -8,6 +8,7 @@ class Hero : public Perso
         Hero();
         Hero(int posX,int posY);
         virtual ~Hero();
+        void init(int posX,int posY);
         virtual std::pair<int,int> directionTir();
         void update(float time);
         void tryToShoot();

@@ -15,10 +15,16 @@ Perso::~Perso()
 {
 }
 
+void Perso::init(int posX,int posY)
+{
+    Positionable::init(posX, posY);
+}
+
 Perso::shootInfo Perso::Tirer(){
     shootInfo sI;
     sI.direction = directionTir();
     sI.startPosition = getPos();
+    isShot = false;
     return sI;
 }
 

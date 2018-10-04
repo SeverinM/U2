@@ -9,6 +9,7 @@ class Ennemi : public Perso
         Ennemi();
         Ennemi(int posX,int posY);
         virtual ~Ennemi();
+        void init(int posX,int posY);
         virtual std::pair<int,int> directionTir();
         void update(float time);
 };

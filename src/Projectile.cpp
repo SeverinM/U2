@@ -17,6 +17,12 @@ Projectile::~Projectile()
     //dtor
 }
 
+void Projectile::init(int posX, int posY, std::pair<int, int> dir)
+{
+    Positionable::init(posX, posY);
+    directionMove = dir;
+}
+
 void Projectile::update(float time){
     goOn( time);
 
