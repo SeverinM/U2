@@ -10,6 +10,7 @@ Positionable::Positionable(int startPosX,int startPosY){
     posY = startPosY;
     vitesse = 8; //TO DO : change this
     animations.push_back(Visuel::createFromFile("Spaceship.txt"));
+    isEnabled = false;
 }
 
 void Positionable::moveBy(int posXBy, int posYBy)

@@ -15,13 +15,12 @@ class Manager
         void stopLoop();
         bool isStop();
         void init();
+        Hero * h;
 
     private:
         bool stop;
         BufferManager *  bufferManager;
         PoolManager * poolManager;
-        Hero h;
-        Ennemi e;
         void drawAllElementIn(Positionable ** listElement);
 };
 

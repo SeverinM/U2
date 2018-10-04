@@ -8,8 +8,14 @@
 class PoolManager
 {
     public:
+        enum typePool
+        {
+            Proj,
+            Enn,
+            Her
+        };
         PoolManager();
-        void addInPool(Positionable * element);
+        Positionable * getInPool(typePool type);
         Positionable ** getEnnemies();
         Positionable ** getProjectiles();
         Positionable ** getHero();
@@ -17,7 +23,7 @@ class PoolManager
     private:
         Ennemi       * poolEnnemi[15];
         Projectile   * poolProjectile[25];
-        Hero        * hero[1];
+        Hero         * hero[1];
 
 };
 

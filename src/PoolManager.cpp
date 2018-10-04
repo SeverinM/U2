@@ -19,39 +19,56 @@ PoolManager::PoolManager()
 };
 
 
-void PoolManager::addInPool(Positionable * element)
+Positionable * PoolManager::getInPool(PoolManager::typePool type)
 {
-    const std::type_info& str = typeid(*element);
-    if (str == typeid(Hero))
+    Positionable * output;
+    switch (type)
     {
-        delete hero;
-        hero[0] = (Hero *)element;
-    }
-
-    if (str == typeid(Projectile))
-    {
-        for (int i = 0; i < 25; i++)
-        {
-            if (poolProjectile[i] == 0)
+        case PoolManager::Enn:
+            for (int i = 0; i < 15; i++)
             {
-                poolProjectile[i] = (Projectile *)element;
+                if (poolEnnemi[i] == 0)
+                {
+                    poolEnnemi[i] = new Ennemi();
+                }
+                if (!poolEnnemi[i]->isEnabled)
+                {
+                    output = poolEnnemi[i];
+                    break;
+                }
             }
             break;
-        }
+
+        case PoolManager::Proj:
+            for (int i = 0; i < 25; i++)
+            {
+                if (poolProjectile[i] == 0)
+                {
+                    poolProjectile[i] = new Projectile();
+                }
+                if (!poolProjectile[i]->isEnabled)
+                {
+                    output = poolProjectile[i];
+                    break;
+                }
+            }
+            break;
+
+        case PoolManager::Her:
+            if (hero[0] == 0)
+            {
+                hero[0] = new Hero();
+            }
+
+            if (!hero[0]->isEnabled)
+            {
+                output = hero[0];
+            }
+            break;
     }
 
-    if (str == typeid(Ennemi))
-    {
-        for (int i = 0; i < 15 ; i++)
-        {
-            if (poolEnnemi[i] == 0)
-            {
-                poolEnnemi[i] = (Ennemi *)element;
-                break;
-            }
-        }
-    }
-};
+    return output;
+}
 
 Positionable** PoolManager::getEnnemies()
 {
