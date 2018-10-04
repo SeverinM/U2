@@ -25,7 +25,7 @@ class Manager
         float frequencySpawn;
         BufferManager *  bufferManager;
         PoolManager * poolManager;
-        void drawAllElementIn(Positionable ** listElement);
+        void drawAllElementIn(Positionable ** listElement, int sizeA);
 };
 
 #endif // MANAGER_H
