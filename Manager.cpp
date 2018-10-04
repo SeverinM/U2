@@ -8,14 +8,8 @@
 Manager::Manager()
 {
     stop = false;
-    Visuel * vis = Visuel::createFromFile("Spaceship.txt");
-    h.addAnimation(vis);
-    e.addAnimation(vis);
-    e.moveBy(10,10);
     bufferManager = new BufferManager();
     poolManager = new PoolManager();
-    poolManager->addInPool(&h);
-    poolManager->addInPool(&e);
 }
 
 
@@ -39,16 +33,16 @@ void Manager::MainLoop(float time)
         key =_getch();
         switch(key){
             case 'z':
-                h.moveBy(0,-1);
+                h->moveBy(0,-1);
                 break;
             case 's':
-                h.moveBy(0,1);
+                h->moveBy(0,1);
                 break;
             case 'q':
-                h.moveBy(-1,0);
+                h->moveBy(-1,0);
                 break;
             case 'd':
-                h.moveBy(1,0);
+                h->moveBy(1,0);
                 break;
             case ' ':
                 stopLoop();
@@ -57,14 +51,9 @@ void Manager::MainLoop(float time)
                     break;
         }
     }
-    //Hero section
-    //h.update(time);
-    //Projectil section
-
-
-    //Ennemi section
 
     bufferManager->resetScreen();
+
     drawAllElementIn(poolManager->getProjectiles());
     drawAllElementIn(poolManager->getEnnemies());
     drawAllElementIn(poolManager->getHero());
@@ -91,4 +80,6 @@ void Manager::drawAllElementIn(Positionable * listElement[]){
 
 void Manager::init()
 {
+    h = (Hero *)poolManager->getInPool(PoolManager::Her);
+    h->isEnabled = true;
 }
