@@ -8,7 +8,7 @@ using namespace std;
 Positionable::Positionable(int startPosX,int startPosY){
     posX = startPosX;
     posY = startPosY;
-    vitesse = 8; //TO DO : change this
+    vitesse = 2; //TO DO : change this
     animations.push_back(Visuel::createFromFile("Spaceship.txt"));
 }
 
