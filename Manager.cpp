@@ -90,9 +90,9 @@ void Manager::MainLoop(float time)
 
     bufferManager->resetScreen();
 
-    drawAllElementIn(poolManager->getProjectiles());
-    drawAllElementIn(poolManager->getEnnemies());
-    drawAllElementIn(poolManager->getHero());
+    drawAllElementIn(poolManager->getProjectiles(),25);
+    drawAllElementIn(poolManager->getEnnemies(),15);
+    drawAllElementIn(poolManager->getHero(),1);
 
     bufferManager->draw();
 
@@ -116,13 +116,13 @@ void Manager::MainLoop(float time)
     }
 }
 
-void Manager::drawAllElementIn(Positionable * listElement[]){
+void Manager::drawAllElementIn(Positionable * listElement[], int sizeA){
 
     if (listElement[0] == nullptr)
     {
         return;
     }
-    int sizeA(sizeof(listElement) / sizeof(listElement[0]));
+
     for (int i = 0; i < sizeA ; i++)
     {
         if(listElement[i] != nullptr && listElement[i]->isEnabled)
