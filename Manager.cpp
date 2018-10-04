@@ -10,11 +10,10 @@ Manager::Manager()
     stop = false;
     Visuel * vis = Visuel::createFromFile("Spaceship.txt");
     h.addAnimation(vis);
+    e.addAnimation(vis);
+    e.moveBy(10,10);
     bufferManager = new BufferManager();
     poolManager = new PoolManager();
-
-    h = Hero(3,7);
-    e = Ennemi(12,12);
     poolManager->addInPool(&h);
     poolManager->addInPool(&e);
 }
@@ -52,7 +51,6 @@ void Manager::MainLoop(float time)
                 h.moveBy(1,0);
                 break;
             case ' ':
-                //h.tryToShoot();
                 stopLoop();
                 break;
             default :
@@ -67,13 +65,9 @@ void Manager::MainLoop(float time)
     //Ennemi section
 
     bufferManager->resetScreen();
-    //drawAllElementIn(poolManager->getProjectiles());
+    drawAllElementIn(poolManager->getProjectiles());
     drawAllElementIn(poolManager->getEnnemies());
-    //drawAllElementIn(poolManager->getHero());
-    if (time > 2)
-    {
-        stopLoop();
-    }
+    drawAllElementIn(poolManager->getHero());
 
     bufferManager->draw();
 }
