@@ -33,16 +33,20 @@ void Manager::MainLoop(float time)
         key =_getch();
         switch(key){
             case 'z':
-                h->moveBy(0,-1);
+                if (h != nullptr && h->isEnabled)
+                    h->moveBy(0,-1);
                 break;
             case 's':
-                h->moveBy(0,1);
+                if (h != nullptr && h->isEnabled)
+                    h->moveBy(0,1);
                 break;
             case 'q':
-                h->moveBy(-1,0);
+                if (h != nullptr && h->isEnabled)
+                    h->moveBy(-1,0);
                 break;
             case 'd':
-                h->moveBy(1,0);
+                if (h != nullptr && h->isEnabled)
+                    h->moveBy(1,0);
                 break;
             case ' ':
                 h->tryToShoot();
@@ -50,8 +54,6 @@ void Manager::MainLoop(float time)
             case 27:
                 stopLoop();
                 break;
-            default :
-                    break;
         }
     }
 
@@ -96,10 +98,13 @@ void Manager::drawAllElementIn(Positionable * listElement[]){
     int sizeA(sizeof(listElement) / sizeof(listElement[0]));
     for (int i = 0; i < sizeA ; i++)
     {
-        map<pair<int,int>, CHAR_INFO *> temp(listElement[i]->getAnimation(0));
-        for (auto& a : temp)
+        if(listElement[i]->isEnabled)
         {
-            bufferManager->placeInBuffer(a.second,a.first.first,a.first.second);
+            map<pair<int,int>, CHAR_INFO *> temp(listElement[i]->getAnimation(0));
+            for (auto& a : temp)
+            {
+                bufferManager->placeInBuffer(a.second,a.first.first,a.first.second);
+            }
         }
     }
 }
@@ -108,4 +113,9 @@ void Manager::init()
 {
     h = (Hero *)poolManager->getInPool(PoolManager::Her);
     h->isEnabled = true;
+    h->addAnimation(Visuel::createFromFile("Spaceship.txt"));
+    Ennemi * e = (Ennemi *)poolManager->getInPool(PoolManager::Enn);
+    e->moveBy(10,10);
+    e->isEnabled = true;
+    e->addAnimation(Visuel::createFromFile("Spaceship.txt",Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));
 }
