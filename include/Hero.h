@@ -12,6 +12,7 @@ class Hero : public Perso
         virtual std::pair<int,int> directionTir();
         void update(float time);
         void tryToShoot();
+        void setPosition(double newX, double newY);
 
     protected:
 

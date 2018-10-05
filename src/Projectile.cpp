@@ -51,4 +51,3 @@ int Projectile::hit(){
 bool Projectile::getIsFromPlayer(){
     return isFromPlayer;
 }
-

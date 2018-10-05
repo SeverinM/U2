@@ -97,25 +97,7 @@ void Manager::MainLoop(float time)
         }
     }
 
-
-    bufferManager->resetScreen();
-
-    drawAllElementIn(poolManager->getProjectiles(),poolManager->getProPoolSize());
-    drawAllElementIn(poolManager->getEnnemies(),poolManager->getEnnPoolSize());
-    drawAllElementIn(poolManager->getHero(),poolManager->getHerPoolSize());
-
-    bufferManager->draw();
-
-    if (timeSpent > frequencySpawn )
-    {
-        timeSpent -= frequencySpawn;
-        Ennemi * e = (Ennemi *)poolManager->getInPool(PoolManager::typePool::Enn);
-        int random(std::rand() % (SIZEX -2));
-        e->setPosition(random,1);
-        e->isEnabled = true;
-        e->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt",Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));
-    }
-
+    //Ennemi section
     Positionable ** ennemies = (Positionable **)poolManager->getEnnemies();
     for (int i = 0; i < poolManager->getEnnPoolSize(); i++)
     {
@@ -132,6 +114,26 @@ void Manager::MainLoop(float time)
                 collisionBuffer[ennemies[i]->getPos()] = ennemies[i];
             }
         }
+    }
+
+
+    //Affichage
+    bufferManager->resetScreen();
+
+    drawAllElementIn(poolManager->getProjectiles(),poolManager->getProPoolSize());
+    drawAllElementIn(poolManager->getEnnemies(),poolManager->getEnnPoolSize());
+    drawAllElementIn(poolManager->getHero(),poolManager->getHerPoolSize());
+
+    bufferManager->draw();
+
+    if (timeSpent > frequencySpawn )
+    {
+        timeSpent -= frequencySpawn;
+        Ennemi * e = (Ennemi *)poolManager->getInPool(PoolManager::typePool::Enn);
+        int random(std::rand() % (SIZEX - 2));
+        e->moveBy(random,1);
+        e->isEnabled = true;
+        e->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt",Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));
     }
 }
 
@@ -154,4 +156,5 @@ void Manager::init()
     h = (Hero *)poolManager->getInPool(PoolManager::Her);
     h->isEnabled = true;
     h->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt"));
+    h->setPosition(SIZEX / 2, SIZEY / 2);
 }

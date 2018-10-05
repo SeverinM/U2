@@ -42,7 +42,3 @@ void Ennemi::update(float deltaTime)
     }
 }
 
-void Ennemi::setPosition(int newX, int newY)
-{
-    Positionable::setPosition(newX,newY);
-}
