@@ -4,6 +4,10 @@
 #include "Visuel.h"
 #include <vector>
 #include <map>
+#include <iostream>
+#define SIZEX 70
+#define SIZEY 70
+
 
 class Positionable
 {

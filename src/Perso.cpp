@@ -42,6 +42,7 @@ void Perso::update(float time)
 
 
 void Perso::Mourir(){
-    //TO DO :
+    isEnabled = false;
+    std::cout << "I'm dead, I was a good soldier" << std::endl;
 }
 

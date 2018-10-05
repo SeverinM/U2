@@ -1,7 +1,4 @@
 #include "../include/Ennemi.h"
-#define SIZEX 70
-#define SIZEY 70
-#include <iostream>
 
 Ennemi::Ennemi() : Perso()
 {
@@ -40,7 +37,7 @@ void Ennemi::update(float deltaTime)
             timeSinceLastShoot = time;
             Projectile * p = (Projectile *)pool->getInPool(PoolManager::typePool::Proj);
             p->isEnabled = true;
-            p->init(posX,posY,{0,0.001});
+            p->init(posX,posY,{0,0.001},false);
         }
     }
 }

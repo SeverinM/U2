@@ -25,6 +25,8 @@ class Manager
         BufferManager *  bufferManager;
         PoolManager * poolManager;
         void drawAllElementIn(Positionable ** listElement, int sizeA);
+
+        map<pair<int,int>,Positionable *> collisionBuffer;
 };
 
 #endif // MANAGER_H

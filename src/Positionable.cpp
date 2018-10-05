@@ -3,8 +3,6 @@
 #include <algorithm>
 #include <iostream>
 #include <tgmath.h>
-#define SIZEX 70
-#define SIZEY 70
 
 using namespace std;
 

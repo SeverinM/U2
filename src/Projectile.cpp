@@ -19,10 +19,11 @@ Projectile::~Projectile()
     //dtor
 }
 
-void Projectile::init(int posX, int posY, std::pair<int, int> dir)
+void Projectile::init(int posX, int posY, std::pair<int, int> dir, bool fromPlayer)
 {
     Positionable::init(posX, posY, "sprites/ProjectileHero.txt");
     directionMove = dir;
+    isFromPlayer = fromPlayer;
 }
 
 void Projectile::update(float time){
@@ -45,5 +46,9 @@ void Projectile::goOn(float time){
 
 int Projectile::hit(){
     return 1;
+}
+
+bool Projectile::getIsFromPlayer(){
+    return isFromPlayer;
 }
 

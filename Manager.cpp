@@ -66,6 +66,8 @@ void Manager::MainLoop(float time)
                 break;
         }
     }
+    //Collision buffer : empty it
+    collisionBuffer.clear();
 
     //Hero section
     h->update(time);
@@ -75,20 +77,25 @@ void Manager::MainLoop(float time)
         proj->isEnabled = true;
         int offsetX = -1;
         int offsetY = 2;
-        proj->init(info.startPosition.first+offsetY,info.startPosition.second+offsetX,info.direction);
+        proj->init(info.startPosition.first+offsetY,info.startPosition.second+offsetX,info.direction,true);
     }
+    collisionBuffer[h->getPos()] = h;
 
     //Projectile section
     Positionable ** posList = poolManager->getProjectiles();
     int sizeA = poolManager->getProPoolSize();
     for(int i = 0; i < sizeA ; i ++){
-        if(posList[i] != nullptr){
-            if(posList[i]->isEnabled){
-                posList[i]->update(time);
+        Positionable * pp = posList[i];
+        if(pp != nullptr){
+            if(pp->isEnabled){
+                pp->update(time);
+                //Here will be the test to see if there is hero with an ennemi projectile. An ally projectile is prio on erasing the value
+                //Also : if a projectile met an opposite projectile : both died
+                //if(collisionBuffer.find(pp->getPos()) != collisionBuffer.end())
+                collisionBuffer[pp->getPos()] = pp;
             }
         }
     }
-    //Ennemi section
 
 
     bufferManager->resetScreen();
@@ -115,6 +122,15 @@ void Manager::MainLoop(float time)
         if (ennemies[i] != nullptr && ennemies[i]->isEnabled)
         {
             ennemies[i]->update(timeSpent);
+            map<pair<int,int>,Positionable *>::iterator it = collisionBuffer.find(ennemies[i]->getPos());
+            if( it != collisionBuffer.end() ){
+                //if((it->second)->)
+                ((Ennemi *)ennemies[i])->takeDamage(100);/*need to be replace by projectile.hit when change will be set*/
+
+            }
+            else {
+                collisionBuffer[ennemies[i]->getPos()] = ennemies[i];
+            }
         }
     }
 }
