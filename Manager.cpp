@@ -164,6 +164,26 @@ void Manager::MainLoop(float time)
             }
         }
     }
+
+
+    //Affichage
+    bufferManager->resetScreen();
+
+    drawAllElementIn(poolManager->getProjectiles(),poolManager->getProPoolSize());
+    drawAllElementIn(poolManager->getEnnemies(),poolManager->getEnnPoolSize());
+    drawAllElementIn(poolManager->getHero(),poolManager->getHerPoolSize());
+
+    bufferManager->draw();
+
+    if (timeSpent > frequencySpawn )
+    {
+        timeSpent -= frequencySpawn;
+        Ennemi * e = (Ennemi *)poolManager->getInPool(PoolManager::typePool::Enn);
+        int random(std::rand() % (SIZEX - 2));
+        e->moveBy(random,1);
+        e->isEnabled = true;
+        e->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt",Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));
+    }
 }
 
 void Manager::drawAllElementIn(Positionable * listElement[], int sizeA){
@@ -185,4 +205,5 @@ void Manager::init()
     h = (Hero *)poolManager->getInPool(Her);
     h->isEnabled = true;
     h->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt"));
+    h->setPosition(SIZEX / 2, SIZEY / 2);
 }

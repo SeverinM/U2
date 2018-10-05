@@ -3,12 +3,11 @@
 
 Perso::Perso() : Positionable(1,1)
 {
-
 }
 
 Perso::Perso(int posX,int posY) :  Positionable(posX, posY)
 {
-
+    timerShoot = 0;
 }
 
 Perso::~Perso()

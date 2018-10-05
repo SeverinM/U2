@@ -60,3 +60,12 @@ void Positionable::setPosition(double newX,double newY)
     }
 }
 
+void Positionable::removeAnimation(int index)
+{
+    if(animations.size() > index)
+    {
+        delete animations[index];
+        animations.erase(animations.begin() + index);
+    }
+}
+

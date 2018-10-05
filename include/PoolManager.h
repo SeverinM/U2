@@ -19,10 +19,10 @@ class PoolManager
         int             getHerPoolSize();
 
     private:
-        Ennemi       * poolEnnemi[15];
+        Ennemi       * poolEnnemi[30];
         Projectile   * poolProjectile[60];
         Hero         * hero[1];
-        int            sizePoolEnn = 15;
+        int            sizePoolEnn = 30;
         int            sizePoolPro = 60;
         int            sizePoolHer = 1;
 
