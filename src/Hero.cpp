@@ -40,15 +40,17 @@ std::pair<int,int> Hero::directionTir(){
     return std::pair<int,int>(0,-1);
 }
 
+
+typePosable Hero::getTypePosable(){
+    return Her;
+}
+
 void Hero::setPosition(double newX, double newY)
 {
     if (newX > 0 && newX < (SIZEX - 1))
     {
         posX = newX;
     }
-typePosable Hero::getTypePosable(){
-    return Her;
-}
 
     if (newY > 0 && newY < (SIZEY - 1))
     {

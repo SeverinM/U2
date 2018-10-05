@@ -2,13 +2,13 @@
 
 Ennemi::Ennemi() : Perso()
 {
-    vitesse = 0.001;
+    vitesse = 0.01;
 }
 
 Ennemi::Ennemi(int posX,int posY, PoolManager * refPool) : Perso(posX, posY)
 {
     pool = refPool;
-    vitesse = 0.001;
+    vitesse = 0.01;
 }
 
 Ennemi::~Ennemi()
@@ -42,7 +42,7 @@ void Ennemi::update(float deltaTime)
                                                    Visuel::getColor(Visuel::Couleur::Rouge,
                                                                     Visuel::Couleur::Transparent)));
             p->isEnabled = true;
-            p->init(posX,posY,{0,0.001},false);*/
+            p->init(posX,posY,{0,0.001},false);
         }
     }
 }

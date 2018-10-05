@@ -78,9 +78,9 @@ void Manager::MainLoop(float time)
         Perso::shootInfo info = h->Tirer();
         Projectile *proj = (Projectile*)poolManager->getInPool(typePosable::Proj);
         proj->isEnabled = true;
-        int offsetX = -1;
-        int offsetY = 2;
-        proj->init(info.startPosition.first+offsetY,info.startPosition.second+offsetX,info.direction,true);
+        int offsetF = h->hitbox.first + info.direction.first;
+        int offsetS = h->hitbox.second+ info.direction.second;
+        proj->init(info.startPosition.first+offsetF,info.startPosition.second+offsetS,info.direction,true);
     }
     collisionBuffer[h->getPos()] = h;
 
@@ -140,27 +140,31 @@ void Manager::MainLoop(float time)
     {
         if (ennemies[i] != nullptr && ennemies[i]->isEnabled)
         {
-            ennemies[i]->update(timeSpent);
-            map<pair<int,int>,Positionable *>::iterator it = collisionBuffer.find(ennemies[i]->getPos());
+            Ennemi * ennemi = (Ennemi *)ennemies[i];
+            ennemi->update(timeSpent);
+            pair<int,int> truePosition = ennemi->getPos();
+            truePosition.first  += ennemi->hitbox.first;
+            truePosition.second += ennemi->hitbox.second;
+            map<pair<int,int>,Positionable *>::iterator it = collisionBuffer.find(truePosition);
             if( it != collisionBuffer.end() ){
-                    Positionable * p = (it->second);
+                Positionable * p = (it->second);
                 switch((it->second)->getTypePosable()){
                     case Her:
-                        ((Ennemi *)ennemies[i])->takeDamage(100);
+                        ((Ennemi *)ennemi)->takeDamage(100);
                         break;
                     case Enn:
                         break;
                     case Proj :
                         Projectile * proj = (Projectile *)p;
                         if(proj->getIsFromPlayer()){
-                            ((Ennemi *)ennemies[i])->takeDamage(proj->hit());
+                            ((Ennemi *)ennemi)->takeDamage(proj->hit());
                             proj->isEnabled = false;
                         }
                         break;
                 }
             }
             else {
-                collisionBuffer[ennemies[i]->getPos()] = ennemies[i];
+                collisionBuffer[truePosition] = ennemi;
             }
         }
     }
@@ -178,7 +182,7 @@ void Manager::MainLoop(float time)
     if (timeSpent > frequencySpawn )
     {
         timeSpent -= frequencySpawn;
-        Ennemi * e = (Ennemi *)poolManager->getInPool(PoolManager::typePool::Enn);
+        Ennemi * e = (Ennemi *)poolManager->getInPool(Enn);
         int random(std::rand() % (SIZEX - 2));
         e->moveBy(random,1);
         e->isEnabled = true;

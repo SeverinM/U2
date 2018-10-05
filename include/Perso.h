@@ -17,7 +17,7 @@ class Perso : public Positionable
 
         shootInfo Tirer();
         void takeDamage(int damage);
-        std::pair<int,int> hitbox;
+        std::pair<int,int> hitbox = std::pair<int,int>(2,0);
         void update(float time);
         virtual std::pair<int,int> directionTir() = 0;
         bool isShot;
@@ -27,7 +27,7 @@ class Perso : public Positionable
         float timerShoot;
         float timerHit;
         void Mourir();
-        float delayShoot = 0.5;
+        float delayShoot = 0.1;
 };
 
 #endif // PERSO_H
