@@ -22,14 +22,12 @@ class Positionable
         inline int getY(){return posY;}
 
     protected:
+        float vitesse;
+        vector<Visuel *> animations;
         float timer;
         float lastTime;
         double posX;
         double posY;
-
-    protected:
-        float vitesse;
-        vector<Visuel *> animations;
 
 
 };

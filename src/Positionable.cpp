@@ -3,6 +3,8 @@
 #include <algorithm>
 #include <iostream>
 #include <tgmath.h>
+#define SIZEX 70
+#define SIZEY 70
 
 using namespace std;
 
@@ -54,5 +56,9 @@ void Positionable::setPosition(double newX,double newY)
 {
     posX = newX;
     posY = newY;
+    if (posX < 0 || posX >= SIZEX || posY < 0 || posY >= SIZEY)
+    {
+        isEnabled = false;
+    }
 }
 

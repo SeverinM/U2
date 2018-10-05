@@ -21,16 +21,12 @@ Projectile::~Projectile()
 
 void Projectile::init(int posX, int posY, std::pair<int, int> dir)
 {
-    Positionable::init(posX, posY);
+    Positionable::init(posX, posY, "sprites/ProjectileHero.txt");
     directionMove = dir;
 }
 
 void Projectile::update(float time){
-    goOn( time);
-    if (posX < 0 || posX >= SIZEX || posY < 0 || posY >= SIZEY)
-    {
-        isEnabled = false;
-    }
+    goOn(time);
 }
 
 

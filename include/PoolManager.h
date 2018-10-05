@@ -4,6 +4,7 @@
 #include "Ennemi.h"
 #include "Projectile.h"
 
+struct Ennemi;
 
 class PoolManager
 {
@@ -19,7 +20,6 @@ class PoolManager
         Positionable ** getEnnemies();
         Positionable ** getProjectiles();
         Positionable ** getHero();
-
         int             getEnnPoolSize();
         int             getProPoolSize();
         int             getHerPoolSize();

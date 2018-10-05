@@ -29,7 +29,7 @@ Positionable * PoolManager::getInPool(PoolManager::typePool type)
             {
                 if (poolEnnemi[i] == 0)
                 {
-                    poolEnnemi[i] = new Ennemi();
+                    poolEnnemi[i] = new Ennemi(0,0,this);
                 }
                 if (!poolEnnemi[i]->isEnabled)
                 {

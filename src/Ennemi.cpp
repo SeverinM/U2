@@ -1,15 +1,17 @@
 #include "../include/Ennemi.h"
 #define SIZEX 70
 #define SIZEY 70
+#include <iostream>
 
 Ennemi::Ennemi() : Perso()
 {
     vitesse = 0.001;
 }
 
-Ennemi::Ennemi(int posX,int posY) : Perso(posX, posY)
+Ennemi::Ennemi(int posX,int posY, PoolManager * refPool) : Perso(posX, posY)
 {
-
+    pool = refPool;
+    vitesse = 0.001;
 }
 
 Ennemi::~Ennemi()
@@ -26,16 +28,24 @@ std::pair<int,int> Ennemi::directionTir(){
     return std::pair<int,int>(0,1);
 }
 
-void Ennemi::update(float time)
+void Ennemi::update(float deltaTime)
 {
-    posY += vitesse;
+    if (isEnabled)
+    {
+        Positionable::setPosition(posX, posY + vitesse);
+        time += 0.00001;
+
+        if (time - timeSinceLastShoot > frequencyShoot)
+        {
+            timeSinceLastShoot = time;
+            Projectile * p = (Projectile *)pool->getInPool(PoolManager::typePool::Proj);
+            p->isEnabled = true;
+            p->init(posX,posY,{0,0.001});
+        }
+    }
 }
 
 void Ennemi::setPosition(int newX, int newY)
 {
     Positionable::setPosition(newX,newY);
-    if (posX < 0 || posX >= SIZEX || posY < 0 || posY >= SIZEY)
-    {
-        isEnabled = false;
-    }
 }

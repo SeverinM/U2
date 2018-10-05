@@ -76,7 +76,6 @@ void Manager::MainLoop(float time)
         int offsetX = -1;
         int offsetY = 2;
         proj->init(info.startPosition.first+offsetY,info.startPosition.second+offsetX,info.direction);
-        //std::cout << "Create " << info.direction.first << ", " << info.direction.second << std::endl;
     }
 
     //Projectile section
