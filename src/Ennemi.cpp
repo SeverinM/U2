@@ -35,7 +35,7 @@ void Ennemi::update(float deltaTime)
         if (time - timeSinceLastShoot > frequencyShoot)
         {
             timeSinceLastShoot = time;
-            Projectile * p = (Projectile *)pool->getInPool(PoolManager::typePool::Proj);
+            Projectile * p = (Projectile *)pool->getInPool(typePosable::Proj);
             p->isEnabled = true;
             p->init(posX,posY,{0,0.001},false);
         }
@@ -46,3 +46,8 @@ void Ennemi::setPosition(int newX, int newY)
 {
     Positionable::setPosition(newX,newY);
 }
+
+typePosable Ennemi::getTypePosable(){
+    return Enn;
+}
+

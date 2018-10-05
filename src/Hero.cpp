@@ -11,7 +11,7 @@ Hero::Hero(int posX,int posY) : Perso(posX, posY)
 
 Hero::~Hero()
 {
-    //dtor
+
 }
 
 void Hero::init(int posX,int posY)
@@ -37,6 +37,10 @@ void Hero::tryToShoot(){
 
 std::pair<int,int> Hero::directionTir(){
     return std::pair<int,int>(0,-1);
+}
+
+typePosable Hero::getTypePosable(){
+    return Her;
 }
 
 

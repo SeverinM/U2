@@ -9,14 +9,8 @@ struct Ennemi;
 class PoolManager
 {
     public:
-        enum typePool
-        {
-            Proj,
-            Enn,
-            Her
-        };
         PoolManager();
-        Positionable * getInPool(typePool type);
+        Positionable * getInPool(typePosable type);
         Positionable ** getEnnemies();
         Positionable ** getProjectiles();
         Positionable ** getHero();

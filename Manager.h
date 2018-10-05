@@ -26,7 +26,7 @@ class Manager
         PoolManager * poolManager;
         void drawAllElementIn(Positionable ** listElement, int sizeA);
 
-        map<pair<int,int>,Positionable *> collisionBuffer;
+        map<pair<int,int>,Positionable *> collisionBuffer;//add : max size == 70 / 70
 };
 
 #endif // MANAGER_H

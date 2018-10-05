@@ -8,6 +8,12 @@
 #define SIZEX 70
 #define SIZEY 70
 
+enum typePosable
+{
+    Proj,
+    Enn,
+    Her
+};
 
 class Positionable
 {
@@ -24,6 +30,8 @@ class Positionable
         bool isEnabled;
         inline int getX(){return posX;}
         inline int getY(){return posY;}
+        virtual typePosable getTypePosable() = 0;
+
 
     protected:
         float vitesse;

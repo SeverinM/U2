@@ -15,6 +15,7 @@ class Ennemi : public Perso
         virtual std::pair<int,int> directionTir();
         void update(float time);
         void setPosition(int newX,int newY);
+        virtual typePosable getTypePosable();
 
     private:
         float time = 0;

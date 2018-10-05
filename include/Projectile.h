@@ -13,6 +13,7 @@ class Projectile : public Positionable
         virtual void update(float time);
         int hit();
         bool getIsFromPlayer();
+        virtual typePosable getTypePosable();
 
     protected:
         bool isFromPlayer;
