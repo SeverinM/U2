@@ -24,6 +24,7 @@ class Positionable
         bool isEnabled;
         inline int getX(){return posX;}
         inline int getY(){return posY;}
+        void removeAnimation(int index);
 
     protected:
         float vitesse;

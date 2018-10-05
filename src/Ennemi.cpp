@@ -30,15 +30,18 @@ void Ennemi::update(float deltaTime)
     if (isEnabled)
     {
         Positionable::setPosition(posX, posY + vitesse);
-        time += 0.00001;
-
+        time += 0.0001;
         if (time - timeSinceLastShoot > frequencyShoot)
         {
-            timeSinceLastShoot = time;
+            /*timeSinceLastShoot = time;
             Projectile * p = (Projectile *)pool->getInPool(PoolManager::typePool::Proj);
-            p->isEnabled = true;
             p->init(posX,posY,{0,0.001},false);
+            p->removeAnimation(0);
+            p->addAnimation(Visuel::createFromFile("sprites/ProjectileHero.txt",
+                                                   Visuel::getColor(Visuel::Couleur::Rouge,
+                                                                    Visuel::Couleur::Transparent)));
+            p->isEnabled = true;
+            p->init(posX,posY,{0,0.001},false);*/
         }
     }
 }
-
