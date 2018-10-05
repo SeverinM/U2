@@ -21,7 +21,7 @@ Projectile::~Projectile()
 
 void Projectile::init(int posX, int posY, std::pair<int, int> dir)
 {
-    Positionable::init(posX, posY, "ProjectileHero.txt");
+    Positionable::init(posX, posY);
     directionMove = dir;
 }
 

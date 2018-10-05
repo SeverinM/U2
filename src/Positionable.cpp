@@ -2,6 +2,7 @@
 #include <windows.h>
 #include <algorithm>
 #include <iostream>
+#include <tgmath.h>
 
 using namespace std;
 
@@ -17,11 +18,10 @@ void Positionable::moveBy(int posXBy, int posYBy)
     setPosition(posXBy + posX, posYBy + posY);
 };
 
-void Positionable::init(int startPosX,int startPosY, string spriteFileName){
+void Positionable::init(int startPosX,int startPosY,string spritefileName){
     posX = startPosX;
     posY = startPosY;
-    vitesse = 2; //TO DO : change this
-    animations.push_back(Visuel::createFromFile(spriteFileName));
+    addAnimation(Visuel::createFromFile(spritefileName));
 }
 
 float Positionable::getVitesse(){
@@ -34,7 +34,7 @@ void Positionable::addAnimation(Visuel * visu)
 
 
 std::pair<int,int> Positionable::getPos(){
-    return std::pair<int,int>(posX,posY);
+    return std::pair<int,int>((int)floor(posX),(int)floor(posY));
 }
 
 map<pair<int,int>, CHAR_INFO *> Positionable::getAnimation(int index)
@@ -44,13 +44,13 @@ map<pair<int,int>, CHAR_INFO *> Positionable::getAnimation(int index)
     map<pair<int,int>, CHAR_INFO *>::iterator i = inputRef.begin();
     while (i != inputRef.end())
     {
-        output[make_pair(i->first.first + posX,i->first.second + posY)] = i->second;
+        output[make_pair(i->first.first + getPos().first,i->first.second + getPos().second)] = i->second;
         i++;
     }
     return output;
 }
 
-void Positionable::setPosition(int newX, int newY)
+void Positionable::setPosition(double newX,double newY)
 {
     posX = newX;
     posY = newY;

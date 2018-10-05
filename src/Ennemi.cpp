@@ -4,7 +4,7 @@
 
 Ennemi::Ennemi() : Perso()
 {
-
+    vitesse = 0.001;
 }
 
 Ennemi::Ennemi(int posX,int posY) : Perso(posX, posY)
@@ -28,7 +28,7 @@ std::pair<int,int> Ennemi::directionTir(){
 
 void Ennemi::update(float time)
 {
-    moveBy(0,1);
+    posY += vitesse;
 }
 
 void Ennemi::setPosition(int newX, int newY)

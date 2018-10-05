@@ -21,7 +21,6 @@ class Manager
         bool stop;
         int timeUpdate;
         float timeSpent;
-        float timeSpentUpdate;
         float frequencySpawn;
         BufferManager *  bufferManager;
         PoolManager * poolManager;

@@ -33,7 +33,6 @@ bool Manager::isStop()
 void Manager::MainLoop(float time)
 {
     timeSpent += time;
-    timeSpentUpdate += time;
     //Input section
     int key = 0;
     if (_kbhit())
@@ -86,7 +85,6 @@ void Manager::MainLoop(float time)
     for(int i = 0; i < sizeA ; i ++){
         if(posList[i] != nullptr){
             if(posList[i]->isEnabled){
-                //cout << "isEnabled" << endl;
                 posList[i]->update(time);
             }
         }
@@ -106,29 +104,23 @@ void Manager::MainLoop(float time)
     {
         timeSpent -= frequencySpawn;
         Ennemi * e = (Ennemi *)poolManager->getInPool(PoolManager::typePool::Enn);
-        int random(std::rand() % 20);
+        int random(std::rand() % (SIZEX -2));
         e->setPosition(random,1);
         e->isEnabled = true;
-        e->addAnimation(Visuel::createFromFile("Spaceship.txt",Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));
+        e->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt",Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));
+    }
 
-        Positionable ** ennemies = (Positionable **)poolManager->getEnnemies();
-        for (int i = 0; i < poolManager->getEnnPoolSize(); i++)
+    Positionable ** ennemies = (Positionable **)poolManager->getEnnemies();
+    for (int i = 0; i < poolManager->getEnnPoolSize(); i++)
+    {
+        if (ennemies[i] != nullptr && ennemies[i]->isEnabled)
         {
-            if (ennemies[i] != nullptr && ennemies[i]->isEnabled)
-            {
-                ennemies[i]->update(timeSpent);
-            }
+            ennemies[i]->update(timeSpent);
         }
     }
 }
 
 void Manager::drawAllElementIn(Positionable * listElement[], int sizeA){
-
-    if (listElement[0] == nullptr)
-    {
-        return;
-    }
-
     for (int i = 0; i < sizeA ; i++)
     {
         if(listElement[i] != nullptr && listElement[i]->isEnabled)
@@ -146,5 +138,5 @@ void Manager::init()
 {
     h = (Hero *)poolManager->getInPool(PoolManager::Her);
     h->isEnabled = true;
-    h->addAnimation(Visuel::createFromFile("Spaceship.txt"));
+    h->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt"));
 }

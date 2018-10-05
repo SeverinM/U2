@@ -3,6 +3,8 @@
 BufferManager::BufferManager()
 {
     HWND console = GetConsoleWindow();
+
+
     RECT r;
     GetWindowRect(console, &r);
     MoveWindow(console, r.left, r.top, SIZEX * 18, SIZEY * 18, true);
@@ -11,9 +13,13 @@ BufferManager::BufferManager()
     bufferCoord = {0,0};
     region = {0,0, SIZEX - 1, SIZEY - 1};
     CONSOLE_CURSOR_INFO cursorInfo;
+
+    //Disable blink
     GetConsoleCursorInfo(id, &cursorInfo);
     cursorInfo.bVisible = false;
     SetConsoleCursorInfo(id, &cursorInfo);
+
+    //set default char
     defaultCar.Char.AsciiChar = 'O';
     defaultCar.Attributes = Visuel::getColor(Visuel::Couleur::Transparent,Visuel::Couleur::Transparent);
 }
