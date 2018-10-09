@@ -8,16 +8,15 @@
 #define SIZEX 70
 #define SIZEY 70
 
-enum typePosable
-{
-    Proj,
-    Enn,
-    Her
-};
-
 class Positionable
 {
     public:
+        enum typePosable
+        {
+            Proj,
+            Enn,
+            Her
+        };
         Positionable(int startPosX,int startPosY);
         void init(int posXBy, int posY, string spriteFileName = "sprite/spaceship.txt");
         void moveBy(int posXBy, int posY);
@@ -32,6 +31,7 @@ class Positionable
         inline int getY(){return posY;}
         void removeAnimation(int index);
         virtual typePosable getTypePosable() = 0;
+        vector<pair<int,int>> getAllPosition();
 
 
     protected:

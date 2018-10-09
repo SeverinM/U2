@@ -20,7 +20,7 @@ class Perso : public Positionable
         std::pair<int,int> hitbox;
         void update(float time);
         virtual std::pair<int,int> directionTir() = 0;
-        bool isShot;
+        bool isShot = false;
 
     protected:
         int pv;

@@ -69,3 +69,13 @@ void Positionable::removeAnimation(int index)
     }
 }
 
+vector<pair<int,int>> Positionable::getAllPosition()
+{
+    vector<pair<int,int>> output;
+    for(auto &a : getAnimation(0))
+    {
+        output.push_back(a.first);
+    }
+    return output;
+}
+

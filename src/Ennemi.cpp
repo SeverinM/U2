@@ -42,7 +42,7 @@ void Ennemi::update(float deltaTime)
                                                    Visuel::getColor(Visuel::Couleur::Rouge,
                                                                     Visuel::Couleur::Transparent)));
             p->isEnabled = true;
-            p->init(posX,posY,{0,0.001},false);*/
+            p->init(posX,posY,{0,0.001},false);
         }
     }
 }
@@ -52,7 +52,7 @@ void Ennemi::setPosition(int newX, int newY)
     Positionable::setPosition(newX,newY);
 }
 
-typePosable Ennemi::getTypePosable(){
+Positionable::typePosable Ennemi::getTypePosable(){
     return Enn;
 }
 
