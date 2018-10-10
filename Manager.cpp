@@ -93,7 +93,6 @@ void Manager::MainLoop(float time)
     for(int i = 0; i < sizeA ; i ++){
         Positionable * pp = posList[i];
         if(pp != nullptr){
-            //cout << pp->getPos().first << " / " << pp->getPos().second << " / " << "Projectile" << endl;
             if(pp->isEnabled){
                 pp->update(time);
                 //Here will be the test to see if there is hero with an ennemi projectile. An ally projectile is prio on erasing the value
@@ -138,26 +137,11 @@ void Manager::MainLoop(float time)
     if (timeSpent > frequencySpawn )
     {
         timeSpent -= frequencySpawn;
-        /*Ennemi * e = (Ennemi *)poolManager->getInPool(Positionable::typePosable::Enn);
-        //int random(std::rand() % (SIZEX -2));
-        e->setPosition(37,1);
+        Ennemi * e = (Ennemi *)poolManager->getInPool(Positionable::typePosable::Enn);
+        int random(std::rand() % (SIZEX -2));
+        e->setPosition(random,1);
         e->isEnabled = true;
-        e->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt",Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));*/
-        /*for (auto &a : collisionBuffer)
-        {
-            if (a.second->getTypePosable() == Positionable::Enn)
-            {
-                cout << a.first.first << " / " << a.first.second << endl;
-            }
-        }*/
-        //cout << "====" << endl;
-        for (auto &a : collisionBuffer)
-        {
-            if (a.second->getTypePosable() == Positionable::Enn)
-            {
-                //cout << a.first.first << " / " << a.first.second << "->" << a.second << endl;
-            }
-        }
+        e->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt",Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));
     }
 
     //Parcours des ennemies
@@ -168,28 +152,33 @@ void Manager::MainLoop(float time)
         {
             ennemies[i]->update(timeSpent);
             //Collision !
-            map<pair<int,int>,Positionable *>::iterator it = collisionBuffer.find(ennemies[i]->getPos());
-            if( it != collisionBuffer.end() ){
-                Positionable * p = (it->second);
-                switch((it->second)->getTypePosable()){
-                    case Positionable::Her:
-                        //((Ennemi *)ennemies[i])->takeDamage(100);
-                        break;
-                    case Positionable::Enn:
-                        break;
-                    case Positionable::Proj :
-                        Projectile * proj = (Projectile *)p;
-                        if(proj->getIsFromPlayer()){
-                            ((Ennemi *)ennemies[i])->takeDamage(proj->hit());
-                        }
-                        proj->isEnabled = false;
-                        break;
+            for (auto &position : ennemies[i]->getAllPosition())
+            {
+                map<pair<int,int>,Positionable *>::iterator it = collisionBuffer.find(position);
+                if( it != collisionBuffer.end() ){
+                    Positionable * p = (it->second);
+                    switch((it->second)->getTypePosable()){
+                        case Positionable::Her:
+                            //Les ennemis se suicident a cause de ca
+                            //((Ennemi *)ennemies[i])->takeDamage(100);
+                            break;
+                        case Positionable::Enn:
+                            break;
+                        case Positionable::Proj :
+                            Projectile * proj = (Projectile *)p;
+                            if(proj->getIsFromPlayer()){
+                                ((Ennemi *)ennemies[i])->takeDamage(proj->hit());
+                            }
+                            proj->isEnabled = false;
+                            break;
+                    }
                 }
             }
-            else {
+            if (ennemies[i]->isEnabled)
+            {
                 for (auto &a : ennemies[i]->getAllPosition())
                 {
-                    collisionBuffer[a] = ennemies[i];
+                collisionBuffer[a] = ennemies[i];
                 }
             }
         }
