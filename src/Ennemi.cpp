@@ -52,7 +52,7 @@ void Ennemi::setPosition(int newX, int newY)
     Positionable::setPosition(newX,newY);
 }
 
-typePosable Ennemi::getTypePosable(){
+Positionable::typePosable Ennemi::getTypePosable(){
     return Enn;
 }
 

@@ -16,6 +16,7 @@ class Manager
         bool isStop();
         void init();
         Hero * h;
+        Ennemi * e;
 
     private:
         bool stop;

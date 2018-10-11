@@ -1,4 +1,5 @@
 #include "../include/Hero.h"
+#include "../include/Positionable.h"
 
 Hero::Hero() : Perso()
 {
@@ -57,4 +58,9 @@ void Hero::setPosition(double newX, double newY)
         posY = newY;
     }
 }
+
+Positionable::typePosable Hero::getTypePosable(){
+    return Positionable::typePosable::Her;
+}
+
 
