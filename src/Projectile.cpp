@@ -52,7 +52,7 @@ bool Projectile::getIsFromPlayer(){
     return isFromPlayer;
 }
 
-Positionable::typePosable Projectile::getTypePosable(){
+typePosable Projectile::getTypePosable(){
     return Proj;
 }
 

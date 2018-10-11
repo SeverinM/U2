@@ -19,12 +19,12 @@ PoolManager::PoolManager()
 };
 
 
-Positionable * PoolManager::getInPool(Positionable::typePosable type)
+Positionable * PoolManager::getInPool(typePosable type)
 {
     Positionable * output;
     switch (type)
     {
-        case Positionable::typePosable::Enn:
+        case Enn:
             for (int i = 0; i < sizePoolEnn; i++)
             {
                 if (poolEnnemi[i] == 0)
@@ -39,7 +39,7 @@ Positionable * PoolManager::getInPool(Positionable::typePosable type)
             }
             break;
 
-        case Positionable::typePosable::Proj:
+        case Proj:
             for (int i = 0; i < sizePoolPro; i++)
             {
                 if (poolProjectile[i] == 0)
@@ -54,7 +54,7 @@ Positionable * PoolManager::getInPool(Positionable::typePosable type)
             }
             break;
 
-        case Positionable::typePosable::Her:
+        case Her:
             if (hero[0] == 0)
             {
                 hero[0] = new Hero();

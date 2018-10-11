@@ -10,7 +10,7 @@ class PoolManager
 {
     public:
         PoolManager();
-        Positionable * getInPool(Positionable::typePosable type);
+        Positionable * getInPool(typePosable type);
         Positionable ** getEnnemies();
         Positionable ** getProjectiles();
         Positionable ** getHero();

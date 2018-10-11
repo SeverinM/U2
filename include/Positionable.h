@@ -8,15 +8,17 @@
 #define SIZEX 70
 #define SIZEY 70
 
-class Positionable
-{
-    public:
-        enum typePosable
+enum typePosable
         {
             Proj,
             Enn,
             Her
         };
+
+class Positionable
+{
+    public:
+
         Positionable(int startPosX,int startPosY);
         void init(int posXBy, int posY, string spriteFileName = "sprite/spaceship.txt");
         void moveBy(int posXBy, int posY);
