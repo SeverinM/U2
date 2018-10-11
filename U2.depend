@@ -50,3 +50,112 @@
 	<windows.h>
 	<conio.h>
 
+1538693834 source:c:\users\ribout horace\documents\travail\enjmin\u2\main.cpp
+	<iostream>
+	<windows.h>
+	<stdio.h>
+	"NYTimer.h"
+	"Manager.h"
+
+1538469960 c:\users\ribout horace\documents\travail\enjmin\u2\nytimer.h
+
+1539246765 c:\users\ribout horace\documents\travail\enjmin\u2\manager.h
+	<windows.h>
+	"include/Hero.h"
+	"include/Ennemi.h"
+	"include/BufferManager.h"
+	"include/PoolManager.h"
+
+1538750498 c:\users\ribout horace\documents\travail\enjmin\u2\include\hero.h
+	"Perso.h"
+
+1539246765 c:\users\ribout horace\documents\travail\enjmin\u2\include\perso.h
+	"Positionable.h"
+
+1539296032 c:\users\ribout horace\documents\travail\enjmin\u2\include\positionable.h
+	<stdio.h>
+	"Visuel.h"
+	<vector>
+	<map>
+	<iostream>
+
+1538693834 c:\users\ribout horace\documents\travail\enjmin\u2\include\visuel.h
+	<windows.h>
+	<map>
+	<fstream>
+	<string>
+
+1538748288 c:\users\ribout horace\documents\travail\enjmin\u2\include\ennemi.h
+	"Perso.h"
+	"PoolManager.h"
+
+1539296053 c:\users\ribout horace\documents\travail\enjmin\u2\include\poolmanager.h
+	"Hero.h"
+	"Ennemi.h"
+	"Projectile.h"
+
+1538748292 c:\users\ribout horace\documents\travail\enjmin\u2\include\projectile.h
+	"Positionable.h"
+
+1538660471 c:\users\ribout horace\documents\travail\enjmin\u2\include\buffermanager.h
+	"Positionable.h"
+	<vector>
+	"PoolManager.h"
+	<windows.h>
+
+1539297729 source:c:\users\ribout horace\documents\travail\enjmin\u2\manager.cpp
+	"Manager.h"
+	<conio.h>
+	"include/Visuel.h"
+	<iostream>
+	<map>
+	<typeinfo>
+	<cstdlib>
+	<time.h>
+
+1538477045 source:c:\users\ribout horace\documents\travail\enjmin\u2\movemain.cpp
+	<iostream>
+	<stdio.h>
+	<windows.h>
+	<conio.h>
+
+1538732647 source:c:\users\ribout horace\documents\travail\enjmin\u2\src\buffermanager.cpp
+	"../include/BufferManager.h"
+
+1539296145 source:c:\users\ribout horace\documents\travail\enjmin\u2\src\ennemi.cpp
+	"../include/Ennemi.h"
+
+1539296216 source:c:\users\ribout horace\documents\travail\enjmin\u2\src\hero.cpp
+	"../include/Hero.h"
+	"../include/Positionable.h"
+
+1538480454 source:c:\users\ribout horace\documents\travail\enjmin\u2\src\nytimer.cpp
+	"../include/NYTimer.h"
+
+1538693834 c:\users\ribout horace\documents\travail\enjmin\u2\include\nytimer.h
+	<windows.h>
+
+1538750481 source:c:\users\ribout horace\documents\travail\enjmin\u2\src\perso.cpp
+	"../include/Perso.h"
+	"../include/Positionable.h"
+
+1539296244 source:c:\users\ribout horace\documents\travail\enjmin\u2\src\poolmanager.cpp
+	"../include/PoolManager.h"
+	<typeinfo>
+	<iostream>
+	<string>
+
+1539246765 source:c:\users\ribout horace\documents\travail\enjmin\u2\src\positionable.cpp
+	"../include/Positionable.h"
+	<windows.h>
+	<algorithm>
+	<iostream>
+	<tgmath.h>
+
+1539296172 source:c:\users\ribout horace\documents\travail\enjmin\u2\src\projectile.cpp
+	<iostream>
+	"../include/Projectile.h"
+
+1538669183 source:c:\users\ribout horace\documents\travail\enjmin\u2\src\visuel.cpp
+	"../include/Visuel.h"
+

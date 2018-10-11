@@ -148,37 +148,37 @@ void Manager::MainLoop(float time)
     Positionable ** ennemies = (Positionable **)poolManager->getEnnemies();
     for (int i = 0; i < poolManager->getEnnPoolSize(); i++)
     {
-        if (ennemies[i] != nullptr && ennemies[i]->isEnabled)
+        Positionable * currentEnnPos = ennemies[i];
+        if (currentEnnPos != nullptr && currentEnnPos->isEnabled)
         {
-            ennemies[i]->update(timeSpent);
+            currentEnnPos->update(timeSpent);
             //Collision !
-            for (auto &position : ennemies[i]->getAllPosition())
+            for (auto &position : currentEnnPos->getAllPosition())
             {
                 map<pair<int,int>,Positionable *>::iterator it = collisionBuffer.find(position);
                 if( it != collisionBuffer.end() ){
                     Positionable * p = (it->second);
                     switch((it->second)->getTypePosable()){
                         case Her:
-                            //Les ennemis se suicident a cause de ca
-                            //((Ennemi *)ennemies[i])->takeDamage(100);
+                            ((Ennemi *)currentEnnPos)->takeDamage(100);
                             break;
                         case Enn:
                             break;
                         case Proj :
                             Projectile * proj = (Projectile *)p;
                             if(proj->getIsFromPlayer()){
-                                ((Ennemi *)ennemies[i])->takeDamage(proj->hit());
+                                ((Ennemi *)currentEnnPos)->takeDamage(proj->hit());
                             }
                             proj->isEnabled = false;
                             break;
                     }
                 }
             }
-            if (ennemies[i]->isEnabled)
+            if (currentEnnPos->isEnabled)
             {
-                for (auto &a : ennemies[i]->getAllPosition())
+                for (auto &a : currentEnnPos->getAllPosition())
                 {
-                collisionBuffer[a] = ennemies[i];
+                    collisionBuffer[a] = currentEnnPos;
                 }
             }
         }
