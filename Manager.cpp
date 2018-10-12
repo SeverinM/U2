@@ -34,41 +34,47 @@ void Manager::MainLoop(float time)
 {
     timeSpent += time;
     //Input section
-    int key = 0;
-    //vector<int> pressedKeys(10, 0);
-    if (_kbhit())
+    update_input_keys();
+    inputKeysNow[INPUT_KEY_Z] = GetAsyncKeyState('Z');
+	inputKeysNow[INPUT_KEY_S] = GetAsyncKeyState('S');
+	inputKeysNow[INPUT_KEY_Q] = GetAsyncKeyState('Q');
+	inputKeysNow[INPUT_KEY_D] = GetAsyncKeyState('D');
+	inputKeysNow[INPUT_KEY_SPACE] = GetAsyncKeyState(' ');
+	pressed =  inputKeysNow[INPUT_KEY_Z] || inputKeysNow[INPUT_KEY_S]
+            || inputKeysNow[INPUT_KEY_Q] || inputKeysNow[INPUT_KEY_D] || inputKeysNow[INPUT_KEY_SPACE];
+    if (is_input_key_pressed(INPUT_KEY_Z))
     {
-        key = _getch();
-        //pressedKeys.push_back(key);
-        //key = _getch();
-        switch(key){
-            case 'z':
-                if (h != nullptr && h->isEnabled)
+        if (h != nullptr && h->isEnabled)
                     h->moveBy(0,-1);
-                break;
-            case 's':
-                if (h != nullptr && h->isEnabled)
+    }
+    else if (is_input_key_pressed(INPUT_KEY_S))
+    {
+        if (h != nullptr && h->isEnabled)
                     h->moveBy(0,1);
-                break;
-            case 'q':
-                if (h != nullptr && h->isEnabled)
+    }
+    if (is_input_key_pressed(INPUT_KEY_Q))
+    {
+        if (h != nullptr && h->isEnabled)
                     h->moveBy(-1,0);
-                break;
-            case 'd':
-                if (h != nullptr && h->isEnabled)
+    }
+    else if (is_input_key_pressed(INPUT_KEY_D))
+    {
+        if (h != nullptr && h->isEnabled)
                     h->moveBy(1,0);
-                break;
-            case ' ':
-                h->tryToShoot();
-                break;
-            case 'p' :
+    }
+    if(is_input_key_pressed(INPUT_KEY_SPACE)){
+        h->tryToShoot();
+    }
+
+    /*
+    case 'p' :
                 cout << "decal" << endl;
                 break;
             case 27:
                 stopLoop();
                 break;
-        }
-    }
+    */
+
     //Collision buffer : empty it
     collisionBuffer.clear();
 
@@ -212,3 +218,46 @@ void Manager::init()
     e->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt",couleur));
     e->setPosition(38, 1);
 }
+
+
+
+
+//Trying things
+void Manager::is_input_key_supported(InputKey inputKey)
+{
+	if (inputKey < 0 || inputKey > INPUT_KEY_COUNT)
+	{
+		cout << "testing unsupported input key : " << inputKey << "." << endl;
+	}
+}
+
+void Manager::update_input_keys()
+{
+	memcpy(inputKeysBefore, inputKeysNow, sizeof (inputKeysBefore));
+}
+
+bool Manager::is_input_key_up(InputKey inputKey)
+{
+	is_input_key_supported(inputKey);
+	return !inputKeysNow[inputKey];
+}
+
+bool Manager::is_input_key_down(InputKey inputKey)
+{
+	is_input_key_supported(inputKey);
+	return inputKeysNow[inputKey];
+}
+
+bool Manager::is_input_key_released(InputKey inputKey)
+{
+	is_input_key_supported(inputKey);
+	return inputKeysBefore[inputKey] && !inputKeysNow[inputKey];
+}
+
+bool Manager::is_input_key_pressed(InputKey inputKey)
+{
+	is_input_key_supported(inputKey);
+	return !inputKeysBefore[inputKey] && inputKeysNow[inputKey];
+}
+
+
