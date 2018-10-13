@@ -10,7 +10,7 @@
 class Manager
 {
     public:
-        Manager();
+        Manager(BufferManager * buff);
         void MainLoop(float time);
         void stopLoop();
         bool isStop();

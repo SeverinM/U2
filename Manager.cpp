@@ -7,10 +7,10 @@
 #include <cstdlib>
 #include <time.h>
 
-Manager::Manager()
+Manager::Manager(BufferManager * buff)
 {
+    bufferManager = buff;
     stop = false;
-    bufferManager = new BufferManager();
     poolManager = new PoolManager();
     timeSpent = 0;
     frequencySpawn = 3;
@@ -99,7 +99,7 @@ void Manager::MainLoop(float time)
                 map<pair<int,int>,Positionable *>::iterator it = collisionBuffer.find(pp->getPos());
                 if(it != collisionBuffer.end()){
                     switch ((it->second)->getTypePosable()){
-                        case Positionable::Her :
+                        case typePosable::Her :
                             if( !((Projectile*)pp)->getIsFromPlayer() )
                                 h->takeDamage( ((Projectile*)pp)->hit() );
                             break;
@@ -128,7 +128,7 @@ void Manager::MainLoop(float time)
     drawAllElementIn(poolManager->getEnnemies(),poolManager->getEnnPoolSize());
     drawAllElementIn(poolManager->getHero(),poolManager->getHerPoolSize());
 
-    //bufferManager->draw();
+    bufferManager->draw();
 
     //Apparition d'ennemis
     if (timeSpent > frequencySpawn )
@@ -158,7 +158,7 @@ void Manager::MainLoop(float time)
                     Positionable * p = (it->second);
                     switch((it->second)->getTypePosable()){
                         case Her:
-                            ((Ennemi *)currentEnnPos)->takeDamage(100);
+                            //((Ennemi *)currentEnnPos)->takeDamage(100);
                             break;
                         case Enn:
                             break;
@@ -181,7 +181,6 @@ void Manager::MainLoop(float time)
             }
         }
     }
-    cout << poolManager->poolCount(Positionable::typePosable::Enn) << endl;
 }
 
 void Manager::drawAllElementIn(Positionable * listElement[], int sizeA){
@@ -203,7 +202,7 @@ void Manager::init()
     h = (Hero *)poolManager->getInPool(Her);
     h->isEnabled = true;
     h->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt"));
-    h->setPosition(37, 11);
+    h->setPosition(37, 40);
 
     e = (Ennemi *)poolManager->getInPool(Enn);
     e->isEnabled = true;

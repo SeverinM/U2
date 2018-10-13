@@ -3,6 +3,7 @@
 
 Perso::Perso() : Positionable(1,1)
 {
+    pv = 1;
 }
 
 Perso::Perso(int posX,int posY) :  Positionable(posX, posY)
@@ -29,7 +30,7 @@ Perso::shootInfo Perso::Tirer(){
 
 void Perso::takeDamage(int damage){
     pv -= damage;
-    if(pv < 0){
+    if(pv <= 0){
         Mourir();
     }
 }
