@@ -34,7 +34,7 @@ void Ennemi::update(float deltaTime)
         if (time - timeSinceLastShoot > frequencyShoot)
         {
             timeSinceLastShoot = time;
-            Projectile * p = (Projectile *)pool->getInPool(typePosable::Proj);
+            /*Projectile * p = (Projectile *)pool->getInPool(typePosable::Proj);
             p->isEnabled = true;
             p->init(posX,posY,{0,0.001},false);
             p->removeAnimation(0);
@@ -42,7 +42,7 @@ void Ennemi::update(float deltaTime)
                                                    Visuel::getColor(Visuel::Couleur::Rouge,
                                                                     Visuel::Couleur::Transparent)));
             p->isEnabled = true;
-            p->init(posX,posY,{0,0.001},false);
+            p->init(posX,posY,{0,0.001},false);*/
         }
     }
 }

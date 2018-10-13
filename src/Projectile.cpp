@@ -30,9 +30,6 @@ void Projectile::update(float time){
     goOn(time);
 }
 
-
-
-
 ///Movement automatique via une direction en memoire !
 void Projectile::goOn(float time){
     //cout << "Hello, i'm  : " << timer << " at " << getVitesse() << endl;
