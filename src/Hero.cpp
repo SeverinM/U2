@@ -19,6 +19,7 @@ void Hero::init(int posX,int posY)
 {
     Perso::init(posX, posY);
     timerShoot = 0;
+    pv = 1;
 }
 
 void Hero::update(float time)
@@ -35,10 +36,8 @@ void Hero::tryToShoot(){
     }
 }
 
-
-
-std::pair<int,int> Hero::directionTir(){
-    return std::pair<int,int>(0,-1);
+std::pair<double , double> Hero::directionTir(){
+    return std::pair<double,double>(0,0.001);
 }
 
 void Hero::setPosition(double newX, double newY)

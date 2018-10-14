@@ -2,14 +2,13 @@
 
 Ennemi::Ennemi() : Perso()
 {
-    vitesse = 0.001;
 }
 
 Ennemi::Ennemi(int posX,int posY, PoolManager * refPool) : Perso(posX, posY)
 {
     pool = refPool;
-    vitesse = 0.001;
     pv = 1;
+    dir = std::pair<double, double>(0.01,0.01);
 }
 
 Ennemi::~Ennemi()
@@ -22,28 +21,26 @@ void Ennemi::init(int posX,int posY)
     Perso::init(posX, posY);
 }
 
-std::pair<int,int> Ennemi::directionTir(){
-    return std::pair<int,int>(0,1);
+std::pair<double,double> Ennemi::directionTir(){
+    return std::pair<double, double>(dir.first,dir.second);
 }
 
 void Ennemi::update(float deltaTime)
 {
     if (isEnabled)
     {
-        Positionable::setPosition(posX, posY + vitesse);
-        time += 0.0001;
+        time += deltaTime;
+        moveBy(dir.first, dir.second);
         if (time - timeSinceLastShoot > frequencyShoot)
         {
             timeSinceLastShoot = time;
             Projectile * p = (Projectile *)pool->getInPool(typePosable::Proj);
             p->isEnabled = true;
-            p->init(posX,posY,{0,0.001},false);
-            p->removeAnimation(0);
+            p->init(posX + 2,posY,{0,0.002},false);
+            p->removeAllAnimation();
             p->addAnimation(Visuel::createFromFile("sprites/ProjectileHero.txt",
                                                    Visuel::getColor(Visuel::Couleur::Rouge,
                                                                     Visuel::Couleur::Transparent)));
-            p->isEnabled = true;
-            p->init(posX,posY,{0,0.001},false);
         }
     }
 }

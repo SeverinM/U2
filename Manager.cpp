@@ -30,7 +30,7 @@ bool Manager::isStop()
     return stop;
 }
 
-void Manager::MainLoop(float time)
+bool Manager::MainLoop(float time)
 {
     timeSpent += time;
     //Input section
@@ -60,7 +60,6 @@ void Manager::MainLoop(float time)
                 h->tryToShoot();
                 break;
             case 'p' :
-                cout << "decal" << endl;
                 break;
             case 27:
                 stopLoop();
@@ -76,14 +75,30 @@ void Manager::MainLoop(float time)
         Perso::shootInfo info = h->Tirer();
         Projectile *proj = (Projectile*)poolManager->getInPool(Proj);
         proj->isEnabled = true;
-        int offsetF = h->hitbox.first + info.direction.first;
-        int offsetS = h->hitbox.second+ info.direction.second;
-        proj->init(info.startPosition.first+offsetF,info.startPosition.second+offsetS,info.direction,true);
+        proj->removeAnimation(0);
+        proj->addAnimation(Visuel::createFromFile("sprites/ProjectileHero.txt",
+                                                   Visuel::getColor(Visuel::Couleur::Cyan,
+                                                                    Visuel::Couleur::Transparent)));
+        std::pair<double , double> direction(0,-0.001);
+        proj->init(h->getPos().first + 2,h->getPos().second,direction,true);
     }
     for (auto &a : h->getAllPosition())
     {
+        map<pair<int,int>,Positionable *>::iterator it = collisionBuffer.find(a);
+        if (it != collisionBuffer.end())
+        {
+            switch (it->second->getTypePosable())
+            {
+                case typePosable::Enn:
+                    h->takeDamage(1);
+                    break;
+                    wasHitThisFrame = true;
+                    break;
+            }
+        }
         collisionBuffer[a] = h;
     }
+    wasHitThisFrame = false;
 
     //Projectile section
     Positionable ** posList = poolManager->getProjectiles();
@@ -134,11 +149,13 @@ void Manager::MainLoop(float time)
     if (timeSpent > frequencySpawn )
     {
         timeSpent -= frequencySpawn;
-        /*Ennemi * e = (Ennemi *)poolManager->getInPool(Positionable::typePosable::Enn);
+        Ennemi * e = (Ennemi *)poolManager->getInPool(typePosable::Enn);
         int random(std::rand() % (SIZEX -2));
         e->setPosition(random,1);
+        std::pair<double , double> speed(0.0001,0.01);
+        e->setDirection(speed);
         e->isEnabled = true;
-        e->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt",Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));*/
+        e->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt",Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));
     }
 
     //Parcours des ennemies
@@ -148,26 +165,24 @@ void Manager::MainLoop(float time)
         Positionable * currentEnnPos = ennemies[i];
         if (currentEnnPos != nullptr && currentEnnPos->isEnabled)
         {
-            currentEnnPos->update(timeSpent);
+            currentEnnPos->update(time);
             //Collision !
             for (auto &position : currentEnnPos->getAllPosition())
             {
                 map<pair<int,int>,Positionable *>::iterator it = collisionBuffer.find(position);
                 if( it != collisionBuffer.end() && (*it).second != ennemies[i]){
-                    //cout << i << " -> " << (*it).first.first << " / " << (*it).first.second << " / " << h << " / " << ennemies[i] << endl;
                     Positionable * p = (it->second);
                     switch((it->second)->getTypePosable()){
-                        case Her:
-                            //((Ennemi *)currentEnnPos)->takeDamage(100);
+                        case Her :
+                            h->takeDamage(1);
                             break;
-                        case Enn:
-                            break;
+
                         case Proj :
                             Projectile * proj = (Projectile *)p;
                             if(proj->getIsFromPlayer()){
                                 ((Ennemi *)currentEnnPos)->takeDamage(proj->hit());
+                                proj->isEnabled = false;
                             }
-                            proj->isEnabled = false;
                             break;
                     }
                 }
@@ -181,6 +196,8 @@ void Manager::MainLoop(float time)
             }
         }
     }
+
+    return !(h->isEnabled);
 }
 
 void Manager::drawAllElementIn(Positionable * listElement[], int sizeA){
@@ -208,5 +225,7 @@ void Manager::init()
     e->isEnabled = true;
     int couleur(Visuel::getColor(Visuel::Couleur::Rouge, Visuel::Couleur::Transparent));
     e->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt",couleur));
-    e->setPosition(38, 1);
+    std::pair<double , double> direction(0,0.001);
+    e->setDirection(direction);
+    e->setPosition(39, 1);
 }

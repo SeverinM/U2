@@ -11,9 +11,10 @@ Positionable::Positionable(int startPosX,int startPosY){
     posY = startPosY;
     vitesse = 4; //TO DO : change this
     isEnabled = false;
+    dir = std::pair<double , double>(0.001,0.001);
 }
 
-void Positionable::moveBy(int posXBy, int posYBy)
+void Positionable::moveBy(float posXBy, float posYBy)
 {
     setPosition(posXBy + posX, posYBy + posY);
 };
@@ -77,5 +78,10 @@ vector<pair<int,int>> Positionable::getAllPosition()
         output.push_back(a.first);
     }
     return output;
+}
+
+void Positionable::removeAllAnimation()
+{
+    animations.clear();
 }
 

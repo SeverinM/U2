@@ -23,7 +23,15 @@ int main()
     }
     while (!man.isStop())
     {
-        man.MainLoop(time.getElapsedSeconds(true));
+        if (man.MainLoop(time.getElapsedSeconds(true)))
+        {
+            gw.switchStop();
+            break;
+        }
+    }
+    while (!gw.isStop())
+    {
+        gw.GameOver();
     }
 
     return 0;

@@ -9,7 +9,7 @@ class Hero : public Perso
         Hero(int posX,int posY);
         virtual ~Hero();
         void init(int posX,int posY);
-        virtual std::pair<int,int> directionTir();
+        virtual std::pair<double, double> directionTir();
         void update(float time);
         void tryToShoot();
         void setPosition(double newX, double newY);

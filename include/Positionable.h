@@ -5,6 +5,7 @@
 #include <vector>
 #include <map>
 #include <iostream>
+#include <tgmath.h>
 #define SIZEX 70
 #define SIZEY 70
 
@@ -21,7 +22,7 @@ class Positionable
 
         Positionable(int startPosX,int startPosY);
         void init(int posXBy, int posY, string spriteFileName = "sprite/spaceship.txt");
-        void moveBy(int posXBy, int posY);
+        void moveBy(float posXBy, float posY);
         float getVitesse();
         std::pair<int,int> getPos();
         virtual void setPosition(double newX,double newY);
@@ -34,9 +35,19 @@ class Positionable
         void removeAnimation(int index);
         virtual typePosable getTypePosable() = 0;
         vector<pair<int,int>> getAllPosition();
+        void removeAllAnimation();
+        inline void setDirection(std::pair<double, double> &newDir){dir = newDir;}
+        static void normalizeDirection(std::pair<double, double> &direction)
+        {
+            float hypo = (direction.first * direction.first) + (direction.second * direction.second);
+            hypo = sqrt(hypo);
+            direction.first /= hypo;
+            direction.second /= hypo;
+        }
 
 
     protected:
+        std::pair<double , double > dir;
         float vitesse;
         vector<Visuel *> animations;
         float timer;

@@ -12,8 +12,8 @@ class Ennemi : public Perso
         Ennemi(int posX,int posY, PoolManager * pool);
         virtual ~Ennemi();
         void init(int posX,int posY);
-        virtual std::pair<int,int> directionTir();
-        void update(float time);
+        virtual std::pair<double,double> directionTir();
+        void update(float deltaTime);
         void setPosition(int newX,int newY);
         virtual typePosable getTypePosable();
 

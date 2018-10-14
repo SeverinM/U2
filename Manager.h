@@ -11,7 +11,7 @@ class Manager
 {
     public:
         Manager(BufferManager * buff);
-        void MainLoop(float time);
+        bool MainLoop(float time);
         void stopLoop();
         bool isStop();
         void init();
@@ -19,6 +19,7 @@ class Manager
         Ennemi * e;
 
     private:
+        bool wasHitThisFrame = false;
         bool stop;
         int timeUpdate;
         float timeSpent;
