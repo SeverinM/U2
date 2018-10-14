@@ -7,10 +7,10 @@
 #include <cstdlib>
 #include <time.h>
 
-Manager::Manager()
+Manager::Manager(BufferManager * buff)
 {
+    bufferManager = buff;
     stop = false;
-    bufferManager = new BufferManager();
     poolManager = new PoolManager();
     timeSpent = 0;
     frequencySpawn = 3;
@@ -36,7 +36,7 @@ bool Manager::isStop()
     return stop;
 }
 
-void Manager::MainLoop(float time)
+bool Manager::MainLoop(float time)
 {
     timeSpent += time;
     //Input section
@@ -103,14 +103,31 @@ void Manager::MainLoop(float time)
         Perso::shootInfo info = h->Tirer();
         Projectile *proj = (Projectile*)poolManager->getInPool(Proj);
         proj->isEnabled = true;
-        int offsetF = h->hitbox.first + info.direction.first;
-        int offsetS = h->hitbox.second+ info.direction.second;
-        proj->init(info.startPosition.first+offsetF,info.startPosition.second+offsetS,info.direction,true);
+        proj->removeAllAnimation();
+        proj->addAnimation(Visuel::createFromFile("sprites/ProjectileHero.txt",
+                                                   Visuel::getColor(Visuel::Couleur::Cyan,
+                                                                    Visuel::Couleur::Transparent)));
+        std::pair<double , double> direction(0,-0.001);
+        proj->init(h->getPos().first + 2,h->getPos().second,direction,true);
     }
     for (auto &a : h->getAllPosition())
     {
+        map<pair<int,int>,Positionable *>::iterator it = collisionBuffer.find(a);
+        if (it != collisionBuffer.end())
+        {
+            switch (it->second->getTypePosable())
+            {
+                case typePosable::Enn:
+                    if (!(h->getIsInRecovery()))
+                    {
+                        h->takeDamage(1);
+                    }
+                    break;
+            }
+        }
         collisionBuffer[a] = h;
     }
+    wasHitThisFrame = false;
 
     //Projectile section
     Positionable ** posList = poolManager->getProjectiles();
@@ -126,12 +143,11 @@ void Manager::MainLoop(float time)
                 map<pair<int,int>,Positionable *>::iterator it = collisionBuffer.find(pp->getPos());
                 if(it != collisionBuffer.end()){
                     switch ((it->second)->getTypePosable()){
-                        cout << "touche" << endl;
-                        case Her :
-                            if( !((Projectile*)pp)->getIsFromPlayer() )
+                        case typePosable::Her :
+                            if( !((Projectile*)pp)->getIsFromPlayer() && !h->getIsInRecovery())
+                            {
                                 h->takeDamage( ((Projectile*)pp)->hit() );
-                            break;
-                        case Enn :
+                            }
                             break;
                         case Proj:
                             if( ((Projectile*)pp)->getIsFromPlayer() != ((Projectile*)it->second)->getIsFromPlayer() ){
@@ -162,9 +178,11 @@ void Manager::MainLoop(float time)
     if (timeSpent > frequencySpawn )
     {
         timeSpent -= frequencySpawn;
-        Ennemi * e = (Ennemi *)poolManager->getInPool(Enn);
+        Ennemi * e = (Ennemi *)poolManager->getInPool(typePosable::Enn);
         int random(std::rand() % (SIZEX -2));
         e->setPosition(random,1);
+        std::pair<double , double> speed(0.0001,0.01);
+        e->setDirection(speed);
         e->isEnabled = true;
         e->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt",Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));
     }
@@ -173,28 +191,26 @@ void Manager::MainLoop(float time)
     Positionable ** ennemies = (Positionable **)poolManager->getEnnemies();
     for (int i = 0; i < poolManager->getEnnPoolSize(); i++)
     {
-        Positionable * currentEnnPos = ennemies[i];
+        Ennemi * currentEnnPos = (Ennemi *)ennemies[i];
         if (currentEnnPos != nullptr && currentEnnPos->isEnabled)
         {
-            currentEnnPos->update(timeSpent);
+            currentEnnPos->update(time, h);
             //Collision !
             for (auto &position : currentEnnPos->getAllPosition())
             {
                 map<pair<int,int>,Positionable *>::iterator it = collisionBuffer.find(position);
-                if( it != collisionBuffer.end() ){
+                if( it != collisionBuffer.end() && (*it).second != ennemies[i]){
                     Positionable * p = (it->second);
                     switch((it->second)->getTypePosable()){
-                        case Her:
-                            ((Ennemi *)currentEnnPos)->takeDamage(100);
-                            break;
-                        case Enn:
-                            break;
                         case Proj :
                             Projectile * proj = (Projectile *)p;
                             if(proj->getIsFromPlayer()){
-                                ((Ennemi *)currentEnnPos)->takeDamage(proj->hit());
+                                if (currentEnnPos->takeDamage(proj->hit()))
+                                {
+                                    score += currentEnnPos->getScore();
+                                }
+                                proj->isEnabled = false;
                             }
-                            proj->isEnabled = false;
                             break;
                     }
                 }
@@ -208,6 +224,8 @@ void Manager::MainLoop(float time)
             }
         }
     }
+
+    return !(h->isEnabled);
 }
 
 void Manager::drawAllElementIn(Positionable * listElement[], int sizeA){
@@ -215,7 +233,7 @@ void Manager::drawAllElementIn(Positionable * listElement[], int sizeA){
     {
         if(listElement[i] != nullptr && listElement[i]->isEnabled)
         {
-            map<pair<int,int>, CHAR_INFO *> temp(listElement[i]->getAnimation(0));
+            map<pair<int,int>, CHAR_INFO *> temp(listElement[i]->getAnimation());
             for (auto& a : temp)
             {
                 bufferManager->placeInBuffer(a.second,a.first.first,a.first.second);
@@ -226,16 +244,20 @@ void Manager::drawAllElementIn(Positionable * listElement[], int sizeA){
 
 void Manager::init()
 {
+    int color(Visuel::getColor(Visuel::Couleur::Gris, Visuel::Couleur::Transparent));
     h = (Hero *)poolManager->getInPool(Her);
     h->isEnabled = true;
     h->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt"));
-    h->setPosition(37, 10);
+    h->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt",color));
+    h->setPosition(37, 40);
 
     e = (Ennemi *)poolManager->getInPool(Enn);
     e->isEnabled = true;
     int couleur(Visuel::getColor(Visuel::Couleur::Rouge, Visuel::Couleur::Transparent));
     e->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt",couleur));
-    e->setPosition(38, 1);
+    std::pair<double , double> direction(0,0.001);
+    e->setDirection(direction);
+    e->setPosition(39, 20);
 }
 
 

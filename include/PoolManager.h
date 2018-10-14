@@ -17,6 +17,8 @@ class PoolManager
         int             getEnnPoolSize();
         int             getProPoolSize();
         int             getHerPoolSize();
+        void            clearPool(typePosable type = typePosable::Enn);
+        int             poolCount(typePosable type = typePosable::Enn);
 
     private:
         Ennemi       * poolEnnemi[60];

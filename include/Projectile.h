@@ -6,10 +6,8 @@ class Projectile : public Positionable
 {
     public:
         Projectile();
-        Projectile(int posX, int posY, std::pair<int, int> direction);
-        virtual ~Projectile();
-        void init(int posX, int posY, std::pair<int, int> direction, bool fromPlayer);
-        void goOn(float time);
+        Projectile(int posX, int posY, std::pair<double, double> direction);
+        void init(int posX, int posY, std::pair<double, double> direction, bool fromPlayer);
         virtual void update(float time);
         int hit();
         bool getIsFromPlayer();
@@ -17,9 +15,6 @@ class Projectile : public Positionable
 
     protected:
         bool isFromPlayer;
-
-    private:
-        std::pair<int, int> directionMove;
 };
 
 #endif // PROJECTILE_H

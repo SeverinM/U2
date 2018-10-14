@@ -4,26 +4,27 @@
 Hero::Hero() : Perso()
 {
     timerShoot = 0;
+    pv = 3;
     vitesse = 4;
 }
 Hero::Hero(int posX,int posY) : Perso(posX, posY)
 {
     timerShoot = 0;
-}
-
-Hero::~Hero()
-{
-
+    pv = 3;
 }
 
 void Hero::init(int posX,int posY)
 {
     Perso::init(posX, posY);
     timerShoot = 0;
+    pv = 3;
 }
 
 void Hero::update(float time)
 {
+    isOnRecovery = (recoveryTimeEnd > totalTime);
+    indexAnimation = (isOnRecovery ? 1 : 0);
+    totalTime += time;
     if(timerShoot > 0){
         timerShoot -= time;
     }
@@ -36,10 +37,8 @@ void Hero::tryToShoot(){
     }
 }
 
-
-
-std::pair<int,int> Hero::directionTir(){
-    return std::pair<int,int>(0,-1);
+std::pair<double , double> Hero::directionTir(){
+    return dir;
 }
 
 void Hero::setPosition(double newX, double newY)
@@ -53,6 +52,13 @@ void Hero::setPosition(double newX, double newY)
     {
         posY = newY;
     }
+}
+
+bool Hero::takeDamage(int damage)
+{
+    bool output = Perso::takeDamage(damage);
+    recoveryTimeEnd = totalTime + recoveryTime;
+    return output;
 }
 
 typePosable Hero::getTypePosable(){

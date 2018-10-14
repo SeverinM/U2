@@ -27,8 +27,8 @@ typedef enum InputKey
 class Manager
 {
     public:
-        Manager();
-        void MainLoop(float time);
+        Manager(BufferManager * buff);
+        bool MainLoop(float time);
         void stopLoop();
         bool isStop();
         void init();
@@ -36,6 +36,7 @@ class Manager
         Ennemi * e;
 
     private:
+        bool wasHitThisFrame = false;
         bool stop;
         int timeUpdate;
         float timeSpent;
@@ -43,6 +44,7 @@ class Manager
         BufferManager *  bufferManager;
         PoolManager * poolManager;
         void drawAllElementIn(Positionable ** listElement, int sizeA);
+        int score = 0;
 
         map<pair<int,int>,Positionable *> collisionBuffer;//add : max size == 70 / 70
 

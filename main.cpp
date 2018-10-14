@@ -3,18 +3,34 @@
 #include <stdio.h>
 #include "NYTimer.h"
 #include "Manager.h"
+#include "./include/GameWrapper.h"
+#include "./include/BufferManager.h"
 
 using namespace std;
 
 int main()
 {
+    BufferManager * bm = new BufferManager();
     NYTimer time;
     time.start();
-    Manager man;
+    Manager man(bm);
     man.init();
+    GameWrapper gw(bm);
+    while (!gw.isStop())
+    {
+        gw.PreGameLoop();
+    }
     while (!man.isStop())
     {
-        man.MainLoop(time.getElapsedSeconds(true));
+        if (man.MainLoop(time.getElapsedSeconds(true)))
+        {
+            gw.switchStop();
+            break;
+        }
+    }
+    while (!gw.isStop())
+    {
+        gw.GameOver();
     }
 
     return 0;

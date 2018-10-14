@@ -1,17 +1,17 @@
 # depslib dependency file v1.0
-1538418484 source:c:\users\séverin\documents\u2\main.cpp
+1538673359 source:c:\users\séverin\documents\u2\main.cpp
 	<iostream>
 	<windows.h>
 	<stdio.h>
-	"Manager.h"
 	"NYTimer.h"
+	"Manager.h"
 
 1538415417 c:\users\séverin\documents\u2\nytimer.h
 
-1538417185 source:c:\users\séverin\documents\u2\src\nytimer.cpp
-	"NYTimer.h"
+1538673339 source:c:\users\séverin\documents\u2\src\nytimer.cpp
+	"../include/NYTimer.h"
 
-1538417174 c:\users\séverin\documents\u2\include\nytimer.h
+1538673307 c:\users\séverin\documents\u2\include\nytimer.h
 	<windows.h>
 
 1538421516 c:\users\séverin\documents\u2\include\manager.h
@@ -50,6 +50,7 @@
 	<windows.h>
 	<conio.h>
 
+<<<<<<< Updated upstream
 1538693834 source:c:\users\ribout horace\documents\travail\enjmin\u2\main.cpp
 	<iostream>
 	<windows.h>
@@ -60,12 +61,16 @@
 1538469960 c:\users\ribout horace\documents\travail\enjmin\u2\nytimer.h
 
 1539246765 c:\users\ribout horace\documents\travail\enjmin\u2\manager.h
+=======
+1539118513 c:\users\séverin\documents\u2\manager.h
+>>>>>>> Stashed changes
 	<windows.h>
 	"include/Hero.h"
 	"include/Ennemi.h"
 	"include/BufferManager.h"
 	"include/PoolManager.h"
 
+<<<<<<< Updated upstream
 1538750498 c:\users\ribout horace\documents\travail\enjmin\u2\include\hero.h
 	"Perso.h"
 
@@ -73,27 +78,55 @@
 	"Positionable.h"
 
 1539296032 c:\users\ribout horace\documents\travail\enjmin\u2\include\positionable.h
+=======
+1539029439 c:\users\séverin\documents\u2\include\hero.h
+	"Perso.h"
+
+1539115180 c:\users\séverin\documents\u2\include\perso.h
+	"Positionable.h"
+
+1539104006 c:\users\séverin\documents\u2\include\positionable.h
+>>>>>>> Stashed changes
 	<stdio.h>
 	"Visuel.h"
 	<vector>
 	<map>
 	<iostream>
 
+<<<<<<< Updated upstream
 1538693834 c:\users\ribout horace\documents\travail\enjmin\u2\include\visuel.h
+=======
+1538675787 c:\users\séverin\documents\u2\include\visuel.h
+>>>>>>> Stashed changes
 	<windows.h>
 	<map>
 	<fstream>
 	<string>
 
+<<<<<<< Updated upstream
 1538748288 c:\users\ribout horace\documents\travail\enjmin\u2\include\ennemi.h
 	"Perso.h"
 	"PoolManager.h"
 
 1539296053 c:\users\ribout horace\documents\travail\enjmin\u2\include\poolmanager.h
+=======
+1539029439 c:\users\séverin\documents\u2\include\ennemi.h
+	"Perso.h"
+	"PoolManager.h"
+
+1538670777 c:\users\séverin\documents\u2\include\buffermanager.h
+	"Positionable.h"
+	<vector>
+	"PoolManager.h"
+	<windows.h>
+
+1539184027 c:\users\séverin\documents\u2\include\poolmanager.h
+>>>>>>> Stashed changes
 	"Hero.h"
 	"Ennemi.h"
 	"Projectile.h"
 
+<<<<<<< Updated upstream
 1538748292 c:\users\ribout horace\documents\travail\enjmin\u2\include\projectile.h
 	"Positionable.h"
 
@@ -104,6 +137,12 @@
 	<windows.h>
 
 1539297729 source:c:\users\ribout horace\documents\travail\enjmin\u2\manager.cpp
+=======
+1539029439 c:\users\séverin\documents\u2\include\projectile.h
+	"Positionable.h"
+
+1539183560 source:c:\users\séverin\documents\u2\manager.cpp
+>>>>>>> Stashed changes
 	"Manager.h"
 	<conio.h>
 	"include/Visuel.h"
@@ -113,12 +152,17 @@
 	<cstdlib>
 	<time.h>
 
+<<<<<<< Updated upstream
 1538477045 source:c:\users\ribout horace\documents\travail\enjmin\u2\movemain.cpp
+=======
+1538506311 source:c:\users\séverin\documents\u2\movemain.cpp
+>>>>>>> Stashed changes
 	<iostream>
 	<stdio.h>
 	<windows.h>
 	<conio.h>
 
+<<<<<<< Updated upstream
 1538732647 source:c:\users\ribout horace\documents\travail\enjmin\u2\src\buffermanager.cpp
 	"../include/BufferManager.h"
 
@@ -146,16 +190,48 @@
 	<string>
 
 1539246765 source:c:\users\ribout horace\documents\travail\enjmin\u2\src\positionable.cpp
+=======
+1539183928 source:c:\users\séverin\documents\u2\src\ennemi.cpp
+	"../include/Ennemi.h"
+
+1539174878 source:c:\users\séverin\documents\u2\src\hero.cpp
+	"../include/Hero.h"
+	"../include/Positionable.h"
+
+1539125757 source:c:\users\séverin\documents\u2\src\perso.cpp
+	"../include/Perso.h"
+	"../include/Positionable.h"
+
+1538670777 source:c:\users\séverin\documents\u2\src\visuel.cpp
+	"../include/Visuel.h"
+
+1539104292 source:c:\users\séverin\documents\u2\src\positionable.cpp
+>>>>>>> Stashed changes
 	"../include/Positionable.h"
 	<windows.h>
 	<algorithm>
 	<iostream>
 	<tgmath.h>
 
+<<<<<<< Updated upstream
 1539296172 source:c:\users\ribout horace\documents\travail\enjmin\u2\src\projectile.cpp
 	<iostream>
 	"../include/Projectile.h"
 
 1538669183 source:c:\users\ribout horace\documents\travail\enjmin\u2\src\visuel.cpp
 	"../include/Visuel.h"
+=======
+1538724332 source:c:\users\séverin\documents\u2\src\buffermanager.cpp
+	"../include/BufferManager.h"
+
+1539183873 source:c:\users\séverin\documents\u2\src\poolmanager.cpp
+	"../include/PoolManager.h"
+	<typeinfo>
+	<iostream>
+	<string>
+
+1539167332 source:c:\users\séverin\documents\u2\src\projectile.cpp
+	<iostream>
+	"../include/Projectile.h"
+>>>>>>> Stashed changes
 

@@ -3,6 +3,7 @@
 
 Perso::Perso() : Positionable(1,1)
 {
+    pv = 1;
 }
 
 Perso::Perso(int posX,int posY) :  Positionable(posX, posY)
@@ -27,11 +28,14 @@ Perso::shootInfo Perso::Tirer(){
     return sI;
 }
 
-void Perso::takeDamage(int damage){
+bool Perso::takeDamage(int damage){
+    bool output = false;
     pv -= damage;
-    if(pv < 0){
+    if(pv <= 0){
         Mourir();
+        output = true;
     }
+    return output;
 }
 
 void Perso::update(float time)
@@ -42,6 +46,5 @@ void Perso::update(float time)
 
 void Perso::Mourir(){
     isEnabled = false;
-    std::cout << "I'm dead, I was a good soldier" << std::endl;
 }
 

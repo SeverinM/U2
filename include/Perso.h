@@ -16,10 +16,9 @@ class Perso : public Positionable
         virtual ~Perso();
 
         shootInfo Tirer();
-        void takeDamage(int damage);
-        std::pair<int,int> hitbox = std::pair<int,int>(2,0);
+        virtual bool takeDamage(int damage);
         void update(float time);
-        virtual std::pair<int,int> directionTir() = 0;
+        virtual std::pair<double,double> directionTir() = 0;
         bool isShot = false;
 
     protected:

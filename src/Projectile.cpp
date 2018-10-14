@@ -5,43 +5,26 @@
 
 Projectile::Projectile() : Positionable(0, 0)
 {
-    directionMove = std::pair<int, int>(0,1);
+    dir = std::pair<int, int>(0,0.01);
     timer = (1/getVitesse());
     lastTime = 0;
 }
-Projectile::Projectile(int posX, int posY, std::pair<int, int> dir) : Positionable(posX, posY)
+
+Projectile::Projectile(int posX, int posY, std::pair<double, double> direction) : Positionable(posX, posY)
 {
-    directionMove = dir;
+    dir = direction;
 }
 
-Projectile::~Projectile()
-{
-    //dtor
-}
-
-void Projectile::init(int posX, int posY, std::pair<int, int> dir, bool fromPlayer)
+void Projectile::init(int posX, int posY, std::pair<double, double> direction, bool fromPlayer)
 {
     Positionable::init(posX, posY, "sprites/ProjectileHero.txt");
-    directionMove = dir;
+    dir = direction;
     isFromPlayer = fromPlayer;
 }
 
 void Projectile::update(float time){
-    goOn(time);
-}
-
-
-
-
-///Movement automatique via une direction en memoire !
-void Projectile::goOn(float time){
-    //cout << "Hello, i'm  : " << timer << " at " << getVitesse() << endl;
-    timer -= time;
-
-    if(timer < 0){
-        moveBy(directionMove.first,directionMove.second);
-        timer = (1/getVitesse());;
-    }
+    posX += dir.first;
+    posY += dir.second;
 }
 
 int Projectile::hit(){
