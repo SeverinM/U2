@@ -16,11 +16,14 @@ class Ennemi : public Perso
         void update(float deltaTime, Hero * her);
         void setPosition(int newX,int newY);
         virtual typePosable getTypePosable();
+        inline int getScore(){return score;}
+        inline void setScore(int &value){score = value;}
 
     private:
         float time = 0;
         float frequencyShoot = 2;
         float timeSinceLastShoot = 0;
+        int score = 1;
         PoolManager * pool;
 };
 

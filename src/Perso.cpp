@@ -29,10 +29,13 @@ Perso::shootInfo Perso::Tirer(){
 }
 
 void Perso::takeDamage(int damage){
+    bool output = false;
     pv -= damage;
     if(pv <= 0){
         Mourir();
+        output = true;
     }
+    return output;
 }
 
 void Perso::update(float time)

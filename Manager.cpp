@@ -121,8 +121,6 @@ bool Manager::MainLoop(float time)
                                 h->takeDamage( ((Projectile*)pp)->hit() );
                             }
                             break;
-                        case Enn :
-                            break;
                         case Proj:
                             if( ((Projectile*)pp)->getIsFromPlayer() != ((Projectile*)it->second)->getIsFromPlayer() ){
                                 pp->isEnabled = false;
@@ -179,7 +177,10 @@ bool Manager::MainLoop(float time)
                         case Proj :
                             Projectile * proj = (Projectile *)p;
                             if(proj->getIsFromPlayer()){
-                                ((Ennemi *)currentEnnPos)->takeDamage(proj->hit());
+                                if (currentEnnPos->takeDamage(proj->hit()))
+                                {
+                                    score += currentEnnPos->getScore();
+                                }
                                 proj->isEnabled = false;
                             }
                             break;
