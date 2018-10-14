@@ -16,6 +16,12 @@ Manager::Manager()
     frequencySpawn = 3;
     srand(time(NULL));
     timeUpdate = 0.5;
+
+    inputAutorisation[0][0] = 0;
+    inputAutorisation[0][1] = 0;
+    inputAutorisation[1][0] = 0;
+    inputAutorisation[1][1] = 0;
+
 }
 
 
@@ -42,29 +48,42 @@ void Manager::MainLoop(float time)
 	inputKeysNow[INPUT_KEY_SPACE] = GetAsyncKeyState(' ');
 	pressed =  inputKeysNow[INPUT_KEY_Z] || inputKeysNow[INPUT_KEY_S]
             || inputKeysNow[INPUT_KEY_Q] || inputKeysNow[INPUT_KEY_D] || inputKeysNow[INPUT_KEY_SPACE];
-    if (is_input_key_pressed(INPUT_KEY_Z))
+    if (is_input_key_down(INPUT_KEY_Z) && inputAutorisation[0][0] <= 0)
     {
         if (h != nullptr && h->isEnabled)
                     h->moveBy(0,-1);
+        inputAutorisation[0][0] = moveTimer;
     }
-    else if (is_input_key_pressed(INPUT_KEY_S))
+    else if (is_input_key_down(INPUT_KEY_S) && inputAutorisation[0][1] <= 0)
     {
         if (h != nullptr && h->isEnabled)
                     h->moveBy(0,1);
+        inputAutorisation[0][1] = moveTimer;
     }
-    if (is_input_key_pressed(INPUT_KEY_Q))
+    if (is_input_key_down(INPUT_KEY_Q) && inputAutorisation[1][0] <= 0)
     {
         if (h != nullptr && h->isEnabled)
                     h->moveBy(-1,0);
+        inputAutorisation[1][0] = moveTimer;
     }
-    else if (is_input_key_pressed(INPUT_KEY_D))
+    else if (is_input_key_down(INPUT_KEY_D) && inputAutorisation[1][1] <= 0 )
     {
         if (h != nullptr && h->isEnabled)
                     h->moveBy(1,0);
+        inputAutorisation[1][1] = moveTimer;
     }
-    if(is_input_key_pressed(INPUT_KEY_SPACE)){
+    if(is_input_key_down(INPUT_KEY_SPACE)){
         h->tryToShoot();
     }
+
+    if(inputAutorisation[0][0] > 0)
+      inputAutorisation[0][0] -= time;
+    if(inputAutorisation[0][1] > 0)
+      inputAutorisation[0][1] -= time;
+    if(inputAutorisation[1][0] > 0)
+      inputAutorisation[1][0] -= time;
+    if(inputAutorisation[1][1] > 0)
+      inputAutorisation[1][1] -= time;
 
     /*
     case 'p' :

@@ -51,6 +51,8 @@ class Manager
         bool inputKeysBefore[INPUT_KEY_COUNT];
         bool inputKeysNow[INPUT_KEY_COUNT];
         bool pressed;
+        float inputAutorisation[2][2];
+        float moveTimer = 0.1f;
 
         bool is_input_key_up(InputKey inputKey);
         bool is_input_key_down(InputKey inputKey);

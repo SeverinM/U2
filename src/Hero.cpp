@@ -4,6 +4,7 @@
 Hero::Hero() : Perso()
 {
     timerShoot = 0;
+    vitesse = 4;
 }
 Hero::Hero(int posX,int posY) : Perso(posX, posY)
 {
