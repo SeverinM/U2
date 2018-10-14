@@ -13,7 +13,7 @@ class Ennemi : public Perso
         virtual ~Ennemi();
         void init(int posX,int posY);
         virtual std::pair<double,double> directionTir();
-        void update(float deltaTime);
+        void update(float deltaTime, Hero * her);
         void setPosition(int newX,int newY);
         virtual typePosable getTypePosable();
 

@@ -165,10 +165,10 @@ bool Manager::MainLoop(float time)
     Positionable ** ennemies = (Positionable **)poolManager->getEnnemies();
     for (int i = 0; i < poolManager->getEnnPoolSize(); i++)
     {
-        Positionable * currentEnnPos = ennemies[i];
+        Ennemi * currentEnnPos = (Ennemi *)ennemies[i];
         if (currentEnnPos != nullptr && currentEnnPos->isEnabled)
         {
-            currentEnnPos->update(time);
+            currentEnnPos->update(time, h);
             //Collision !
             for (auto &position : currentEnnPos->getAllPosition())
             {
@@ -176,13 +176,6 @@ bool Manager::MainLoop(float time)
                 if( it != collisionBuffer.end() && (*it).second != ennemies[i]){
                     Positionable * p = (it->second);
                     switch((it->second)->getTypePosable()){
-                        case Her :
-                            if (!h->getIsInRecovery())
-                            {
-                                h->takeDamage(1);
-                            }
-                            break;
-
                         case Proj :
                             Projectile * proj = (Projectile *)p;
                             if(proj->getIsFromPlayer()){

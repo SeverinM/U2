@@ -37,6 +37,7 @@
 		<Unit filename="Manager.h" />
 		<Unit filename="include/BufferManager.h" />
 		<Unit filename="include/Ennemi.h" />
+		<Unit filename="include/GameWrapper.h" />
 		<Unit filename="include/Hero.h" />
 		<Unit filename="include/NYTimer.h" />
 		<Unit filename="include/Perso.h" />
@@ -49,6 +50,7 @@
 		<Unit filename="moveMain.h" />
 		<Unit filename="src/BufferManager.cpp" />
 		<Unit filename="src/Ennemi.cpp" />
+		<Unit filename="src/GameWrapper.cpp" />
 		<Unit filename="src/Hero.cpp" />
 		<Unit filename="src/NYTimer.cpp" />
 		<Unit filename="src/Perso.cpp" />

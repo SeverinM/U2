@@ -25,7 +25,7 @@ std::pair<double,double> Ennemi::directionTir(){
     return std::pair<double, double>(dir.first,dir.second);
 }
 
-void Ennemi::update(float deltaTime)
+void Ennemi::update(float deltaTime, Hero * her)
 {
     if (isEnabled)
     {
@@ -33,10 +33,14 @@ void Ennemi::update(float deltaTime)
         moveBy(dir.first, dir.second);
         if (time - timeSinceLastShoot > frequencyShoot)
         {
+            std::pair<double , double> dir;
+            dir.first = her->getPos().first - getPos().first;
+            dir.second = her->getPos().second - getPos().second;
+            Positionable::normalizeDirection(dir);
             timeSinceLastShoot = time;
             Projectile * p = (Projectile *)pool->getInPool(typePosable::Proj);
             p->isEnabled = true;
-            p->init(posX + 2,posY,{0,0.002},false);
+            p->init(posX + 2,posY,{dir.first / 100, dir.second / 100},false);
             p->removeAllAnimation();
             p->addAnimation(Visuel::createFromFile("sprites/ProjectileHero.txt",
                                                    Visuel::getColor(Visuel::Couleur::Rouge,
