@@ -75,7 +75,7 @@ bool Manager::MainLoop(float time)
         Perso::shootInfo info = h->Tirer();
         Projectile *proj = (Projectile*)poolManager->getInPool(Proj);
         proj->isEnabled = true;
-        proj->removeAnimation(0);
+        proj->removeAllAnimation();
         proj->addAnimation(Visuel::createFromFile("sprites/ProjectileHero.txt",
                                                    Visuel::getColor(Visuel::Couleur::Cyan,
                                                                     Visuel::Couleur::Transparent)));
@@ -90,9 +90,10 @@ bool Manager::MainLoop(float time)
             switch (it->second->getTypePosable())
             {
                 case typePosable::Enn:
-                    h->takeDamage(1);
-                    break;
-                    wasHitThisFrame = true;
+                    if (!(h->getIsInRecovery()))
+                    {
+                        h->takeDamage(1);
+                    }
                     break;
             }
         }
@@ -115,8 +116,10 @@ bool Manager::MainLoop(float time)
                 if(it != collisionBuffer.end()){
                     switch ((it->second)->getTypePosable()){
                         case typePosable::Her :
-                            if( !((Projectile*)pp)->getIsFromPlayer() )
+                            if( !((Projectile*)pp)->getIsFromPlayer() && !h->getIsInRecovery())
+                            {
                                 h->takeDamage( ((Projectile*)pp)->hit() );
+                            }
                             break;
                         case Enn :
                             break;
@@ -174,7 +177,10 @@ bool Manager::MainLoop(float time)
                     Positionable * p = (it->second);
                     switch((it->second)->getTypePosable()){
                         case Her :
-                            h->takeDamage(1);
+                            if (!h->getIsInRecovery())
+                            {
+                                h->takeDamage(1);
+                            }
                             break;
 
                         case Proj :
@@ -205,7 +211,7 @@ void Manager::drawAllElementIn(Positionable * listElement[], int sizeA){
     {
         if(listElement[i] != nullptr && listElement[i]->isEnabled)
         {
-            map<pair<int,int>, CHAR_INFO *> temp(listElement[i]->getAnimation(0));
+            map<pair<int,int>, CHAR_INFO *> temp(listElement[i]->getAnimation());
             for (auto& a : temp)
             {
                 bufferManager->placeInBuffer(a.second,a.first.first,a.first.second);
@@ -216,9 +222,11 @@ void Manager::drawAllElementIn(Positionable * listElement[], int sizeA){
 
 void Manager::init()
 {
+    int color(Visuel::getColor(Visuel::Couleur::Gris, Visuel::Couleur::Transparent));
     h = (Hero *)poolManager->getInPool(Her);
     h->isEnabled = true;
     h->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt"));
+    h->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt",color));
     h->setPosition(37, 40);
 
     e = (Ennemi *)poolManager->getInPool(Enn);
@@ -227,5 +235,5 @@ void Manager::init()
     e->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt",couleur));
     std::pair<double , double> direction(0,0.001);
     e->setDirection(direction);
-    e->setPosition(39, 1);
+    e->setPosition(39, 20);
 }

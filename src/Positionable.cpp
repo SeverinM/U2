@@ -38,10 +38,10 @@ std::pair<int,int> Positionable::getPos(){
     return std::pair<int,int>((int)floor(posX),(int)floor(posY));
 }
 
-map<pair<int,int>, CHAR_INFO *> Positionable::getAnimation(int index)
+map<pair<int,int>, CHAR_INFO *> Positionable::getAnimation()
 {
     map<pair<int,int>, CHAR_INFO *> output = *new map<pair<int,int>, CHAR_INFO *>();
-    map<pair<int,int>, CHAR_INFO *> inputRef = animations[index]->getPositions();
+    map<pair<int,int>, CHAR_INFO *> inputRef = animations[indexAnimation]->getPositions();
     map<pair<int,int>, CHAR_INFO *>::iterator i = inputRef.begin();
     while (i != inputRef.end())
     {
@@ -61,19 +61,10 @@ void Positionable::setPosition(double newX,double newY)
     }
 }
 
-void Positionable::removeAnimation(int index)
-{
-    if(animations.size() > index)
-    {
-        delete animations[index];
-        animations.erase(animations.begin() + index);
-    }
-}
-
 vector<pair<int,int>> Positionable::getAllPosition()
 {
     vector<pair<int,int>> output;
-    for(auto &a : getAnimation(0))
+    for(auto &a : getAnimation())
     {
         output.push_back(a.first);
     }
@@ -82,6 +73,25 @@ vector<pair<int,int>> Positionable::getAllPosition()
 
 void Positionable::removeAllAnimation()
 {
+    for (auto &anims : animations)
+    {
+        delete anims;
+    }
     animations.clear();
+}
+
+void Positionable::previousSprite()
+{
+    indexAnimation = max(0, indexAnimation - 1);
+}
+
+void Positionable::nextSprite()
+{
+    indexAnimation = (indexAnimation + 1) % getLengthAnimation();
+}
+
+int Positionable::getLengthAnimation()
+{
+    return animations.size();
 }
 

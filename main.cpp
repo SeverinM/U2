@@ -16,7 +16,6 @@ int main()
     Manager man(bm);
     man.init();
     GameWrapper gw(bm);
-    gw.switchStop();
     while (!gw.isStop())
     {
         gw.PreGameLoop();

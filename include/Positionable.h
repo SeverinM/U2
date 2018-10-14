@@ -22,20 +22,28 @@ class Positionable
 
         Positionable(int startPosX,int startPosY);
         void init(int posXBy, int posY, string spriteFileName = "sprite/spaceship.txt");
+
+        //positions
         void moveBy(float posXBy, float posY);
         float getVitesse();
         std::pair<int,int> getPos();
         virtual void setPosition(double newX,double newY);
-        void addAnimation(Visuel * visu);
-        map<pair<int,int>, CHAR_INFO *> getAnimation(int index);
-        virtual void update(float time) = 0;
-        bool isEnabled;
         inline int getX(){return posX;}
         inline int getY(){return posY;}
-        void removeAnimation(int index);
-        virtual typePosable getTypePosable() = 0;
         vector<pair<int,int>> getAllPosition();
+
+        //animations
+        void addAnimation(Visuel * visu);
+        map<pair<int,int>, CHAR_INFO *> getAnimation();
+        virtual void update(float time) = 0;
+        bool isEnabled;
+        virtual typePosable getTypePosable() = 0;
         void removeAllAnimation();
+        void nextSprite();
+        void previousSprite();
+        int getLengthAnimation();
+
+        //directions
         inline void setDirection(std::pair<double, double> &newDir){dir = newDir;}
         static void normalizeDirection(std::pair<double, double> &direction)
         {
@@ -47,6 +55,7 @@ class Positionable
 
 
     protected:
+        int indexAnimation = 0;
         std::pair<double , double > dir;
         float vitesse;
         vector<Visuel *> animations;

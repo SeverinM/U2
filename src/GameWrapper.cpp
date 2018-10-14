@@ -5,7 +5,7 @@ GameWrapper::GameWrapper(BufferManager * buffer)
 {
     buff = buffer;
     textPreGame = new Hero(30,30);
-    textPreGame->removeAnimation(0);
+    textPreGame->removeAllAnimation();
     textGameOver = new Hero(30,30);
     textGameOver->removeAllAnimation();
     Visuel * vis = Visuel::createFromFile("sprites/Intro.txt");
@@ -36,7 +36,7 @@ void GameWrapper::PreGameLoop()
     }
 
     buff->resetScreen();
-    map<pair<int,int>, CHAR_INFO *> temp(textPreGame->getAnimation(0));
+    map<pair<int,int>, CHAR_INFO *> temp(textPreGame->getAnimation());
     for (auto& a : temp)
     {
         buff->placeInBuffer(a.second,a.first.first,a.first.second);
@@ -56,7 +56,7 @@ void GameWrapper::GameOver()
     }
 
     buff->resetScreen();
-    map<pair<int,int>, CHAR_INFO *> temp(textGameOver->getAnimation(0));
+    map<pair<int,int>, CHAR_INFO *> temp(textGameOver->getAnimation());
     for (auto& a : temp)
     {
         buff->placeInBuffer(a.second,a.first.first,a.first.second);
