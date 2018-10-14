@@ -13,7 +13,7 @@ class Hero : public Perso
         void tryToShoot();
         void setPosition(double newX, double newY);
         virtual typePosable getTypePosable();
-        void takeDamage(int damage);
+        bool takeDamage(int damage);
         inline bool getIsInRecovery(){
             return isOnRecovery;
         }

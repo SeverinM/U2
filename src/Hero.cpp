@@ -53,10 +53,11 @@ void Hero::setPosition(double newX, double newY)
     }
 }
 
-void Hero::takeDamage(int damage)
+bool Hero::takeDamage(int damage)
 {
-    Perso::takeDamage(damage);
+    bool output = Perso::takeDamage(damage);
     recoveryTimeEnd = totalTime + recoveryTime;
+    return output;
 }
 
 typePosable Hero::getTypePosable(){

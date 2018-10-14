@@ -28,7 +28,7 @@ Perso::shootInfo Perso::Tirer(){
     return sI;
 }
 
-void Perso::takeDamage(int damage){
+bool Perso::takeDamage(int damage){
     bool output = false;
     pv -= damage;
     if(pv <= 0){
