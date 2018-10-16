@@ -2,6 +2,7 @@
 #define GAMEWRAPPER_H
 #include <windows.h>
 #include "BufferManager.h"
+#include "Texte.h"
 
 class GameWrapper
 {
@@ -17,8 +18,8 @@ class GameWrapper
     private:
         bool stop = false;
         BufferManager * buff;
-        Hero * textGameOver;
-        Hero * textPreGame;
+        Texte * textGameOver;
+        Texte * textPreGame;
 };
 
 #endif // GAMEWRAPPER_H

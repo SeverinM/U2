@@ -14,6 +14,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="include" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -23,6 +24,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -44,6 +46,7 @@
 		<Unit filename="include/PoolManager.h" />
 		<Unit filename="include/Positionable.h" />
 		<Unit filename="include/Projectile.h" />
+		<Unit filename="include/Texte.h" />
 		<Unit filename="include/Visuel.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="moveMain.cpp" />
@@ -57,6 +60,7 @@
 		<Unit filename="src/PoolManager.cpp" />
 		<Unit filename="src/Positionable.cpp" />
 		<Unit filename="src/Projectile.cpp" />
+		<Unit filename="src/Texte.cpp" />
 		<Unit filename="src/Visuel.cpp" />
 		<Extensions>
 			<code_completion />

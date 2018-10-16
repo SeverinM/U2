@@ -13,7 +13,8 @@ enum typePosable
         {
             Proj,
             Enn,
-            Her
+            Her,
+            Txt
         };
 
 class Positionable

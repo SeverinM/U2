@@ -4,9 +4,9 @@
 GameWrapper::GameWrapper(BufferManager * buffer)
 {
     buff = buffer;
-    textPreGame = new Hero(30,30);
+    textPreGame = new Texte(30,30);
     textPreGame->removeAllAnimation();
-    textGameOver = new Hero(30,30);
+    textGameOver = new Texte(30,30);
     textGameOver->removeAllAnimation();
     Visuel * vis = Visuel::createFromFile("sprites/Intro.txt");
     Visuel * vis2 = Visuel::createFromFile("sprites/gameover.txt");
