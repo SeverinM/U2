@@ -39,7 +39,7 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Linker>
-			<Add library="../Lib/bin/Debug/libLib.a" />
+			<Add library="./dependencies/lib/libLib.dll" />
 		</Linker>
 		<Unit filename="Manager.cpp" />
 		<Unit filename="Manager.h" />
