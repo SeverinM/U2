@@ -13,7 +13,7 @@ Manager::Manager(BufferManager * buff)
     stop = false;
     poolManager = new PoolManager();
     timeSpent = 0;
-    frequencySpawn = 3;
+    frequencySpawn = 1;
     srand(time(NULL));
     timeUpdate = 0.5;
 
