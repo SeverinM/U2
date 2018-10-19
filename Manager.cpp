@@ -13,7 +13,7 @@ Manager::Manager(BufferManager * buff)
     stop = false;
     poolManager = new PoolManager();
     timeSpent = 0;
-    frequencySpawn = 3;
+    frequencySpawn = 1;
     srand(time(NULL));
     timeUpdate = 0.5;
 
@@ -52,25 +52,25 @@ bool Manager::MainLoop(float time)
     {
         if (h != nullptr && h->isEnabled)
                     h->moveBy(0,-1);
-        inputAutorisation[0][0] = moveTimer;
+        inputAutorisation[0][0] = moveTimerUpDown;
     }
     else if (is_input_key_down(INPUT_KEY_S) && inputAutorisation[0][1] <= 0)
     {
         if (h != nullptr && h->isEnabled)
                     h->moveBy(0,1);
-        inputAutorisation[0][1] = moveTimer;
+        inputAutorisation[0][1] = moveTimerUpDown;
     }
     if (is_input_key_down(INPUT_KEY_Q) && inputAutorisation[1][0] <= 0)
     {
         if (h != nullptr && h->isEnabled)
                     h->moveBy(-1,0);
-        inputAutorisation[1][0] = moveTimer;
+        inputAutorisation[1][0] = moveTimerRightLeft;
     }
     else if (is_input_key_down(INPUT_KEY_D) && inputAutorisation[1][1] <= 0 )
     {
         if (h != nullptr && h->isEnabled)
                     h->moveBy(1,0);
-        inputAutorisation[1][1] = moveTimer;
+        inputAutorisation[1][1] = moveTimerRightLeft;
     }
     if(is_input_key_down(INPUT_KEY_SPACE)){
         h->tryToShoot();
@@ -107,7 +107,7 @@ bool Manager::MainLoop(float time)
         proj->addAnimation(Visuel::createFromFile("sprites/ProjectileHero.txt",
                                                    Visuel::getColor(Visuel::Couleur::Cyan,
                                                                     Visuel::Couleur::Transparent)));
-        std::pair<double , double> direction(0,-0.001);
+        std::pair<double , double> direction(0,-0.07);
         proj->init(h->getPos().first + 2,h->getPos().second,direction,true);
     }
     for (auto &a : h->getAllPosition())

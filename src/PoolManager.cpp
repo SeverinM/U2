@@ -99,14 +99,14 @@ void PoolManager::clearPool(typePosable type)
     switch (type)
     {
         case typePosable::Enn:
-            for (int i = 0 ; i < 30 ; i++)
+            for (int i = 0 ; i < sizePoolEnn ; i++)
             {
                 delete poolEnnemi[i];
                 poolEnnemi[i] = 0;
             }
             break;
         case typePosable::Proj:
-            for (int i = 0 ; i < 60 ; i++)
+            for (int i = 0 ; i < sizePoolPro ; i++)
             {
                 delete poolProjectile[i];
                 poolProjectile[i] = 0;
@@ -125,7 +125,7 @@ int PoolManager::poolCount(typePosable type)
     switch (type)
     {
         case typePosable::Enn:
-            for (int i = 0 ; i < 30 ; i++)
+            for (int i = 0 ; i < sizePoolEnn ; i++)
             {
                 if (poolEnnemi[i] != nullptr && poolEnnemi[i]->isEnabled)
                 {
@@ -134,7 +134,7 @@ int PoolManager::poolCount(typePosable type)
             }
             break;
         case typePosable::Proj:
-            for (int i = 0 ; i < 60 ; i++)
+            for (int i = 0 ; i < sizePoolPro ; i++)
             {
                 if (poolProjectile[i] != nullptr && poolProjectile[i]->isEnabled)
                 {

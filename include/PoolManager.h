@@ -1,5 +1,7 @@
 #ifndef POOLMANAGER_H
 #define POOLMANAGER_H
+#define SIZE_PROJ 200
+#define SIZE_ENN 60
 #include "Hero.h"
 #include "Ennemi.h"
 #include "Projectile.h"
@@ -21,11 +23,11 @@ class PoolManager
         int             poolCount(typePosable type = typePosable::Enn);
 
     private:
-        Ennemi       * poolEnnemi[60];
-        Projectile   * poolProjectile[120];
+        Ennemi       * poolEnnemi[SIZE_ENN];
+        Projectile   * poolProjectile[SIZE_PROJ];
         Hero         * hero[1];
-        int            sizePoolEnn = 60;
-        int            sizePoolPro = 120;
+        int            sizePoolEnn = SIZE_ENN;
+        int            sizePoolPro = SIZE_PROJ;
         int            sizePoolHer = 1;
 
 };
