@@ -5,11 +5,17 @@
 #include "Manager.h"
 #include "./include/GameWrapper.h"
 #include "./include/BufferManager.h"
+#include "./include/ProgrammableProj.h"
 
 using namespace std;
 
 int main()
 {
+    ProgrammableProj::initSequence();
+    char * str;
+    str = "Test";
+    ProgrammableProj::readSequence(str);
+
     BufferManager * bm = new BufferManager();
     NYTimer time;
     time.start();

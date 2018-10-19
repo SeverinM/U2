@@ -1,0 +1,14 @@
+{
+	"Test" :
+	{
+		"isCyclic" : true,
+		"steps" : 
+		[
+			{
+				"x" : "( 4 + dir.x ) * 3",
+				"y" : "2 * dir.y",
+				"time" : 1500
+			}
+		]
+	}
+}
