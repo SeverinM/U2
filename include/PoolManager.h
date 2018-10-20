@@ -5,6 +5,7 @@
 #include "Hero.h"
 #include "Ennemi.h"
 #include "Projectile.h"
+#include "ProgrammableProj.h"
 
 struct Ennemi;
 
@@ -24,7 +25,7 @@ class PoolManager
 
     private:
         Ennemi       * poolEnnemi[SIZE_ENN];
-        Projectile   * poolProjectile[SIZE_PROJ];
+        ProgrammableProj   * poolProjectile[SIZE_PROJ];
         Hero         * hero[1];
         int            sizePoolEnn = SIZE_ENN;
         int            sizePoolPro = SIZE_PROJ;

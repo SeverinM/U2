@@ -68,6 +68,10 @@
 		<Unit filename="src/Projectile.cpp" />
 		<Unit filename="src/Texte.cpp" />
 		<Unit filename="src/Visuel.cpp" />
+		<Unit filename="tinyexpr.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="tinyexpr.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

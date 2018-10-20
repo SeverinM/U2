@@ -41,7 +41,7 @@ void GameWrapper::PreGameLoop()
     {
         buff->placeInBuffer(a.second,a.first.first,a.first.second);
     }
-    //buff->draw();
+    buff->draw();
 }
 
 void GameWrapper::GameOver()

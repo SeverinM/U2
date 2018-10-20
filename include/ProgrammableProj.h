@@ -6,6 +6,7 @@
 #include <queue>
 #include <istream>
 #include <jansson.h>
+#include "../tinyexpr.h"
 
 struct ParamSequence
 {
@@ -19,10 +20,12 @@ struct ParamSequence
 class ProgrammableProj : public Projectile
 {
     public:
-        ProgrammableProj(int posX, int posY, std::pair<double, double> direction, string tag);
-        void setTag(string &newValue);
+        ProgrammableProj(int posX, int posY, std::pair<double, double> direction, string tag, Positionable * p);
+        ProgrammableProj();
+        void setTag(char * &newValue);
+        void nextSequence();
 
-        static void initSequence()
+        static void initSequences()
         {
             json_error_t error;
             string line;
@@ -51,7 +54,6 @@ class ProgrammableProj : public Projectile
 
             size_t index;
             json_t * value;
-            json_t * valueStep;
             json_t * xKey;
             json_t * yKey;
             json_t * timeKey;
@@ -66,26 +68,30 @@ class ProgrammableProj : public Projectile
                 param.directionX = json_string_value(xKey);
                 param.directionY = json_string_value(yKey);
                 param.time = json_integer_value(timeKey);
+                output.push(param);
             }
 
             return output;
         }
 
-        static float evaluateString (const char * str)
-        {
-            return 1;
-        }
+        double evaluateString (const char * str);
 
     protected:
-        vector<ParamSequence> sequence;
+        queue<ParamSequence> sequence;
         queue<ParamSequence> actualSequence;
+        ParamSequence currentSequence;
         virtual void update (float time);
+        double * posXTarget;
+        double * posYTarget;
 
         //Si mis a true , se repete
         bool isCyclic;
         float timeSinceBegin;
+        float timeSpent;
+
         static json_t * allSequences;
         static string nameFile;
+        te_variable vars[];
 };
 
 #endif // PROGRAMMABLEPROJ_H

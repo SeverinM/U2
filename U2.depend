@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1539546836 source:c:\users\séverin\documents\u2\main.cpp
+1540040074 source:c:\users\séverin\documents\u2\main.cpp
 	<iostream>
 	<windows.h>
 	<stdio.h>
@@ -7,6 +7,8 @@
 	"Manager.h"
 	"./include/GameWrapper.h"
 	"./include/BufferManager.h"
+	"./include/ProgrammableProj.h"
+	"tinyexpr.h"
 
 1538415417 c:\users\séverin\documents\u2\nytimer.h
 
@@ -65,7 +67,7 @@
 
 1539246765 c:\users\ribout horace\documents\travail\enjmin\u2\manager.h
 
-1539589421 c:\users\séverin\documents\u2\manager.h
+1539981719 c:\users\séverin\documents\u2\manager.h
 	<windows.h>
 	"include/Hero.h"
 	"include/Ennemi.h"
@@ -122,7 +124,7 @@
 1539589421 c:\users\séverin\documents\u2\include\perso.h
 	"Positionable.h"
 
-1539719232 c:\users\séverin\documents\u2\include\positionable.h
+1540032256 c:\users\séverin\documents\u2\include\positionable.h
 	<stdio.h>
 	"Visuel.h"
 	<vector>
@@ -150,10 +152,11 @@
 	"PoolManager.h"
 	<windows.h>
 
-1539420802 c:\users\séverin\documents\u2\include\poolmanager.h
+1540040799 c:\users\séverin\documents\u2\include\poolmanager.h
 	"Hero.h"
 	"Ennemi.h"
 	"Projectile.h"
+	"ProgrammableProj.h"
 
 1538748292 c:\users\ribout horace\documents\travail\enjmin\u2\include\projectile.h
 	"Positionable.h"
@@ -169,7 +172,7 @@
 1539520797 c:\users\séverin\documents\u2\include\projectile.h
 	"Positionable.h"
 
-1539589421 source:c:\users\séverin\documents\u2\manager.cpp
+1540041696 source:c:\users\séverin\documents\u2\manager.cpp
 	"Manager.h"
 	<conio.h>
 	"include/Visuel.h"
@@ -211,8 +214,9 @@
 
 1539246765 source:c:\users\ribout horace\documents\travail\enjmin\u2\src\positionable.cpp
 
-1539547608 source:c:\users\séverin\documents\u2\src\ennemi.cpp
+1540041612 source:c:\users\séverin\documents\u2\src\ennemi.cpp
 	"../include/Ennemi.h"
+	"ProgrammableProj.h"
 
 1539589421 source:c:\users\séverin\documents\u2\src\hero.cpp
 	"../include/Hero.h"
@@ -225,7 +229,7 @@
 1538670777 source:c:\users\séverin\documents\u2\src\visuel.cpp
 	"../include/Visuel.h"
 
-1539528432 source:c:\users\séverin\documents\u2\src\positionable.cpp
+1540032242 source:c:\users\séverin\documents\u2\src\positionable.cpp
 	"../include/Positionable.h"
 	<windows.h>
 	<algorithm>
@@ -244,7 +248,7 @@
 1538724332 source:c:\users\séverin\documents\u2\src\buffermanager.cpp
 	"../include/BufferManager.h"
 
-1539421078 source:c:\users\séverin\documents\u2\src\poolmanager.cpp
+1540041328 source:c:\users\séverin\documents\u2\src\poolmanager.cpp
 	"../include/PoolManager.h"
 	<typeinfo>
 	<iostream>
@@ -259,14 +263,36 @@
 	"BufferManager.h"
 	"Texte.h"
 
-1539719627 source:c:\users\séverin\documents\u2\src\gamewrapper.cpp
+1540039970 source:c:\users\séverin\documents\u2\src\gamewrapper.cpp
 	"../include/GameWrapper.h"
 	<conio.h>
 
 1539720432 c:\users\séverin\documents\u2\include\texte.h
 	"Positionable.h"
 
-1539849309 source:c:\users\séverin\documents\u2\src\texte.cpp
+1539968854 source:c:\users\séverin\documents\u2\src\texte.cpp
 	"Texte.h"
 	<jansson.h>
+
+1540040862 c:\users\séverin\documents\u2\include\programmableproj.h
+	"Projectile.h"
+	<vector>
+	<string>
+	<queue>
+	<istream>
+	<jansson.h>
+	"../tinyexpr.h"
+
+1540041536 source:c:\users\séverin\documents\u2\src\programmableproj.cpp
+	"ProgrammableProj.h"
+
+1526010053 source:c:\users\séverin\documents\u2\tinyexpr.c
+	"tinyexpr.h"
+	<stdlib.h>
+	<math.h>
+	<string.h>
+	<stdio.h>
+	<limits.h>
+
+1526010053 c:\users\séverin\documents\u2\tinyexpr.h
 

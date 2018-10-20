@@ -6,15 +6,15 @@
 #include "./include/GameWrapper.h"
 #include "./include/BufferManager.h"
 #include "./include/ProgrammableProj.h"
+#include "tinyexpr.h"
 
 using namespace std;
 
 int main()
 {
-    ProgrammableProj::initSequence();
+    ProgrammableProj::initSequences();
     char * str;
     str = "Test";
-    ProgrammableProj::readSequence(str);
 
     BufferManager * bm = new BufferManager();
     NYTimer time;
