@@ -9,7 +9,8 @@
 
 struct ParamSequence
 {
-    std::pair <float, float> direction;
+    string directionX;
+    string directionY;
 
     //Milliseconds
     int time;
@@ -39,7 +40,7 @@ class ProgrammableProj : public Projectile
             allSequences = json_loads(jsonFile.c_str(), 0 , &error);
         }
 
-        static queue<ParamSequence> readSequence(char * &sequence)
+        static queue<ParamSequence> readSequence(char * sequence)
         {
             queue <ParamSequence> output;
             json_t * allParams;
@@ -62,10 +63,12 @@ class ProgrammableProj : public Projectile
                 yKey = json_object_get(value, "y");
                 timeKey = json_object_get(value , "time");
 
-                param.direction.first = evaluateString(json_string_value(xKey));
-                param.direction.second = evaluateString(json_string_value(yKey));
+                param.directionX = json_string_value(xKey);
+                param.directionY = json_string_value(yKey);
                 param.time = json_integer_value(timeKey);
             }
+
+            return output;
         }
 
         static float evaluateString (const char * str)
@@ -74,8 +77,8 @@ class ProgrammableProj : public Projectile
         }
 
     protected:
-        vector<std::pair<double , double>> sequence;
-        queue<std::pair<double , double> *> actualSequence;
+        vector<ParamSequence> sequence;
+        queue<ParamSequence> actualSequence;
         virtual void update (float time);
 
         //Si mis a true , se repete

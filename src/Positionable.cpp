@@ -19,6 +19,11 @@ void Positionable::moveBy(float posXBy, float posYBy)
     setPosition(posXBy + posX, posYBy + posY);
 };
 
+void Positionable::moveBy(int posXBy , int posYBy)
+{
+    Positionable::moveBy((float)posXBy, (float)posYBy);
+}
+
 void Positionable::init(int startPosX,int startPosY,string spritefileName){
     posX = startPosX;
     posY = startPosY;

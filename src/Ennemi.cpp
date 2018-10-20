@@ -30,7 +30,7 @@ void Ennemi::update(float deltaTime, Hero * her)
     if (isEnabled)
     {
         time += deltaTime;
-        moveBy(dir.first, dir.second);
+        moveBy((float)dir.first,(float)dir.second);
         if (time - timeSinceLastShoot > frequencyShoot)
         {
             std::pair<double , double> dir;

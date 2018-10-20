@@ -26,6 +26,7 @@ class Positionable
 
         //positions
         void moveBy(float posXBy, float posY);
+        void moveBy(int posXBy, int posYBy);
         float getVitesse();
         std::pair<int,int> getPos();
         virtual void setPosition(double newX,double newY);
