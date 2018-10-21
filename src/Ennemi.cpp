@@ -8,7 +8,7 @@ Ennemi::Ennemi() : Perso()
 Ennemi::Ennemi(int posX,int posY, PoolManager * refPool) : Perso(posX, posY)
 {
     pool = refPool;
-    pv = 1;
+    pv = 10;
     dir = std::pair<double, double>(0.01,0.01);
 }
 
@@ -44,7 +44,7 @@ void Ennemi::update(float deltaTime, Hero * her)
             //ProgrammableProj * p = (ProgrammableProj *)pool->getInPool(typePosable::ProjProg);
             Projectile * p = (Projectile *)pool->getInPool(typePosable::Proj);
             p->isEnabled = true;
-            p->init(posX + 2,posY,{dir.first / 100, dir.second / 100},false);
+            p->init(posX + 2,posY,{(double)0.001, 0},false);
             p->removeAllAnimation();
             p->addAnimation(Visuel::createFromFile("sprites/ProjectileHero.txt",
                                                    Visuel::getColor(Visuel::Couleur::Rouge,

@@ -178,13 +178,13 @@ bool Manager::MainLoop(float time)
     if (timeSpent > frequencySpawn )
     {
         timeSpent -= frequencySpawn;
-        Ennemi * e = (Ennemi *)poolManager->getInPool(typePosable::Enn);
+        /*Ennemi * e = (Ennemi *)poolManager->getInPool(typePosable::Enn);
         int random(std::rand() % (SIZEX -2));
         e->setPosition(random,1);
         std::pair<double , double> speed(0.0001,0.01);
         e->setDirection(speed);
         e->isEnabled = true;
-        e->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt",Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));
+        e->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt",Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));*/
     }
 
     //Parcours des ennemies

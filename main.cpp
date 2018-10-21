@@ -6,6 +6,7 @@
 #include "./include/GameWrapper.h"
 #include "./include/BufferManager.h"
 #include "./include/ProgrammableProj.h"
+#include "tinyexpr.h"
 
 using namespace std;
 
