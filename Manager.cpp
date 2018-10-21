@@ -6,6 +6,7 @@
 #include <typeinfo>
 #include <cstdlib>
 #include <time.h>
+#include <ProgrammableProj.h>
 
 Manager::Manager(BufferManager * buff)
 {
@@ -21,7 +22,6 @@ Manager::Manager(BufferManager * buff)
     inputAutorisation[0][1] = 0;
     inputAutorisation[1][0] = 0;
     inputAutorisation[1][1] = 0;
-
 }
 
 

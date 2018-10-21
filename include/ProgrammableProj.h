@@ -1,11 +1,12 @@
 #ifndef PROGRAMMABLEPROJ_H
 #define PROGRAMMABLEPROJ_H
-#include "Projectile.h"
 #include <vector>
 #include <string>
 #include <queue>
 #include <istream>
 #include <jansson.h>
+#include "../tinyexpr.h"
+#include "Projectile.h"
 
 struct ParamSequence
 {
@@ -19,10 +20,12 @@ struct ParamSequence
 class ProgrammableProj : public Projectile
 {
     public:
-        ProgrammableProj(int posX, int posY, std::pair<double, double> direction, string tag);
-        void setTag(string &newValue);
+        ProgrammableProj(int posX, int posY, std::pair<double, double> direction, string tag, Positionable * p);
+        ProgrammableProj();
+        void setTag(const char * newValue);
+        void nextSequence();
 
-        static void initSequence()
+        static void initSequences()
         {
             json_error_t error;
             string line;
@@ -40,7 +43,7 @@ class ProgrammableProj : public Projectile
             allSequences = json_loads(jsonFile.c_str(), 0 , &error);
         }
 
-        static queue<ParamSequence> readSequence(char * sequence)
+        static queue<ParamSequence> readSequence(const char * sequence)
         {
             queue <ParamSequence> output;
             json_t * allParams;
@@ -51,41 +54,36 @@ class ProgrammableProj : public Projectile
 
             size_t index;
             json_t * value;
-            json_t * valueStep;
-            json_t * xKey;
-            json_t * yKey;
-            json_t * timeKey;
 
             ParamSequence param;
             json_array_foreach(steps , index , value)
             {
-                xKey = json_object_get(value, "x");
-                yKey = json_object_get(value, "y");
-                timeKey = json_object_get(value , "time");
-
-                param.directionX = json_string_value(xKey);
-                param.directionY = json_string_value(yKey);
-                param.time = json_integer_value(timeKey);
+                param.directionX = json_string_value(json_object_get(value, "x"));
+                param.directionY = json_string_value(json_object_get(value, "y"));
+                param.time = json_integer_value(json_object_get(value , "time"));
+                output.push(param);
             }
-
             return output;
         }
 
-        static float evaluateString (const char * str)
-        {
-            return 1;
-        }
+        double evaluateString (const char * str);
 
     protected:
-        vector<ParamSequence> sequence;
+        queue<ParamSequence> sequence;
         queue<ParamSequence> actualSequence;
-        virtual void update (float time);
+        ParamSequence * currentSequence;
+        void update (float time) override;
+        double * posXTarget;
+        double * posYTarget;
 
         //Si mis a true , se repete
         bool isCyclic;
         float timeSinceBegin;
+        float timeSpent;
+
         static json_t * allSequences;
         static string nameFile;
+        te_variable vars[];
 };
 
 #endif // PROGRAMMABLEPROJ_H

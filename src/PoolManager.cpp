@@ -65,6 +65,22 @@ Positionable * PoolManager::getInPool(typePosable type)
                 output = hero[0];
             }
             break;
+
+        case ProjProg:
+            for (int i = 0; i < sizePoolProProg; i++)
+            {
+                if (poolProgProj[i] == 0)
+                {
+                    poolProgProj[i] = new ProgrammableProj(0,0,{-0.07,0}, "Test", hero[0]);
+                }
+
+                if (!poolProgProj[i]->isEnabled)
+                {
+                    output = poolProgProj[i];
+                    break;
+                }
+            }
+            break;
     }
     return output;
 }
@@ -92,6 +108,11 @@ int PoolManager::getProPoolSize(){
 }
 int PoolManager::getHerPoolSize(){
     return sizePoolHer;
+}
+
+int PoolManager::getProProgPoolSize()
+{
+    return sizePoolProProg;
 }
 
 void PoolManager::clearPool(typePosable type)

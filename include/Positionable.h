@@ -14,7 +14,8 @@ enum typePosable
             Proj,
             Enn,
             Her,
-            Txt
+            Txt,
+            ProjProg
         };
 
 class Positionable
@@ -32,6 +33,8 @@ class Positionable
         virtual void setPosition(double newX,double newY);
         inline int getX(){return posX;}
         inline int getY(){return posY;}
+        inline double * getTrueX(){return &posX;}
+        inline double * getTrueY(){return &posY;}
         vector<pair<int,int>> getAllPosition();
 
         //animations
