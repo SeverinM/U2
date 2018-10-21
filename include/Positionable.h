@@ -10,13 +10,13 @@
 #define SIZEY 70
 
 enum typePosable
-        {
-            Proj,
-            Enn,
-            Her,
-            Txt,
-            ProjProg
-        };
+{
+    Proj,
+    Enn,
+    Her,
+    Txt,
+    ProjProg
+};
 
 class Positionable
 {
@@ -30,8 +30,6 @@ class Positionable
         void moveBy(int posXBy, int posYBy);
         float getVitesse();
         std::pair<int,int> getPos();
-        double& getTrueX();
-        double& getTrueY();
         virtual void setPosition(double newX,double newY);
         inline int getX(){return posX;}
         inline int getY(){return posY;}

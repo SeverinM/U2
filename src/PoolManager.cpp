@@ -44,7 +44,7 @@ Positionable * PoolManager::getInPool(typePosable type)
             {
                 if (poolProjectile[i] == 0)
                 {
-                    poolProjectile[i] = new ProgrammableProj(0,0,{0,0},"Test", hero[0]);
+                    poolProjectile[i] = new Projectile(0,0,{-0.002,0});
                 }
                 if (!poolProjectile[i]->isEnabled)
                 {

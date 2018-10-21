@@ -39,12 +39,11 @@ void Ennemi::update(float deltaTime, Hero * her)
             dir.second = her->getPos().second - getPos().second;
             Positionable::normalizeDirection(dir);
             timeSinceLastShoot = time;
-
             //ca ne marche pas :/
             //ProgrammableProj * p = (ProgrammableProj *)pool->getInPool(typePosable::ProjProg);
             Projectile * p = (Projectile *)pool->getInPool(typePosable::Proj);
             p->isEnabled = true;
-            p->init(posX + 2,posY,{(double)0.001, 0},false);
+            p->init(posX + 2,posY,{dir.first / 100, dir.second / 100},false);
             p->removeAllAnimation();
             p->addAnimation(Visuel::createFromFile("sprites/ProjectileHero.txt",
                                                    Visuel::getColor(Visuel::Couleur::Rouge,

@@ -99,14 +99,3 @@ int Positionable::getLengthAnimation()
 {
     return animations.size();
 }
-
-double& Positionable::getTrueX()
-{
-    return posX;
-}
-
-double& Positionable::getTrueY()
-{
-    return posY;
-}
-

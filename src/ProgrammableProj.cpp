@@ -33,7 +33,6 @@ void ProgrammableProj::update(float time)
     }
 
     Projectile::update(time);
-    cout << "projectile's bizarre adventures" << endl;
 
     if (currentSequence != nullptr)
     {

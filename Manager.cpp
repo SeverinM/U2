@@ -100,6 +100,8 @@ bool Manager::MainLoop(float time)
     //Hero section
     h->update(time);
     if(h->isShot){
+        h->isShot = false;
+        cout << h << endl;
         Perso::shootInfo info = h->Tirer();
         Projectile *proj = (Projectile*)poolManager->getInPool(Proj);
         proj->isEnabled = true;
@@ -127,7 +129,6 @@ bool Manager::MainLoop(float time)
         }
         collisionBuffer[a] = h;
     }
-    wasHitThisFrame = false;
 
     //Projectile section
     Positionable ** posList = poolManager->getProjectiles();
@@ -147,6 +148,7 @@ bool Manager::MainLoop(float time)
                             if( !((Projectile*)pp)->getIsFromPlayer() && !h->getIsInRecovery())
                             {
                                 h->takeDamage( ((Projectile*)pp)->hit() );
+                                (it->second)->isEnabled = false;
                             }
                             break;
                         case Proj:
@@ -178,13 +180,13 @@ bool Manager::MainLoop(float time)
     if (timeSpent > frequencySpawn )
     {
         timeSpent -= frequencySpawn;
-        /*Ennemi * e = (Ennemi *)poolManager->getInPool(typePosable::Enn);
+        Ennemi * e = (Ennemi *)poolManager->getInPool(typePosable::Enn);
         int random(std::rand() % (SIZEX -2));
         e->setPosition(random,1);
         std::pair<double , double> speed(0.0001,0.01);
         e->setDirection(speed);
         e->isEnabled = true;
-        e->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt",Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));*/
+        e->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt",Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));
     }
 
     //Parcours des ennemies
