@@ -21,7 +21,6 @@ class ProgrammableProj : public Projectile
 {
     public:
         ProgrammableProj(int posX, int posY, std::pair<double, double> direction, string tag, Positionable * p);
-        ProgrammableProj();
         void setTag(const char * newValue);
         void nextSequence();
 
@@ -67,6 +66,7 @@ class ProgrammableProj : public Projectile
         }
 
         double evaluateString (const char * str);
+        bool isCyclic;
 
     protected:
         queue<ParamSequence> sequence;
@@ -77,7 +77,6 @@ class ProgrammableProj : public Projectile
         double * posYTarget;
 
         //Si mis a true , se repete
-        bool isCyclic;
         float timeSinceBegin;
         float timeSpent;
 

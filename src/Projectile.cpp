@@ -23,8 +23,7 @@ void Projectile::init(int posX, int posY, std::pair<double, double> direction, b
 }
 
 void Projectile::update(float time){
-    posX += dir.first;
-    posY += dir.second;
+    moveBy((float)dir.first, (float)dir.second);
 }
 
 int Projectile::hit(){

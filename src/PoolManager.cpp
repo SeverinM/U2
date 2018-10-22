@@ -5,17 +5,16 @@
 
 PoolManager::PoolManager()
 {
-    for (int i = 0 ; i < sizePoolPro ; i++)
+    hero[0] = new Hero(0,0);
+    for (int i = 0 ; i < sizePoolPro; i++)
     {
         poolProjectile[i] = 0;
     }
 
-    for (int i = 0 ; i < sizePoolEnn ; i++)
+    for (int i = 0 ; i < sizePoolEnn; i++)
     {
         poolEnnemi[i] = 0;
     }
-
-    hero[0] = 0;
 };
 
 
@@ -33,7 +32,7 @@ Positionable * PoolManager::getInPool(typePosable type)
                 }
                 if (!poolEnnemi[i]->isEnabled)
                 {
-                    output = poolEnnemi[i];
+                    output = (Positionable *)poolEnnemi[i];
                     break;
                 }
             }
@@ -42,13 +41,14 @@ Positionable * PoolManager::getInPool(typePosable type)
         case Proj:
             for (int i = 0; i < sizePoolPro; i++)
             {
-                if (poolProjectile[i] == 0)
+                if (poolProjectile[i] == nullptr)
                 {
                     poolProjectile[i] = new Projectile(0,0,{-0.002,0});
                 }
+
                 if (!poolProjectile[i]->isEnabled)
                 {
-                    output = poolProjectile[i];
+                    output = (Positionable *)poolProjectile[i];
                     break;
                 }
             }
@@ -62,7 +62,7 @@ Positionable * PoolManager::getInPool(typePosable type)
 
             if (!hero[0]->isEnabled)
             {
-                output = hero[0];
+                output = (Positionable *)hero[0];
             }
             break;
 
@@ -76,7 +76,7 @@ Positionable * PoolManager::getInPool(typePosable type)
 
                 if (!poolProgProj[i]->isEnabled)
                 {
-                    output = poolProgProj[i];
+                    output = (Positionable *)poolProgProj[i];
                     break;
                 }
             }
