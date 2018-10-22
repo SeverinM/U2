@@ -101,7 +101,6 @@ bool Manager::MainLoop(float time)
     h->update(time);
     if(h->isShot){
         h->isShot = false;
-        cout << h << endl;
         Perso::shootInfo info = h->Tirer();
         Projectile *proj = (Projectile*)poolManager->getInPool(Proj);
         proj->isEnabled = true;
@@ -148,7 +147,7 @@ bool Manager::MainLoop(float time)
                             if( !((Projectile*)pp)->getIsFromPlayer() && !h->getIsInRecovery())
                             {
                                 h->takeDamage( ((Projectile*)pp)->hit() );
-                                (it->second)->isEnabled = false;
+                                pp->isEnabled = false;
                             }
                             break;
                         case Proj:
