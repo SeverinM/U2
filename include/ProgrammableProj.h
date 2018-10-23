@@ -10,6 +10,7 @@
 
 struct ParamSequence
 {
+    ParamSequence() : directionX("default"), directionY("default"), time(0){}
     string directionX;
     string directionY;
 
@@ -45,15 +46,18 @@ class ProgrammableProj : public Projectile
 
         static queue<ParamSequence> readSequence(const char * sequence)
         {
+            //ca bug ici
+            cout << "debut" << endl;
             queue <ParamSequence> output;
-            json_t * allParams;
-            json_t * steps;
+            cout << "2" << endl;
+            json_t * allParams = NULL;
+            json_t * steps = NULL;
 
             allParams = json_object_get(allSequences, sequence);
             steps = json_object_get(allParams, "steps");
 
             size_t index;
-            json_t * value;
+            json_t * value = NULL;
 
             ParamSequence param;
             json_array_foreach(steps , index , value)
@@ -72,7 +76,7 @@ class ProgrammableProj : public Projectile
     protected:
         queue<ParamSequence> sequence;
         queue<ParamSequence> actualSequence;
-        ParamSequence * currentSequence;
+        ParamSequence currentSequence;
         void update (float time) override;
         double * posXTarget;
         double * posYTarget;

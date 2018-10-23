@@ -7,12 +7,12 @@
 			{
 				"x" : "(tarx - posx) / 1000",
 				"y" : "(tary - posy) / 1000",
-				"time" : 200
+				"time" : 2000
 			},
 			{
 				"x" : "-(tarx - posx) / 1000",
 				"y" : "-(tary - posy) / 1000",
-				"time" : 2000
+				"time" : 4000
 			}
 		]
 	}

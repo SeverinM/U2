@@ -10,14 +10,14 @@ Hero::Hero() : Perso()
 Hero::Hero(int posX,int posY) : Perso(posX, posY)
 {
     timerShoot = 0;
-    pv = 3;
+    pv = 10;
 }
 
 void Hero::init(int posX,int posY)
 {
     Perso::init(posX, posY);
     timerShoot = 0;
-    pv = 3;
+    pv = 10;
 }
 
 void Hero::update(float time)

@@ -287,7 +287,7 @@ void Manager::init()
     h->isEnabled = true;
     h->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt"));
     h->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt",color));
-    h->setPosition(37, 40);
+    h->setPosition(34, 40);
 
     e = (Ennemi *)poolManager->getInPool(Enn);
     e->isEnabled = true;

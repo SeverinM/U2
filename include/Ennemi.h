@@ -21,7 +21,7 @@ class Ennemi : public Perso
 
     private:
         float time = 0;
-        float frequencyShoot = 2;
+        float frequencyShoot = 1;
         float timeSinceLastShoot = 0;
         int score = 1;
         PoolManager * pool;
