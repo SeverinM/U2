@@ -15,6 +15,11 @@ PoolManager::PoolManager()
     {
         poolEnnemi[i] = 0;
     }
+
+    for (int i = 0 ; i < sizePoolProProg; i++)
+    {
+        poolProgProj[i] = 0;
+    }
 };
 
 
@@ -98,6 +103,11 @@ Positionable ** PoolManager::getProjectiles()
 Positionable ** PoolManager::getHero()
 {
     return (Positionable **)hero;
+}
+
+Positionable ** PoolManager::getProjectilesProg()
+{
+    return (Positionable **)poolProgProj;
 }
 
 int PoolManager::getEnnPoolSize(){

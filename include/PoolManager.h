@@ -17,6 +17,7 @@ class PoolManager
         Positionable * getInPool(typePosable type);
         Positionable ** getEnnemies();
         Positionable ** getProjectiles();
+        Positionable ** getProjectilesProg();
         Positionable ** getHero();
         int             getEnnPoolSize();
         int             getProPoolSize();

@@ -7,6 +7,7 @@ json_t * ProgrammableProj::allSequences;
 ProgrammableProj::ProgrammableProj(int posX, int posY, std::pair<double , double> direction, string tag, Positionable * p)
 : Projectile(posX,posY, direction) , isCyclic(true) , timeSinceBegin(0)
 {
+    //marche pas
     timeSpent = 0;
     posXTarget = p->getTrueX();
     posYTarget = p->getTrueY();
@@ -14,19 +15,33 @@ ProgrammableProj::ProgrammableProj(int posX, int posY, std::pair<double , double
     vars[1] = {"tary",posYTarget};
     vars[2] = {"posx" ,&posX};
     vars[3] = {"posy", &posY};
+    currentSequence = new ParamSequence;
+    currentSequence->directionX = "default";
+    currentSequence->directionY = "default";
+    currentSequence->time = 0;
+    delete currentSequence;
     setTag(tag.c_str());
+}
+
+ProgrammableProj::ProgrammableProj(int posX, int posY, std::pair<double, double> direction) : Projectile(posX,posY, direction)
+{
+    //marche
+    isCyclic = true;
+    timeSinceBegin = 0;
+    currentSequence = new ParamSequence;
+    currentSequence->directionX = "default";
+    currentSequence->directionY = "default";
+    currentSequence->time = 0;
 }
 
 void ProgrammableProj::setTag(const char * newValue)
 {
     actualSequence = sequence = readSequence(newValue);
-    sequence.pop();
     nextSequence();
 }
 
 void ProgrammableProj::update(float time)
 {
-
     if (!isEnabled)
     {
         return;
@@ -34,10 +49,11 @@ void ProgrammableProj::update(float time)
 
     Projectile::update(time);
 
-    if (currentSequence != nullptr)
+    if (currentSequence->directionX == "default" || currentSequence->directionY == "default")
     {
         return;
     }
+
     timeSpent += time;
     if (currentSequence->time < timeSpent * 1000)
     {
@@ -53,7 +69,8 @@ void ProgrammableProj::nextSequence()
 {
     if (actualSequence.size() > 0)
     {
-        currentSequence = &actualSequence.front();
+        delete currentSequence;
+        currentSequence = new ParamSequence(actualSequence.front());
         actualSequence.pop();
     }
 
@@ -77,6 +94,7 @@ double ProgrammableProj::evaluateString(const char * str)
     {
         output = te_eval(expr);
     }
+    delete expr;
     return output;
 }
 

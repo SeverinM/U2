@@ -166,12 +166,49 @@ bool Manager::MainLoop(float time)
         }
     }
 
+    posList = poolManager->getProjectilesProg();
+    sizeA = poolManager->getProProgPoolSize();
+    for(int i = 0; i < sizeA ; i ++){
+        Positionable * pp = posList[i];
+        if(pp != nullptr){
+            if(pp->isEnabled){
+                pp->update(time);
+                //Here will be the test to see if there is hero with an ennemi projectile. An ally projectile is prio on erasing the value
+                //Also : if a projectile met an opposite projectile : both died
+                //Collision !
+                map<pair<int,int>,Positionable *>::iterator it = collisionBuffer.find(pp->getPos());
+                if(it != collisionBuffer.end()){
+                    switch ((it->second)->getTypePosable()){
+                        case typePosable::Her :
+                            if( !((Projectile*)pp)->getIsFromPlayer() && !h->getIsInRecovery())
+                            {
+                                h->takeDamage( ((Projectile*)pp)->hit() );
+                                pp->isEnabled = false;
+                            }
+                            break;
+                        case Proj:
+                            if( ((Projectile*)pp)->getIsFromPlayer() != ((Projectile*)it->second)->getIsFromPlayer() ){
+                                pp->isEnabled = false;
+                                (it->second)->isEnabled = false;
+                            }
+                            break;
+                    }
+                }
+                for (auto &a : pp->getAllPosition())
+                {
+                    collisionBuffer[a] = pp;
+                }
+            }
+        }
+    }
+
     //Draw section
     bufferManager->resetScreen();
 
     drawAllElementIn(poolManager->getProjectiles(),poolManager->getProPoolSize());
     drawAllElementIn(poolManager->getEnnemies(),poolManager->getEnnPoolSize());
     drawAllElementIn(poolManager->getHero(),poolManager->getHerPoolSize());
+    drawAllElementIn(poolManager->getProjectilesProg(), poolManager->getProProgPoolSize());
 
     bufferManager->draw();
 

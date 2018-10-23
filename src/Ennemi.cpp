@@ -40,8 +40,8 @@ void Ennemi::update(float deltaTime, Hero * her)
             Positionable::normalizeDirection(dir);
             timeSinceLastShoot = time;
             //ca ne marche pas :/
-            //ProgrammableProj * p = (ProgrammableProj *)pool->getInPool(typePosable::ProjProg);
-            Projectile * p = (Projectile *)pool->getInPool(typePosable::Proj);
+            ProgrammableProj * p = (ProgrammableProj *)pool->getInPool(typePosable::ProjProg);
+            //Projectile * p = (Projectile *)pool->getInPool(typePosable::Proj);
             p->isEnabled = true;
             p->init(posX + 2,posY,{dir.first / 100, dir.second / 100},false);
             p->removeAllAnimation();

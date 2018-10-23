@@ -21,6 +21,7 @@ class ProgrammableProj : public Projectile
 {
     public:
         ProgrammableProj(int posX, int posY, std::pair<double, double> direction, string tag, Positionable * p);
+        ProgrammableProj(int posX , int posY , std::pair<double , double> direction);
         void setTag(const char * newValue);
         void nextSequence();
 

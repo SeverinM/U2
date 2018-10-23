@@ -7,14 +7,13 @@
 #include "./include/BufferManager.h"
 #include "./include/ProgrammableProj.h"
 #include "tinyexpr.h"
+#include "Texte.h"
 
 using namespace std;
 
 int main()
 {
     ProgrammableProj::initSequences();
-    char * str;
-    str = "Test";
 
     BufferManager * bm = new BufferManager();
     NYTimer time;

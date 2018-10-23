@@ -13,6 +13,7 @@ Projectile::Projectile() : Positionable(0, 0)
 Projectile::Projectile(int posX, int posY, std::pair<double, double> direction) : Positionable(posX, posY)
 {
     dir = direction;
+    Positionable::init(posX, posY, "sprites/ProjectileHero.txt");
 }
 
 void Projectile::init(int posX, int posY, std::pair<double, double> direction, bool fromPlayer)
