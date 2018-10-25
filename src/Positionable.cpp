@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <iostream>
 #include <tgmath.h>
+#include <math.h>
 
 using namespace std;
 
@@ -11,6 +12,7 @@ Positionable::Positionable(int startPosX,int startPosY){
     posY = startPosY;
     vitesse = 4; //TO DO : change this
     isEnabled = false;
+    physicEnabled = true;
     dir = std::pair<double , double>(0.001,0.001);
 }
 
@@ -19,25 +21,32 @@ void Positionable::moveBy(float posXBy, float posYBy)
     setPosition(posXBy + posX, posYBy + posY);
 };
 
+void Positionable::setColor(int newColor)
+{
+    for (auto &a : animations)
+    {
+        a->setColor(newColor);
+    }
+}
+
 void Positionable::moveBy(int posXBy , int posYBy)
 {
     Positionable::moveBy((float)posXBy, (float)posYBy);
 }
 
 void Positionable::init(int startPosX,int startPosY,string spritefileName){
-    posX = startPosX;
-    posY = startPosY;
+    setPosition(startPosX, startPosY);
     addAnimation(Visuel::createFromFile(spritefileName));
 }
 
 float Positionable::getVitesse(){
     return vitesse;
 }
+
 void Positionable::addAnimation(Visuel * visu)
 {
    animations.push_back(visu);
 }
-
 
 std::pair<int,int> Positionable::getPos(){
     return std::pair<int,int>((int)floor(posX),(int)floor(posY));
@@ -46,7 +55,7 @@ std::pair<int,int> Positionable::getPos(){
 map<pair<int,int>, CHAR_INFO *> Positionable::getAnimation()
 {
     map<pair<int,int>, CHAR_INFO *> output = *new map<pair<int,int>, CHAR_INFO *>();
-    map<pair<int,int>, CHAR_INFO *> inputRef = animations[indexAnimation]->getPositions();
+    map<pair<int,int>, CHAR_INFO *> inputRef = animations[floor(indexAnimation)]->getPositions();
     map<pair<int,int>, CHAR_INFO *>::iterator i = inputRef.begin();
     while (i != inputRef.end())
     {
@@ -85,14 +94,20 @@ void Positionable::removeAllAnimation()
     animations.clear();
 }
 
-void Positionable::previousSprite()
+bool Positionable::decreaseSprite(float amount)
 {
-    indexAnimation = max(0, indexAnimation - 1);
+    bool output;
+    indexAnimation = max((float)0, indexAnimation - amount);
+    output = ((float)0 < indexAnimation);
+    return output;
 }
 
-void Positionable::nextSprite()
+bool Positionable::increaseSprite(float amount)
 {
-    indexAnimation = (indexAnimation + 1) % getLengthAnimation();
+    bool output;
+    indexAnimation = min((float)getLengthAnimation() -1 ,indexAnimation + amount);
+    output = (getLengthAnimation() - 1 > indexAnimation );
+    return output;
 }
 
 int Positionable::getLengthAnimation()

@@ -20,6 +20,14 @@ void Visuel::deleteValue(int x, int y)
     }
 };
 
+void Visuel::setColor(int newColor)
+{
+    for (auto &a : getPositions())
+    {
+        a.second->Attributes = newColor;
+    }
+}
+
 Visuel::Visuel(int colorD){
     color = colorD;
 }

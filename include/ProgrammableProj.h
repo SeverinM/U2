@@ -8,19 +8,16 @@
 #include "../tinyexpr.h"
 #include "Projectile.h"
 
-struct ParamSequence
-{
-    ParamSequence() : directionX("default"), directionY("default"), time(0){}
-    string directionX;
-    string directionY;
-
-    //Milliseconds
-    int time;
-};
-
 class ProgrammableProj : public Projectile
 {
     public:
+        struct ParamSequence{
+            string directionX;
+            string directionY;
+
+            //Milliseconds
+            int time;
+        };
         ProgrammableProj(int posX, int posY, std::pair<double, double> direction, string tag, Positionable * p);
         ProgrammableProj(int posX , int posY , std::pair<double , double> direction);
         void setTag(const char * newValue);
@@ -46,10 +43,6 @@ class ProgrammableProj : public Projectile
 
         static queue<ParamSequence> readSequence(const char * sequence)
         {
-            //ca bug ici
-            cout << "debut" << endl;
-            queue <ParamSequence> output;
-            cout << "2" << endl;
             json_t * allParams = NULL;
             json_t * steps = NULL;
 
@@ -58,6 +51,8 @@ class ProgrammableProj : public Projectile
 
             size_t index;
             json_t * value = NULL;
+
+            queue<ParamSequence> output;
 
             ParamSequence param;
             json_array_foreach(steps , index , value)

@@ -42,11 +42,13 @@ class Positionable
         map<pair<int,int>, CHAR_INFO *> getAnimation();
         virtual void update(float time) = 0;
         bool isEnabled;
+        bool physicEnabled;
         virtual typePosable getTypePosable() = 0;
         void removeAllAnimation();
-        void nextSprite();
-        void previousSprite();
+        bool increaseSprite(float amount = 1);
+        bool decreaseSprite(float amount = 1);
         int getLengthAnimation();
+        void setColor(int newColor);
 
         //directions
         inline void setDirection(std::pair<double, double> &newDir){dir = newDir;}
@@ -60,7 +62,7 @@ class Positionable
 
 
     protected:
-        int indexAnimation = 0;
+        float indexAnimation = 0;
         std::pair<double , double > dir;
         float vitesse;
         vector<Visuel *> animations;

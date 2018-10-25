@@ -18,13 +18,16 @@ class Ennemi : public Perso
         virtual typePosable getTypePosable();
         inline int getScore(){return score;}
         inline void setScore(int &value){score = value;}
+        void Mourir();
 
     private:
+        float speedAnimation = 0.001;
         float time = 0;
         float frequencyShoot = 1;
         float timeSinceLastShoot = 0;
         int score = 1;
         PoolManager * pool;
+        bool dying = false;
 };
 
 #endif // ENNEMI_H

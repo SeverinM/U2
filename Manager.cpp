@@ -158,14 +158,18 @@ bool Manager::MainLoop(float time)
                             break;
                     }
                 }
-                for (auto &a : pp->getAllPosition())
+                if (pp->physicEnabled)
                 {
-                    collisionBuffer[a] = pp;
+                    for (auto &a : pp->getAllPosition())
+                    {
+                        collisionBuffer[a] = pp;
+                    }
                 }
             }
         }
     }
 
+    //Programmable projectile
     posList = poolManager->getProjectilesProg();
     sizeA = poolManager->getProProgPoolSize();
     for(int i = 0; i < sizeA ; i ++){
@@ -194,9 +198,12 @@ bool Manager::MainLoop(float time)
                             break;
                     }
                 }
-                for (auto &a : pp->getAllPosition())
+                if (pp->physicEnabled)
                 {
-                    collisionBuffer[a] = pp;
+                    for (auto &a : pp->getAllPosition())
+                    {
+                        collisionBuffer[a] = pp;
+                    }
                 }
             }
         }
@@ -218,11 +225,14 @@ bool Manager::MainLoop(float time)
         timeSpent -= frequencySpawn;
         Ennemi * e = (Ennemi *)poolManager->getInPool(typePosable::Enn);
         int random(std::rand() % (SIZEX -2));
-        e->setPosition(random,1);
-        std::pair<double , double> speed(0.0001,0.01);
+        e->init(random,1);
+        e->removeAllAnimation();
+        std::pair<double , double> speed(0,0.01);
         e->setDirection(speed);
         e->isEnabled = true;
         e->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt",Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));
+        e->addAnimation(Visuel::createFromFile("sprites/Destroy1.txt",Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));
+        e->addAnimation(Visuel::createFromFile("sprites/Destroy2.txt",Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));
     }
 
     //Parcours des ennemies
@@ -243,7 +253,7 @@ bool Manager::MainLoop(float time)
                         case Proj :
                             Projectile * proj = (Projectile *)p;
                             if(proj->getIsFromPlayer()){
-                                if (currentEnnPos->takeDamage(proj->hit()))
+                                if (currentEnnPos->physicEnabled && currentEnnPos->takeDamage(proj->hit()))
                                 {
                                     score += currentEnnPos->getScore();
                                 }
@@ -287,15 +297,18 @@ void Manager::init()
     h->isEnabled = true;
     h->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt"));
     h->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt",color));
-    h->setPosition(34, 40);
+    h->setPosition(37, 40);
 
     e = (Ennemi *)poolManager->getInPool(Enn);
+    e->init(39, 20);
+    e->removeAllAnimation();
     e->isEnabled = true;
     int couleur(Visuel::getColor(Visuel::Couleur::Rouge, Visuel::Couleur::Transparent));
     e->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt",couleur));
+    e->addAnimation(Visuel::createFromFile("sprites/Destroy1.txt",couleur));
+    e->addAnimation(Visuel::createFromFile("sprites/Destroy2.txt",couleur));
     std::pair<double , double> direction(0,0.001);
     e->setDirection(direction);
-    e->setPosition(39, 20);
 }
 
 

@@ -38,7 +38,6 @@ class Visuel
             output = devant + (derriere * 16);
             return output;
         };
-        int color;
 
         static Visuel * createFromFile(string fileName, int color = Visuel::getColor(Couleur::Cyan,Couleur::Transparent))
         {
@@ -65,9 +64,12 @@ class Visuel
             return visu;
         }
 
+        void setColor(int newColor);
+
     private:
         //Chaque pair represente le couple Position X / Position Y
         map<pair<int, int>, CHAR_INFO *> positions;
+        int color;
 };
 
 #endif // VISUEL_H

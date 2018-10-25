@@ -25,7 +25,7 @@ class Perso : public Positionable
         int pv;
         float timerShoot;
         float timerHit;
-        void Mourir();
+        virtual void Mourir();
         float delayShoot = 0.3;
 };
 
