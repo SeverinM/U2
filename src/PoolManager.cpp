@@ -5,7 +5,8 @@
 
 PoolManager::PoolManager()
 {
-    hero[0] = new Hero(0,0);
+    float zero(0);
+    hero[0] = new Hero(zero,zero);
     for (int i = 0 ; i < sizePoolPro; i++)
     {
         poolProjectile[i] = 0;
@@ -20,6 +21,7 @@ PoolManager::PoolManager()
 
 Positionable * PoolManager::getInPool(typePosable type)
 {
+    float zero(0);
     Positionable * output;
     switch (type)
     {
@@ -28,7 +30,7 @@ Positionable * PoolManager::getInPool(typePosable type)
             {
                 if (poolEnnemi[i] == 0)
                 {
-                    poolEnnemi[i] = new Ennemi(0,0,this);
+                    poolEnnemi[i] = new Ennemi(zero,zero,this);
                 }
                 if (!poolEnnemi[i]->isEnabled)
                 {
@@ -43,7 +45,10 @@ Positionable * PoolManager::getInPool(typePosable type)
             {
                 if (poolProjectile[i] == nullptr)
                 {
-                    poolProjectile[i] = new Projectile(0,0,{-0.002,0});
+                    float posX(0);
+                    float posY(0);
+                    std::pair<float,float> dir(-0.002,0);
+                    poolProjectile[i] = new Projectile(posX,posY,dir);
                 }
 
                 if (!poolProjectile[i]->isEnabled)
@@ -57,7 +62,7 @@ Positionable * PoolManager::getInPool(typePosable type)
         case Her:
             if (hero[0] == 0)
             {
-                hero[0] = new Hero();
+                hero[0] = new Hero(zero,zero);
             }
 
             if (!hero[0]->isEnabled)

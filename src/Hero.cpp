@@ -1,26 +1,20 @@
 #include "../include/Hero.h"
 #include "../include/Positionable.h"
 
-Hero::Hero() : Perso()
-{
-    timerShoot = 0;
-    pv = 100;
-    vitesse = 4;
-}
-Hero::Hero(int posX,int posY) : Perso(posX, posY)
+Hero::Hero(float &posX,float &posY) : Perso(posX, posY)
 {
     timerShoot = 0;
     pv = 10;
 }
 
-void Hero::init(int posX,int posY)
+void Hero::init(float &posX,float &posY)
 {
-    Perso::init(posX, posY);
+    Positionable::init(posX, posY);
     timerShoot = 0;
     pv = 10;
 }
 
-void Hero::update(float time)
+void Hero::update(float &time)
 {
     isOnRecovery = (recoveryTimeEnd > totalTime);
     indexAnimation = (isOnRecovery ? 1 : 0);
@@ -37,11 +31,11 @@ void Hero::tryToShoot(){
     }
 }
 
-std::pair<double , double> Hero::directionTir(){
+std::pair<float ,float> Hero::directionTir(){
     return dir;
 }
 
-void Hero::setPosition(double newX, double newY)
+void Hero::setPosition(float &newX,float &newY)
 {
     if (newX > 0 && newX < (SIZEX - 1))
     {
@@ -54,7 +48,7 @@ void Hero::setPosition(double newX, double newY)
     }
 }
 
-bool Hero::takeDamage(int damage)
+bool Hero::takeDamage(int &damage)
 {
     bool output = Perso::takeDamage(damage);
     recoveryTimeEnd = totalTime + recoveryTime;

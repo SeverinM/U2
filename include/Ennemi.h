@@ -8,13 +8,11 @@ struct PoolManager;
 class Ennemi : public Perso
 {
     public:
-        Ennemi();
-        Ennemi(int posX,int posY, PoolManager * pool);
+        Ennemi(float &posX,float &posY, PoolManager * pool);
         virtual ~Ennemi();
-        void init(int posX,int posY);
-        virtual std::pair<double,double> directionTir();
-        void update(float deltaTime, Hero * her);
-        void setPosition(int newX,int newY);
+        void init(float &posX,float &posY);
+        virtual std::pair<float,float> directionTir();
+        void update(float &deltaTime, Hero * her);
         virtual typePosable getTypePosable();
         inline int getScore(){return score;}
         inline void setScore(int &value){score = value;}

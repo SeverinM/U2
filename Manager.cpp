@@ -37,6 +37,9 @@ bool Manager::isStop()
 
 bool Manager::MainLoop(float time)
 {
+    float minusOne(-1);
+    float one(1);
+    float zero(0);
     timeSpent += time;
     //Input section
     update_input_keys();
@@ -50,25 +53,25 @@ bool Manager::MainLoop(float time)
     if (is_input_key_down(INPUT_KEY_Z) && inputAutorisation[0][0] <= 0)
     {
         if (h != nullptr && h->isEnabled)
-                    h->moveBy(0,-1);
+                    h->moveBy(zero,minusOne);
         inputAutorisation[0][0] = moveTimerUpDown;
     }
     else if (is_input_key_down(INPUT_KEY_S) && inputAutorisation[0][1] <= 0)
     {
         if (h != nullptr && h->isEnabled)
-                    h->moveBy(0,1);
+                    h->moveBy(zero,one);
         inputAutorisation[0][1] = moveTimerUpDown;
     }
     if (is_input_key_down(INPUT_KEY_Q) && inputAutorisation[1][0] <= 0)
     {
         if (h != nullptr && h->isEnabled)
-                    h->moveBy(-1,0);
+                    h->moveBy(minusOne,zero);
         inputAutorisation[1][0] = moveTimerRightLeft;
     }
     else if (is_input_key_down(INPUT_KEY_D) && inputAutorisation[1][1] <= 0 )
     {
         if (h != nullptr && h->isEnabled)
-                    h->moveBy(1,0);
+                    h->moveBy(one,zero);
         inputAutorisation[1][1] = moveTimerRightLeft;
     }
     if(is_input_key_down(INPUT_KEY_SPACE)){
@@ -104,11 +107,15 @@ bool Manager::MainLoop(float time)
         Projectile *proj = (Projectile*)poolManager->getInPool(Proj);
         proj->isEnabled = true;
         proj->removeAllAnimation();
-        proj->addAnimation(Visuel::createFromFile("sprites/ProjectileHero.txt",
+        string defaultSprite("sprites/ProjectileHero.txt");
+        proj->addAnimation(Visuel::createFromFile(defaultSprite,
                                                    Visuel::getColor(Visuel::Couleur::Cyan,
                                                                     Visuel::Couleur::Transparent)));
-        std::pair<double , double> direction(0,-0.07);
-        proj->init(h->getPos().first + 2,h->getPos().second,direction,true);
+        std::pair<float , float> direction(0,-0.07);
+        float x(h->getPos().first + 2);
+        float y(h->getPos().second);
+        bool isPlayer(true);
+        proj->init(x,y,direction,isPlayer);
     }
     for (auto &a : h->getAllPosition())
     {
@@ -120,8 +127,12 @@ bool Manager::MainLoop(float time)
                 case typePosable::Enn:
                     if (!(h->getIsInRecovery()))
                     {
-                        h->takeDamage(1);
+                        int amount(1);
+                        h->takeDamage(amount);
                     }
+                    break;
+
+                default :
                     break;
             }
         }
@@ -145,7 +156,8 @@ bool Manager::MainLoop(float time)
                         case typePosable::Her :
                             if( !((Projectile*)pp)->getIsFromPlayer() && !h->getIsInRecovery())
                             {
-                                h->takeDamage( ((Projectile*)pp)->hit() );
+                                int damage(((Projectile*)pp)->hit());
+                                h->takeDamage(damage);
                                 pp->isEnabled = false;
                             }
                             break;
@@ -154,6 +166,9 @@ bool Manager::MainLoop(float time)
                                 pp->isEnabled = false;
                                 (it->second)->isEnabled = false;
                             }
+                            break;
+
+                        default :
                             break;
                     }
                 }
@@ -182,15 +197,20 @@ bool Manager::MainLoop(float time)
     {
         timeSpent -= frequencySpawn;
         Ennemi * e = (Ennemi *)poolManager->getInPool(typePosable::Enn);
-        int random(std::rand() % (SIZEX -2));
-        e->init(random,1);
+        float random(std::rand() % (SIZEX -2));
+        float y(1);
+        e->init(random,y);
         e->removeAllAnimation();
-        std::pair<double , double> speed(0,0.01);
+        std::pair<float , float> speed(0,0.01);
         e->setDirection(speed);
         e->isEnabled = true;
-        e->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt",Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));
-        e->addAnimation(Visuel::createFromFile("sprites/Destroy1.txt",Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));
-        e->addAnimation(Visuel::createFromFile("sprites/Destroy2.txt",Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));
+        string anim1("sprites/Spaceship.txt");
+        string anim2("sprites/Destroy1.txt");
+        string anim3("sprites/Destroy2.txt");
+        e->addAnimation(Visuel::createFromFile(anim1,Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));
+        e->addAnimation(Visuel::createFromFile(anim2,Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));
+        e->addAnimation(Visuel::createFromFile(anim3,Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));
+        e->addAnimation(Visuel::createFromFile(anim3,Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));
     }
 
     //Parcours des ennemies
@@ -208,10 +228,14 @@ bool Manager::MainLoop(float time)
                 if( it != collisionBuffer.end() && (*it).second != ennemies[i]){
                     Positionable * p = (it->second);
                     switch((it->second)->getTypePosable()){
+                        default:
+                            break;
+
                         case Proj :
                             Projectile * proj = (Projectile *)p;
                             if(proj->getIsFromPlayer()){
-                                if (currentEnnPos->physicEnabled && currentEnnPos->takeDamage(proj->hit()))
+                                int dmg(proj->hit());
+                                if (currentEnnPos->physicEnabled && currentEnnPos->takeDamage(dmg))
                                 {
                                     score += currentEnnPos->getScore();
                                 }
@@ -250,22 +274,30 @@ void Manager::drawAllElementIn(Positionable * listElement[], int sizeA){
 
 void Manager::init()
 {
+    string spaceship("sprites/Spaceship.txt");
+    string destroy1("sprites/Destroy1.txt");
+    string destroy2("sprites/Destroy2.txt");
+
     int color(Visuel::getColor(Visuel::Couleur::Gris, Visuel::Couleur::Transparent));
     h = (Hero *)poolManager->getInPool(Her);
     h->isEnabled = true;
-    h->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt"));
-    h->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt",color));
-    h->setPosition(37, 40);
+    h->addAnimation(Visuel::createFromFile(spaceship));
+    h->addAnimation(Visuel::createFromFile(spaceship,color));
+    float x(37);
+    float y(40);
+    h->setPosition(x,y);
 
     e = (Ennemi *)poolManager->getInPool(Enn);
-    e->init(39, 20);
+    x = 39;
+    y = 20;
+    e->init(x,y);
     e->removeAllAnimation();
     e->isEnabled = true;
     int couleur(Visuel::getColor(Visuel::Couleur::Rouge, Visuel::Couleur::Transparent));
-    e->addAnimation(Visuel::createFromFile("sprites/Spaceship.txt",couleur));
-    e->addAnimation(Visuel::createFromFile("sprites/Destroy1.txt",couleur));
-    e->addAnimation(Visuel::createFromFile("sprites/Destroy2.txt",couleur));
-    std::pair<double , double> direction(0,0.001);
+    e->addAnimation(Visuel::createFromFile(spaceship,couleur));
+    e->addAnimation(Visuel::createFromFile(destroy1,couleur));
+    e->addAnimation(Visuel::createFromFile(destroy2,couleur));
+    std::pair<float,float> direction(0,0.001);
     e->setDirection(direction);
 }
 

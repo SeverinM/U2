@@ -10,7 +10,8 @@
 #define SIZEY 70
 #include <queue>
 #include <functional>
-
+#include <math.h>
+#include <memory>
 
 enum typePosable
 {
@@ -31,37 +32,33 @@ class Positionable
 {
     public:
 
-        Positionable(int startPosX,int startPosY);
-        void init(int posXBy, int posY, string spriteFileName = "sprite/spaceship.txt");
+        Positionable(float &startPosX,float &startPosY);
+        void init(float &posXBy,float &posY, string spriteFileName = "sprite/spaceship.txt");
 
         //positions
-        void moveBy(float posXBy, float posY);
-        void moveBy(int posXBy, int posYBy);
+        void moveBy(float &posXBy, float &posY);
         float getVitesse();
-        std::pair<int,int> getPos();
-        virtual void setPosition(double newX,double newY);
-        inline int getX(){return posX;}
-        inline int getY(){return posY;}
-        inline double * getTrueX(){return &posX;}
-        inline double * getTrueY(){return &posY;}
+        std::pair<float,float> getPos();
+        inline std::pair<int , int> getIntPos(){return {(int)floor(posX),(int)floor(posY)};};
+        virtual void setPosition(float &newX,float &newY);
         vector<pair<int,int>> getAllPosition();
 
         //animations
-        void addAnimation(Visuel * visu);
+        void addAnimation(shared_ptr<Visuel> visu);
         map<pair<int,int>, CHAR_INFO *> getAnimation();
         bool isEnabled;
         bool physicEnabled;
         virtual typePosable getTypePosable() = 0;
         void removeAllAnimation();
-        bool increaseSprite(float amount = 1);
-        bool decreaseSprite(float amount = 1);
+        bool increaseSprite(float &amount);
+        bool decreaseSprite(float &amount);
         int getLengthAnimation();
-        void setColor(int newColor);
+        void setColor(int &newColor);
 
         //Lambdas
-        virtual void update(float time);
+        virtual void update(float &time);
         inline int sizeLambda(){return funcQueue.size();};
-        inline Lambda& addLambda(std::function<void()> lambda, float time, bool repeat = false)
+        inline Lambda& addLambda(std::function<void()> lambda, float time,bool repeat = false)
         {
             //Securité
             if (repeat && time <= 0)
@@ -73,12 +70,12 @@ class Positionable
             lamb.func = lambda;
             lamb.repeatItself = repeat;
             funcQueue.push(lamb);
-            return lamb;
+            return funcQueue.back();
         }
 
         //directions
-        inline void setDirection(std::pair<double, double> newDir){dir = newDir;}
-        static void normalizeDirection(std::pair<double, double> &direction)
+        inline void setDirection(std::pair<float, float> &newDir){dir = newDir;}
+        static void normalizeDirection(std::pair<float,float> &direction)
         {
             float hypo = (direction.first * direction.first) + (direction.second * direction.second);
             hypo = sqrt(hypo);
@@ -89,14 +86,14 @@ class Positionable
 
     protected:
         float indexAnimation = 0;
-        std::pair<double , double > dir;
+        std::pair<float , float> dir;
         float vitesse;
-        vector<Visuel *> animations;
+        vector<shared_ptr<Visuel>> animations;
         float timer;
         float lastTime;
         float timerFunc;
-        double posX;
-        double posY;
+        float posX;
+        float posY;
 
         queue<Lambda> funcQueue;
 };

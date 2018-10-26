@@ -1,10 +1,6 @@
 #include "../include/Ennemi.h"
 
-Ennemi::Ennemi() : Perso()
-{
-}
-
-Ennemi::Ennemi(int posX,int posY, PoolManager * refPool) : Perso(posX, posY)
+Ennemi::Ennemi(float &posX,float &posY, PoolManager * refPool) : Perso(posX, posY)
 {
     pool = refPool;
     pv = 1;
@@ -16,8 +12,8 @@ Ennemi::~Ennemi()
     //dtor
 }
 
-void Ennemi::init(int posX,int posY){
-    Perso::init(posX, posY);
+void Ennemi::init(float &posX,float &posY){
+    Positionable::init(posX, posY);
     dying = false;
     indexAnimation = 0;
     physicEnabled = true;
@@ -30,14 +26,15 @@ void Ennemi::Mourir()
     dir.second /= 5;
     dying = true;
     physicEnabled = false;
-    setColor(Visuel::getColor(Visuel::Couleur::Gris, Visuel::Couleur::Transparent));
+    int grey(Visuel::getColor(Visuel::Couleur::Gris, Visuel::Couleur::Transparent));
+    setColor(grey);
 }
 
-std::pair<double,double> Ennemi::directionTir(){
-    return std::pair<double, double>(dir.first,dir.second);
+std::pair<float,float> Ennemi::directionTir(){
+    return dir;
 }
 
-void Ennemi::update(float deltaTime, Hero * her)
+void Ennemi::update(float &deltaTime, Hero * her)
 {
     if (dying && !increaseSprite(speedAnimation))
     {
@@ -48,38 +45,41 @@ void Ennemi::update(float deltaTime, Hero * her)
     {
         Perso::update(time);
         time += deltaTime;
-        moveBy((float)dir.first,(float)dir.second);
+        float x(dir.first);
+        float y(dir.second);
+        moveBy(x,y);
         if (time - timeSinceLastShoot > frequencyShoot && !dying)
         {
-            std::pair<double , double> dir;
+            std::pair<float ,float> dir;
             dir.first = her->getPos().first - getPos().first;
             dir.second = her->getPos().second - getPos().second;
             Positionable::normalizeDirection(dir);
             timeSinceLastShoot = time;
             Projectile * p = (Projectile *)pool->getInPool(typePosable::Proj);
             p->isEnabled = true;
+
+            //A supprimer (sert juste pour le test)
             std::function<void()> lamb = [p, her]{
-                std::pair<double , double> direction;
-                direction.first = (*her->getTrueX() - *p->getTrueX());
-                direction.second = (*her->getTrueY() - *p->getTrueY());
+                std::pair<float,float> direction;
+                direction.first = her->getPos().first - p->getPos().first;
+                direction.second = her->getPos().second - p->getPos().second;
                 p->normalizeDirection(direction);
                 direction.first /= 100;
                 direction.second /= 100;
                 p->setDirection(direction);
             };
-            p->init(posX + 2,posY,{dir.first / 100, dir.second / 100},false);
+            x = posX + 2;
+            bool isPlayer(false);
+            std::pair<float, float> dirTemp(dir.first / 100 ,dir.second / 100);
+            p->init(x,posY,dirTemp,isPlayer);
             p->addLambda(lamb , 1 , true);
             p->removeAllAnimation();
-            p->addAnimation(Visuel::createFromFile("sprites/ProjectileHero.txt",
+            string defaultSprite("sprites/ProjectileHero.txt");
+            p->addAnimation(Visuel::createFromFile(defaultSprite,
                                                    Visuel::getColor(Visuel::Couleur::Rouge,
                                                                     Visuel::Couleur::Transparent)));
         }
     }
-}
-
-void Ennemi::setPosition(int newX, int newY)
-{
-    Positionable::setPosition(newX,newY);
 }
 
 typePosable Ennemi::getTypePosable(){

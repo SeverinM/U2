@@ -5,20 +5,17 @@
 class Hero : public Perso
 {
     public:
-        Hero();
-        Hero(int posX,int posY);
-        void init(int posX,int posY);
-        virtual std::pair<double, double> directionTir();
-        void update(float time);
+        Hero(float &posX,float &posY);
+        void init(float &posX,float &posY);
+        virtual std::pair<float, float> directionTir();
+        void update(float &time);
         void tryToShoot();
-        void setPosition(double newX, double newY);
+        void setPosition(float &newX,float &newY);
         virtual typePosable getTypePosable();
-        bool takeDamage(int damage);
+        bool takeDamage(int &damage);
         inline bool getIsInRecovery(){
             return isOnRecovery;
         }
-
-    protected:
 
     private:
         float totalTime = 0;

@@ -4,12 +4,15 @@
 GameWrapper::GameWrapper(BufferManager * buffer)
 {
     buff = buffer;
-    textPreGame = new Texte(30,30);
+    float defaultPosition(30);
+    textPreGame = new Texte(defaultPosition,defaultPosition);
     textPreGame->removeAllAnimation();
-    textGameOver = new Texte(30,30);
+    textGameOver = new Texte(defaultPosition,defaultPosition);
     textGameOver->removeAllAnimation();
-    Visuel * vis = Visuel::createFromFile("sprites/Intro.txt");
-    Visuel * vis2 = Visuel::createFromFile("sprites/gameover.txt");
+    string sprtIntro("sprites/Intro.txt");
+    string sprtGameOver("sprites/gameover.txt");
+    shared_ptr<Visuel> vis = Visuel::createFromFile(sprtIntro);
+    shared_ptr<Visuel> vis2 = Visuel::createFromFile(sprtGameOver);
     textGameOver->addAnimation(vis2);
     textPreGame->addAnimation(vis);
 }

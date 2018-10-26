@@ -5,10 +5,9 @@
 class Projectile : public Positionable
 {
     public:
-        Projectile();
-        Projectile(int posX, int posY, std::pair<double, double> direction);
-        void init(int posX, int posY, std::pair<double, double> direction, bool fromPlayer);
-        virtual void update(float time);
+        Projectile(float &posX,float &posY, std::pair<float, float> &direction);
+        void init(float &posX,float &posY, std::pair<float, float> &direction, bool &fromPlayer);
+        virtual void update(float &time);
         int hit();
         bool getIsFromPlayer();
         virtual typePosable getTypePosable();

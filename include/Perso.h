@@ -10,15 +10,13 @@ class Perso : public Positionable
             std::pair<int,int> startPosition;
             std::pair<int,int> direction;
         } ;
-        Perso();
-        Perso(int posX,int posY);
-        void init(int posX,int posY);
+        Perso(float &posX,float &posY);
         virtual ~Perso();
 
         shootInfo Tirer();
-        virtual bool takeDamage(int damage);
+        virtual bool takeDamage(int &damage);
         void update(float time);
-        virtual std::pair<double,double> directionTir() = 0;
+        virtual std::pair<float,float> directionTir() = 0;
         bool isShot = false;
 
     protected:

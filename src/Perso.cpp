@@ -1,23 +1,13 @@
 #include "../include/Perso.h"
 #include "../include/Positionable.h"
 
-Perso::Perso() : Positionable(1,1)
-{
-    pv = 1;
-}
-
-Perso::Perso(int posX,int posY) :  Positionable(posX, posY)
+Perso::Perso(float &posX,float &posY) :  Positionable(posX, posY)
 {
     timerShoot = 0;
 }
 
 Perso::~Perso()
 {
-}
-
-void Perso::init(int posX,int posY)
-{
-    Positionable::init(posX, posY);
 }
 
 Perso::shootInfo Perso::Tirer(){
@@ -28,7 +18,7 @@ Perso::shootInfo Perso::Tirer(){
     return sI;
 }
 
-bool Perso::takeDamage(int damage){
+bool Perso::takeDamage(int &damage){
     bool output = false;
     pv -= damage;
     if(pv <= 0){

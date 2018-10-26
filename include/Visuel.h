@@ -4,6 +4,8 @@
 #include <map>
 #include <fstream>
 #include <string>
+#include <memory>
+
 using namespace std;
 
 class Visuel
@@ -30,8 +32,8 @@ class Visuel
         };
         Visuel(int colorD = Visuel::getColor(Couleur::Cyan,Couleur::Transparent));
         map<pair<int, int> , CHAR_INFO *>& getPositions();
-        void addValue(int x , int y , CHAR_INFO * char_win);
-        void deleteValue(int x, int y);
+        void addValue(int &x , int &y , CHAR_INFO * char_win);
+        void deleteValue(int &x, int &y);
         static int getColor(Couleur devant , Couleur derriere)
         {
             int output(0);
@@ -39,7 +41,7 @@ class Visuel
             return output;
         };
 
-        static Visuel * createFromFile(string fileName, int color = Visuel::getColor(Couleur::Cyan,Couleur::Transparent))
+        static shared_ptr<Visuel> createFromFile(string &fileName, int color = Visuel::getColor(Couleur::Cyan,Couleur::Transparent))
         {
             ifstream inFile(fileName);
             string line;
@@ -55,16 +57,18 @@ class Visuel
                     car->Attributes = visu->color;
                     if (line[x] != ' ')
                     {
-                        visu->addValue(x,y,car);
+                        int x2(x);
+                        int y2(y);
+                        visu->addValue(x2,y2,car);
                     }
                 }
                 y++;
             }
             inFile.close();
-            return visu;
+            return shared_ptr<Visuel>(visu);
         }
 
-        void setColor(int newColor);
+        void setColor(int &newColor);
 
     private:
         //Chaque pair represente le couple Position X / Position Y

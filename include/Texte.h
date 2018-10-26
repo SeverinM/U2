@@ -6,8 +6,8 @@
 class Texte : public Positionable
 {
     public:
-        Texte(int startPosX, int startPosY);
-        virtual void update(float time);
+        Texte(float &startPosX,float &startPosY);
+        virtual void update(float &time);
         virtual typePosable getTypePosable();
         virtual ~Texte();
 

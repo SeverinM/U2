@@ -7,17 +7,17 @@
 
 using namespace std;
 
-Positionable::Positionable(int startPosX,int startPosY){
+Positionable::Positionable(float &startPosX,float &startPosY){
     posX = startPosX;
     posY = startPosY;
     vitesse = 4; //TO DO : change this
     isEnabled = false;
     physicEnabled = true;
-    dir = std::pair<double , double>(0.001,0.001);
+    dir = std::pair<float , float>(0.001,0.001);
     timerFunc = 0;
 }
 
-void Positionable::update(float time)
+void Positionable::update(float &time)
 {
     timerFunc += time;
 
@@ -32,12 +32,14 @@ void Positionable::update(float time)
     }
 }
 
-void Positionable::moveBy(float posXBy, float posYBy)
+void Positionable::moveBy(float &posXBy, float &posYBy)
 {
-    setPosition(posXBy + posX, posYBy + posY);
+    float newPosX = posXBy + posX;
+    float newPosY = posYBy + posY;
+    setPosition(newPosX, newPosY);
 };
 
-void Positionable::setColor(int newColor)
+void Positionable::setColor(int &newColor)
 {
     for (auto &a : animations)
     {
@@ -45,12 +47,7 @@ void Positionable::setColor(int newColor)
     }
 }
 
-void Positionable::moveBy(int posXBy , int posYBy)
-{
-    Positionable::moveBy((float)posXBy, (float)posYBy);
-}
-
-void Positionable::init(int startPosX,int startPosY,string spritefileName){
+void Positionable::init(float &startPosX,float &startPosY,string spritefileName){
     setPosition(startPosX, startPosY);
     addAnimation(Visuel::createFromFile(spritefileName));
     timerFunc = 0;
@@ -64,13 +61,13 @@ float Positionable::getVitesse(){
     return vitesse;
 }
 
-void Positionable::addAnimation(Visuel * visu)
+void Positionable::addAnimation(shared_ptr<Visuel> visu)
 {
    animations.push_back(visu);
 }
 
-std::pair<int,int> Positionable::getPos(){
-    return std::pair<int,int>((int)floor(posX),(int)floor(posY));
+std::pair<float,float> Positionable::getPos(){
+    return std::pair<float,float>((float)floor(posX),(float)floor(posY));
 }
 
 map<pair<int,int>, CHAR_INFO *> Positionable::getAnimation()
@@ -80,13 +77,13 @@ map<pair<int,int>, CHAR_INFO *> Positionable::getAnimation()
     map<pair<int,int>, CHAR_INFO *>::iterator i = inputRef.begin();
     while (i != inputRef.end())
     {
-        output[make_pair(i->first.first + getPos().first,i->first.second + getPos().second)] = i->second;
+        output[make_pair(i->first.first + getIntPos().first,i->first.second + getIntPos().second)] = i->second;
         i++;
     }
     return output;
 }
 
-void Positionable::setPosition(double newX,double newY)
+void Positionable::setPosition(float &newX,float &newY)
 {
     posX = newX;
     posY = newY;
@@ -108,14 +105,10 @@ vector<pair<int,int>> Positionable::getAllPosition()
 
 void Positionable::removeAllAnimation()
 {
-    for (auto &anims : animations)
-    {
-        delete anims;
-    }
     animations.clear();
 }
 
-bool Positionable::decreaseSprite(float amount)
+bool Positionable::decreaseSprite(float &amount)
 {
     bool output;
     indexAnimation = max((float)0, indexAnimation - amount);
@@ -123,7 +116,7 @@ bool Positionable::decreaseSprite(float amount)
     return output;
 }
 
-bool Positionable::increaseSprite(float amount)
+bool Positionable::increaseSprite(float &amount)
 {
     bool output;
     indexAnimation = min((float)getLengthAnimation() -1 ,indexAnimation + amount);

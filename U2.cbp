@@ -51,7 +51,6 @@
 		<Unit filename="include/Perso.h" />
 		<Unit filename="include/PoolManager.h" />
 		<Unit filename="include/Positionable.h" />
-		<Unit filename="include/ProgrammableProj.h" />
 		<Unit filename="include/Projectile.h" />
 		<Unit filename="include/Texte.h" />
 		<Unit filename="include/Visuel.h" />
@@ -64,14 +63,9 @@
 		<Unit filename="src/Perso.cpp" />
 		<Unit filename="src/PoolManager.cpp" />
 		<Unit filename="src/Positionable.cpp" />
-		<Unit filename="src/ProgrammableProj.cpp" />
 		<Unit filename="src/Projectile.cpp" />
 		<Unit filename="src/Texte.cpp" />
 		<Unit filename="src/Visuel.cpp" />
-		<Unit filename="tinyexpr.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="tinyexpr.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
