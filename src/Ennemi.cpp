@@ -1,5 +1,4 @@
 #include "../include/Ennemi.h"
-#include "ProgrammableProj.h"
 
 Ennemi::Ennemi() : Perso()
 {
@@ -47,6 +46,7 @@ void Ennemi::update(float deltaTime, Hero * her)
 
     if (isEnabled)
     {
+        Perso::update(time);
         time += deltaTime;
         moveBy((float)dir.first,(float)dir.second);
         if (time - timeSinceLastShoot > frequencyShoot && !dying)
@@ -56,11 +56,19 @@ void Ennemi::update(float deltaTime, Hero * her)
             dir.second = her->getPos().second - getPos().second;
             Positionable::normalizeDirection(dir);
             timeSinceLastShoot = time;
-            //ProgrammableProj * p = (ProgrammableProj *)pool->getInPool(typePosable::ProjProg);
-            //En cas d'urgence decommentez la ligne
             Projectile * p = (Projectile *)pool->getInPool(typePosable::Proj);
             p->isEnabled = true;
+            std::function<void()> lamb = [p, her]{
+                std::pair<double , double> direction;
+                direction.first = (*her->getTrueX() - *p->getTrueX());
+                direction.second = (*her->getTrueY() - *p->getTrueY());
+                p->normalizeDirection(direction);
+                direction.first /= 100;
+                direction.second /= 100;
+                p->setDirection(direction);
+            };
             p->init(posX + 2,posY,{dir.first / 100, dir.second / 100},false);
+            p->addLambda(lamb , 1 , true);
             p->removeAllAnimation();
             p->addAnimation(Visuel::createFromFile("sprites/ProjectileHero.txt",
                                                    Visuel::getColor(Visuel::Couleur::Rouge,

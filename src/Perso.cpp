@@ -40,9 +40,8 @@ bool Perso::takeDamage(int damage){
 
 void Perso::update(float time)
 {
-
+    Positionable::update(time);
 }
-
 
 void Perso::Mourir(){
     isEnabled = false;

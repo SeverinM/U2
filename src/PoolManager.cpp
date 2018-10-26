@@ -15,11 +15,6 @@ PoolManager::PoolManager()
     {
         poolEnnemi[i] = 0;
     }
-
-    for (int i = 0 ; i < sizePoolProProg; i++)
-    {
-        poolProgProj[i] = 0;
-    }
 };
 
 
@@ -70,22 +65,6 @@ Positionable * PoolManager::getInPool(typePosable type)
                 output = (Positionable *)hero[0];
             }
             break;
-
-        case ProjProg:
-            for (int i = 0; i < sizePoolProProg; i++)
-            {
-                if (poolProgProj[i] == 0)
-                {
-                    poolProgProj[i] = new ProgrammableProj(0,0,{-0.07,0}, "Test", hero[0]);
-                }
-
-                if (!poolProgProj[i]->isEnabled)
-                {
-                    output = (Positionable *)poolProgProj[i];
-                    break;
-                }
-            }
-            break;
     }
     return output;
 }
@@ -105,11 +84,6 @@ Positionable ** PoolManager::getHero()
     return (Positionable **)hero;
 }
 
-Positionable ** PoolManager::getProjectilesProg()
-{
-    return (Positionable **)poolProgProj;
-}
-
 int PoolManager::getEnnPoolSize(){
     return sizePoolEnn;
 }
@@ -118,11 +92,6 @@ int PoolManager::getProPoolSize(){
 }
 int PoolManager::getHerPoolSize(){
     return sizePoolHer;
-}
-
-int PoolManager::getProProgPoolSize()
-{
-    return sizePoolProProg;
 }
 
 void PoolManager::clearPool(typePosable type)

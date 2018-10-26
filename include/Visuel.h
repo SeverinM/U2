@@ -48,7 +48,7 @@ class Visuel
             CHAR_INFO * car;
             while (getline(inFile,line))
             {
-                for (int x = 0; x < line.length();x++)
+                for (unsigned int x = 0; x < line.length();x++)
                 {
                     car = new CHAR_INFO();
                     car->Char.AsciiChar = line[x];

@@ -25,6 +25,7 @@ void Projectile::init(int posX, int posY, std::pair<double, double> direction, b
 
 void Projectile::update(float time){
     moveBy((float)dir.first, (float)dir.second);
+    Positionable::update(time);
 }
 
 int Projectile::hit(){

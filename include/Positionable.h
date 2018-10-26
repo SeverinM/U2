@@ -8,14 +8,23 @@
 #include <tgmath.h>
 #define SIZEX 70
 #define SIZEY 70
+#include <queue>
+#include <functional>
+
 
 enum typePosable
 {
     Proj,
     Enn,
     Her,
-    Txt,
-    ProjProg
+    Txt
+};
+
+struct Lambda
+{
+    float time;
+    std::function<void()> func;
+    bool repeatItself;
 };
 
 class Positionable
@@ -40,7 +49,6 @@ class Positionable
         //animations
         void addAnimation(Visuel * visu);
         map<pair<int,int>, CHAR_INFO *> getAnimation();
-        virtual void update(float time) = 0;
         bool isEnabled;
         bool physicEnabled;
         virtual typePosable getTypePosable() = 0;
@@ -50,8 +58,26 @@ class Positionable
         int getLengthAnimation();
         void setColor(int newColor);
 
+        //Lambdas
+        virtual void update(float time);
+        inline int sizeLambda(){return funcQueue.size();};
+        inline Lambda& addLambda(std::function<void()> lambda, float time, bool repeat = false)
+        {
+            //Securité
+            if (repeat && time <= 0)
+            {
+                repeat = false;
+            }
+            Lambda lamb;
+            lamb.time = time;
+            lamb.func = lambda;
+            lamb.repeatItself = repeat;
+            funcQueue.push(lamb);
+            return lamb;
+        }
+
         //directions
-        inline void setDirection(std::pair<double, double> &newDir){dir = newDir;}
+        inline void setDirection(std::pair<double, double> newDir){dir = newDir;}
         static void normalizeDirection(std::pair<double, double> &direction)
         {
             float hypo = (direction.first * direction.first) + (direction.second * direction.second);
@@ -68,8 +94,11 @@ class Positionable
         vector<Visuel *> animations;
         float timer;
         float lastTime;
+        float timerFunc;
         double posX;
         double posY;
+
+        queue<Lambda> funcQueue;
 };
 
 #endif // POSITIONABLE_H

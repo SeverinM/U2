@@ -14,6 +14,22 @@ Positionable::Positionable(int startPosX,int startPosY){
     isEnabled = false;
     physicEnabled = true;
     dir = std::pair<double , double>(0.001,0.001);
+    timerFunc = 0;
+}
+
+void Positionable::update(float time)
+{
+    timerFunc += time;
+
+    if (funcQueue.size() > 0 && funcQueue.front().time <= timerFunc)
+    {
+        funcQueue.front().func();
+        if (!funcQueue.front().repeatItself)
+        {
+            funcQueue.pop();
+        }
+        timerFunc = 0;
+    }
 }
 
 void Positionable::moveBy(float posXBy, float posYBy)
@@ -37,6 +53,11 @@ void Positionable::moveBy(int posXBy , int posYBy)
 void Positionable::init(int startPosX,int startPosY,string spritefileName){
     setPosition(startPosX, startPosY);
     addAnimation(Visuel::createFromFile(spritefileName));
+    timerFunc = 0;
+    while (funcQueue.size() > 0)
+    {
+        funcQueue.pop();
+    }
 }
 
 float Positionable::getVitesse(){
