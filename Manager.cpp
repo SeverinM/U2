@@ -104,7 +104,7 @@ bool Manager::MainLoop(float time)
     if(h->isShot){
         h->isShot = false;
         h->Tirer();
-        Projectile *proj = (Projectile*)poolManager->getInPool(Proj);
+        Projectile *proj = static_cast<Projectile*>(poolManager->getInPool(Proj));
         proj->isEnabled = true;
         proj->removeAllAnimation();
         string defaultSprite("sprites/ProjectileHero.txt");
@@ -152,17 +152,18 @@ bool Manager::MainLoop(float time)
                 //Collision !
                 map<pair<int,int>,Positionable *>::iterator it = collisionBuffer.find(pp->getPos());
                 if(it != collisionBuffer.end()){
+                    Projectile * proj (static_cast<Projectile *>(pp));
                     switch ((it->second)->getTypePosable()){
                         case typePosable::Her :
-                            if( !((Projectile*)pp)->getIsFromPlayer() && !h->getIsInRecovery())
+                            if(!proj->getIsFromPlayer() && !h->getIsInRecovery())
                             {
-                                int damage(((Projectile*)pp)->hit());
+                                int damage(proj->hit());
                                 h->takeDamage(damage);
                                 pp->isEnabled = false;
                             }
                             break;
                         case Proj:
-                            if( ((Projectile*)pp)->getIsFromPlayer() != ((Projectile*)it->second)->getIsFromPlayer() ){
+                            if(proj->getIsFromPlayer() != static_cast<Projectile *>(it->second)->getIsFromPlayer() ){
                                 pp->isEnabled = false;
                                 (it->second)->isEnabled = false;
                             }
@@ -214,10 +215,10 @@ bool Manager::MainLoop(float time)
     }
 
     //Parcours des ennemies
-    Positionable ** ennemies = (Positionable **)poolManager->getEnnemies();
+    Positionable ** ennemies(static_cast<Positionable **>(poolManager->getEnnemies()));
     for (int i = 0; i < poolManager->getEnnPoolSize(); i++)
     {
-        Ennemi * currentEnnPos = (Ennemi *)ennemies[i];
+        Ennemi * currentEnnPos(static_cast<Ennemi *>(ennemies[i]));
         if (currentEnnPos != nullptr && currentEnnPos->isEnabled)
         {
             currentEnnPos->update(time, h);
@@ -232,7 +233,7 @@ bool Manager::MainLoop(float time)
                             break;
 
                         case Proj :
-                            Projectile * proj = (Projectile *)p;
+                            Projectile * proj(static_cast<Projectile *>(p));
                             if(proj->getIsFromPlayer()){
                                 int dmg(proj->hit());
                                 if (currentEnnPos->physicEnabled && currentEnnPos->takeDamage(dmg))
