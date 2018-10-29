@@ -15,12 +15,12 @@ void Hero::setDefaultValue()
 {
     timerShoot = 0;
     delayShoot = 0.15f;
-    pv = 10;
+    pv = 5;
 
     shotPower = SHOT_POWER_MAX;
     powerByShot = 300;
-    recoverPerUpdate = 1;
-    multiplierAdd = 0.0015f;
+    recoverPerUpdate = 10;
+    multiplierAdd = 20;
 }
 
 void Hero::update(float &time)
@@ -32,8 +32,8 @@ void Hero::update(float &time)
         timerShoot -= time;
     }
     if(shotPower < SHOT_POWER_MAX){
-        shotPower += recoverPerUpdate * multiplierPerUpdate;
-        multiplierPerUpdate += multiplierAdd;
+        shotPower += recoverPerUpdate * multiplierPerUpdate * time;
+        multiplierPerUpdate += (multiplierAdd * time);
     }
     //cout << "recharge ! " << shotPower << endl;
     shotPower = shotPower > SHOT_POWER_MAX ? SHOT_POWER_MAX : shotPower;
