@@ -7,7 +7,7 @@ BufferManager::BufferManager()
 
     RECT r;
     GetWindowRect(console, &r);
-    MoveWindow(console, r.left, r.top, SIZEX * 18, SIZEY * 18, true);
+    MoveWindow(console, r.left, r.top, SIZEX * 9, SIZEY * 18, true);
     id = (HANDLE)GetStdHandle(STD_OUTPUT_HANDLE);
     bufferSize = { SIZEX, SIZEY };
     bufferCoord = {0,0};

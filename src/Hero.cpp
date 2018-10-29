@@ -3,15 +3,23 @@
 
 Hero::Hero(float &posX,float &posY) : Perso(posX, posY)
 {
-    timerShoot = 0;
-    pv = 10;
+    setDefaultValue();
 }
 
 void Hero::init(float &posX,float &posY)
 {
     Positionable::init(posX, posY);
+    setDefaultValue();
+}
+void Hero::setDefaultValue()
+{
     timerShoot = 0;
+    delayShoot = 0.2f;
     pv = 10;
+
+    shotPower = SHOT_POWER_MAX;
+    powerByShot = 200;
+    recoverPerUpdate = 1;
 }
 
 void Hero::update(float &time)
@@ -22,12 +30,19 @@ void Hero::update(float &time)
     if(timerShoot > 0){
         timerShoot -= time;
     }
+    if(shotPower < SHOT_POWER_MAX)
+        shotPower += recoverPerUpdate;
+    //cout << "recharge ! " << shotPower << endl;
+    shotPower = shotPower > SHOT_POWER_MAX ? SHOT_POWER_MAX : shotPower;
+    //cout << "apres    ! " << shotPower << endl;
 }
 
 void Hero::tryToShoot(){
-    if(timerShoot <= 0){
+    if(timerShoot <= 0 && shotPower > powerByShot){
         isShot = true;
         timerShoot = delayShoot;
+        shotPower -= powerByShot;
+        //cout << shotPower << " / "  << endl;
     }
 }
 

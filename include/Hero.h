@@ -1,5 +1,6 @@
 #ifndef HERO_H
 #define HERO_H
+#define SHOT_POWER_MAX 8000
 #include "Perso.h"
 
 class Hero : public Perso
@@ -16,12 +17,19 @@ class Hero : public Perso
         inline bool getIsInRecovery(){
             return isOnRecovery;
         }
+        inline float getShotPower(){
+             return shotPower;
+        }
 
     private:
         float totalTime = 0;
         float recoveryTimeEnd = 0;
         float recoveryTime = 3;
         bool isOnRecovery = false;
+        float shotPower;
+        float powerByShot;
+        float recoverPerUpdate;
+        void setDefaultValue();
 };
 
 #endif // HERO_H
