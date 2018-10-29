@@ -189,17 +189,14 @@ bool Manager::MainLoop(float time)
     bufferManager->resetScreen();
 //ShotPower slider :
     CHAR_INFO trait ;
-    trait.Char.AsciiChar = '_';
-    trait.Attributes =
-        FOREGROUND_RED
-        |FOREGROUND_INTENSITY
-        |BACKGROUND_RED
-        |BACKGROUND_GREEN
-        |BACKGROUND_INTENSITY;
+    trait.Char.AsciiChar = '-';
+    trait.Attributes = FOREGROUND_RED | FOREGROUND_INTENSITY;
 
     float numberOf_Full = SIZEY * (h->getShotPower()/SHOT_POWER_MAX);
     for(int yPos = 0; yPos < numberOf_Full; yPos++)
     {
+        if(yPos == 3)
+            trait.Attributes = FOREGROUND_GREEN;
         bufferManager->placeInBuffer(&trait, (yPos), (SIZEX-28));
     }
 
