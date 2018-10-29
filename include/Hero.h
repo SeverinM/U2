@@ -29,6 +29,8 @@ class Hero : public Perso
         float shotPower;
         float powerByShot;
         float recoverPerUpdate;
+        float multiplierPerUpdate;
+        float multiplierAdd;
         void setDefaultValue();
 };
 
