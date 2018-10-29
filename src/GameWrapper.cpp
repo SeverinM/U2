@@ -4,7 +4,7 @@
 GameWrapper::GameWrapper(BufferManager * buffer)
 {
     buff = buffer;
-    float defaultPosition(30);
+    float defaultPosition(10);
     textPreGame = new Texte(defaultPosition,defaultPosition);
     textPreGame->removeAllAnimation();
     textGameOver = new Texte(defaultPosition,defaultPosition);

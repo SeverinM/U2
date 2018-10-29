@@ -21,6 +21,7 @@ int main()
     {
         gw.PreGameLoop();
     }
+    time.start();
     while (!man.isStop())
     {
         if (man.MainLoop(time.getElapsedSeconds(true)))

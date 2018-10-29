@@ -87,15 +87,6 @@ bool Manager::MainLoop(float time)
     if(inputAutorisation[1][1] > 0)
       inputAutorisation[1][1] -= time;
 
-    /*
-    case 'p' :
-                cout << "decal" << endl;
-                break;
-            case 27:
-                stopLoop();
-                break;
-    */
-
     //Collision buffer : empty it
     collisionBuffer.clear();
 
@@ -187,7 +178,7 @@ bool Manager::MainLoop(float time)
 
     //Draw section
     bufferManager->resetScreen();
-//ShotPower slider :
+    //ShotPower slider :
     CHAR_INFO trait ;
     trait.Char.AsciiChar = '-';
     trait.Attributes = FOREGROUND_RED | FOREGROUND_INTENSITY;

@@ -6,8 +6,8 @@
 #include <map>
 #include <iostream>
 #include <tgmath.h>
-#define SIZEX 70
-#define SIZEY 70
+#define SIZEX 60
+#define SIZEY 60
 #include <queue>
 #include <functional>
 #include <math.h>

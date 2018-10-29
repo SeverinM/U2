@@ -7,8 +7,8 @@ class NYTimer
     public:
         NYTimer();
         void start();
-        float getElapsedSeconds(bool restart);
         void restart();
+        float getElapsedSeconds(bool restart);
 
     private:
         LARGE_INTEGER lastUpdate;

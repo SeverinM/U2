@@ -59,7 +59,7 @@ void Ennemi::update(float &deltaTime, Hero * her)
             p->isEnabled = true;
 
             //A supprimer (sert juste pour le test)
-            std::function<void()> lamb = [p, her]{
+            /*std::function<void()> lamb = [p, her]{
                 std::pair<float,float> direction;
                 direction.first = her->getPos().first - p->getPos().first;
                 direction.second = her->getPos().second - p->getPos().second;
@@ -67,12 +67,12 @@ void Ennemi::update(float &deltaTime, Hero * her)
                 direction.first /= 100;
                 direction.second /= 100;
                 p->setDirection(direction);
-            };
+            };*/
             x = posX + 2;
             bool isPlayer(false);
             std::pair<float, float> dirTemp(dir.first / 100 ,dir.second / 100);
             p->init(x,posY,dirTemp,isPlayer);
-            p->addLambda(lamb , 1 , true);
+            //p->addLambda(lamb , 1 , true);
             p->removeAllAnimation();
             string defaultSprite("sprites/ProjectileHero.txt");
             p->addAnimation(Visuel::createFromFile(defaultSprite,

@@ -5,8 +5,8 @@
 #include <vector>
 #include "PoolManager.h"
 #include <windows.h>
-#define SIZEX 70
-#define SIZEY 70
+#define SIZEX 60
+#define SIZEY 60
 
 using namespace std;
 
