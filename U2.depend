@@ -450,3 +450,153 @@
 	<tgmath.h>
 	<math.h>
 
+1540369268 source:c:\users\severin.michaut\documents\u2\main.cpp
+	<iostream>
+	<windows.h>
+	<stdio.h>
+	"NYTimer.h"
+	"Manager.h"
+	"./include/GameWrapper.h"
+	"./include/BufferManager.h"
+	"./include/ProgrammableProj.h"
+	"tinyexpr.h"
+	"Texte.h"
+
+1539608477 c:\users\severin.michaut\documents\u2\nytimer.h
+
+1540152937 c:\users\severin.michaut\documents\u2\manager.h
+	<windows.h>
+	"include/Hero.h"
+	"include/Ennemi.h"
+	"include/BufferManager.h"
+	"include/PoolManager.h"
+
+1539608477 c:\users\severin.michaut\documents\u2\include\hero.h
+	"Perso.h"
+
+1539608477 c:\users\severin.michaut\documents\u2\include\perso.h
+	"Positionable.h"
+
+1540211697 c:\users\severin.michaut\documents\u2\include\positionable.h
+	<stdio.h>
+	"Visuel.h"
+	<vector>
+	<map>
+	<iostream>
+	<tgmath.h>
+
+1540369442 c:\users\severin.michaut\documents\u2\include\visuel.h
+	<windows.h>
+	<map>
+	<fstream>
+	<string>
+
+1540369268 c:\users\severin.michaut\documents\u2\include\ennemi.h
+	"Perso.h"
+	"PoolManager.h"
+
+1540369268 c:\users\severin.michaut\documents\u2\include\poolmanager.h
+	"Hero.h"
+	"Ennemi.h"
+	"Projectile.h"
+	"ProgrammableProj.h"
+
+1539608477 c:\users\severin.michaut\documents\u2\include\projectile.h
+	"Positionable.h"
+
+1540369268 c:\users\severin.michaut\documents\u2\include\programmableproj.h
+	<vector>
+	<string>
+	<queue>
+	<istream>
+	<jansson.h>
+	"../tinyexpr.h"
+	"Projectile.h"
+
+1540152937 c:\users\severin.michaut\documents\u2\tinyexpr.h
+
+1539608477 c:\users\severin.michaut\documents\u2\include\buffermanager.h
+	"Positionable.h"
+	<vector>
+	"PoolManager.h"
+	<windows.h>
+
+1539811154 c:\users\severin.michaut\documents\u2\include\gamewrapper.h
+	<windows.h>
+	"BufferManager.h"
+	"Texte.h"
+
+1539811154 c:\users\severin.michaut\documents\u2\include\texte.h
+	"Positionable.h"
+
+1540369268 source:c:\users\severin.michaut\documents\u2\manager.cpp
+	"Manager.h"
+	<conio.h>
+	"include/Visuel.h"
+	<iostream>
+	<map>
+	<typeinfo>
+	<cstdlib>
+	<time.h>
+	<ProgrammableProj.h>
+
+1539608477 source:c:\users\severin.michaut\documents\u2\src\buffermanager.cpp
+	"../include/BufferManager.h"
+
+1540369293 source:c:\users\severin.michaut\documents\u2\src\ennemi.cpp
+	"../include/Ennemi.h"
+	"ProgrammableProj.h"
+
+1539811154 source:c:\users\severin.michaut\documents\u2\src\gamewrapper.cpp
+	"../include/GameWrapper.h"
+	<conio.h>
+
+1540369268 source:c:\users\severin.michaut\documents\u2\src\hero.cpp
+	"../include/Hero.h"
+	"../include/Positionable.h"
+
+1539608477 source:c:\users\severin.michaut\documents\u2\src\nytimer.cpp
+	"../include/NYTimer.h"
+
+1539608477 c:\users\severin.michaut\documents\u2\include\nytimer.h
+	<windows.h>
+
+1539608477 source:c:\users\severin.michaut\documents\u2\src\perso.cpp
+	"../include/Perso.h"
+	"../include/Positionable.h"
+
+1540211697 source:c:\users\severin.michaut\documents\u2\src\positionable.cpp
+	"../include/Positionable.h"
+	<windows.h>
+	<algorithm>
+	<iostream>
+	<tgmath.h>
+
+1540369268 source:c:\users\severin.michaut\documents\u2\src\programmableproj.cpp
+	"ProgrammableProj.h"
+
+1540369268 source:c:\users\severin.michaut\documents\u2\src\projectile.cpp
+	<iostream>
+	"../include/Projectile.h"
+
+1540211319 source:c:\users\severin.michaut\documents\u2\src\texte.cpp
+	"Texte.h"
+	<jansson.h>
+
+1539608477 source:c:\users\severin.michaut\documents\u2\src\visuel.cpp
+	"../include/Visuel.h"
+
+1540152937 source:c:\users\severin.michaut\documents\u2\tinyexpr.c
+	"tinyexpr.h"
+	<stdlib.h>
+	<math.h>
+	<string.h>
+	<stdio.h>
+	<limits.h>
+
+1540369442 source:c:\users\severin.michaut\documents\u2\src\poolmanager.cpp
+	"../include/PoolManager.h"
+	<typeinfo>
+	<iostream>
+	<string>
+
