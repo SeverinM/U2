@@ -291,19 +291,6 @@ void Manager::init()
     float x(37);
     float y(40);
     h->setPosition(x,y);
-
-    e = (Ennemi *)poolManager->getInPool(Enn);
-    x = 39;
-    y = 20;
-    e->init(x,y);
-    e->removeAllAnimation();
-    e->isEnabled = true;
-    int couleur(Visuel::getColor(Visuel::Couleur::Rouge, Visuel::Couleur::Transparent));
-    e->addAnimation(Visuel::createFromFile(spaceship,couleur));
-    e->addAnimation(Visuel::createFromFile(destroy1,couleur));
-    e->addAnimation(Visuel::createFromFile(destroy2,couleur));
-    std::pair<float,float> direction(0,0.001);
-    e->setDirection(direction);
 }
 
 
