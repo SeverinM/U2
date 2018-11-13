@@ -10,7 +10,6 @@ using namespace std;
 Positionable::Positionable(float &startPosX,float &startPosY){
     posX = startPosX;
     posY = startPosY;
-    vitesse = 4; //TO DO : change this
     isEnabled = false;
     physicEnabled = true;
     dir = std::pair<float , float>(0.001,0.001);
@@ -55,10 +54,6 @@ void Positionable::init(float &startPosX,float &startPosY,string spritefileName)
     {
         funcQueue.pop();
     }
-}
-
-float Positionable::getVitesse(){
-    return vitesse;
 }
 
 void Positionable::addAnimation(shared_ptr<Visuel> visu)
@@ -127,4 +122,19 @@ bool Positionable::increaseSprite(float &amount)
 int Positionable::getLengthAnimation()
 {
     return animations.size();
+}
+
+Lambda& Positionable::addLambda(std::function<void()> lambda,float time,bool repeat)
+{
+    //Securité
+    if (repeat && time <= 0)
+    {
+        repeat = false;
+    }
+    Lambda lamb;
+    lamb.time = time;
+    lamb.func = lambda;
+    lamb.repeatItself = repeat;
+    funcQueue.push(lamb);
+    return funcQueue.back();
 }

@@ -37,7 +37,6 @@ class Positionable
 
         //positions
         void moveBy(float &posXBy, float &posY);
-        float getVitesse();
         std::pair<float,float> getPos();
         inline std::pair<int , int> getIntPos(){return {(int)floor(posX),(int)floor(posY)};};
         virtual void setPosition(float &newX,float &newY);
@@ -58,19 +57,14 @@ class Positionable
         //Lambdas
         virtual void update(float &time);
         inline int sizeLambda(){return funcQueue.size();};
-        inline Lambda& addLambda(std::function<void()> lambda, float time,bool repeat = false)
+        Lambda& addLambda(std::function<void()> lambda, float time,bool repeat = false);
+
+        inline void cleanQueue()
         {
-            //Securité
-            if (repeat && time <= 0)
+            while (!funcQueue.empty())
             {
-                repeat = false;
+                funcQueue.pop();
             }
-            Lambda lamb;
-            lamb.time = time;
-            lamb.func = lambda;
-            lamb.repeatItself = repeat;
-            funcQueue.push(lamb);
-            return funcQueue.back();
         }
 
         //directions
@@ -87,7 +81,6 @@ class Positionable
     protected:
         float indexAnimation = 0;
         std::pair<float , float> dir;
-        float vitesse;
         vector<shared_ptr<Visuel>> animations;
         float timer;
         float lastTime;
