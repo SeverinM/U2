@@ -58,6 +58,16 @@ class Positionable
         virtual void update(float &time);
         inline int sizeLambda(){return funcQueue.size();};
         Lambda& addLambda(std::function<void()> lambda, float time,bool repeat = false);
+        inline Lambda& addLambda(Lambda &lamb)
+        {
+            funcQueue.push(lamb);
+            return lamb;
+        }
+
+        inline void addLambda(queue<Lambda> &newValue)
+        {
+            funcQueue = newValue;
+        }
 
         inline void cleanQueue()
         {
@@ -77,6 +87,9 @@ class Positionable
             direction.second /= hypo;
         }
 
+        inline void setFlag(int &newValue){flag = newValue;}
+        inline int getFlag(){return flag;}
+
 
     protected:
         float indexAnimation = 0;
@@ -87,6 +100,7 @@ class Positionable
         float timerFunc;
         float posX;
         float posY;
+        int flag;
 
         queue<Lambda> funcQueue;
 };

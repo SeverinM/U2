@@ -201,21 +201,10 @@ bool Manager::MainLoop(float time)
     if (timeSpent > frequencySpawn )
     {
         timeSpent -= frequencySpawn;
-        Ennemi * e = (Ennemi *)poolManager->getInPool(typePosable::Enn);
+        Ennemi * e = fact->build(TypeEnnemy::StraightDown);
         float random(std::rand() % (SIZEX -2));
         float y(1);
-        e->init(random,y);
-        e->removeAllAnimation();
-        std::pair<float , float> speed(0,0.01);
-        e->setDirection(speed);
-        e->isEnabled = true;
-        string anim1("sprites/Spaceship.txt");
-        string anim2("sprites/Destroy1.txt");
-        string anim3("sprites/Destroy2.txt");
-        e->addAnimation(Visuel::createFromFile(anim1,Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));
-        e->addAnimation(Visuel::createFromFile(anim2,Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));
-        e->addAnimation(Visuel::createFromFile(anim3,Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));
-        e->addAnimation(Visuel::createFromFile(anim3,Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));
+        e->setPosition(random,y);
     }
 
     //Parcours des ennemies
@@ -291,6 +280,16 @@ void Manager::init()
     float x(37);
     float y(40);
     h->setPosition(x,y);
+
+    vector<shared_ptr<Visuel>> input;
+    input.push_back(Visuel::createFromFile(spaceship,Visuel::getColor(Visuel::Couleur::Rouge, Visuel::Couleur::Transparent)));
+    input.push_back(Visuel::createFromFile(destroy1,Visuel::getColor(Visuel::Couleur::Rouge, Visuel::Couleur::Transparent)));
+    input.push_back(Visuel::createFromFile(destroy2,Visuel::getColor(Visuel::Couleur::Rouge, Visuel::Couleur::Transparent)));
+    fact = new FactoryEnnemy(poolManager, input);
+    float freq(1);
+    fact->setFrequencyShoot(freq);
+    std::pair<float,float> firstDirection(0,1);
+    fact->setDirection(firstDirection);
 }
 
 

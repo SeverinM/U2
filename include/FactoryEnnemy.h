@@ -6,11 +6,18 @@
 #include "PoolManager.h"
 #include "Ennemi.h"
 
+enum TypeEnnemy
+{
+    StraightDown,
+    Circle,
+    CircleMirror
+};
+
 class FactoryEnnemy
 {
     public:
-        FactoryEnnemy(PoolManager * newPool , queue<Lambda> &allSeq, vector<shared_ptr<Visuel>> &anim);
-        Ennemi * build();
+        FactoryEnnemy(PoolManager * newPool , vector<shared_ptr<Visuel>> &anim);
+        Ennemi * build(TypeEnnemy enn);
 
         inline std::pair<float, float> getDirection(){return direction;}
         inline void setDirection(std::pair<float, float> &newValue){direction = newValue;}
@@ -24,9 +31,6 @@ class FactoryEnnemy
 
         inline vector<shared_ptr<Visuel>> getAnimations(){return animations;}
         inline void setAnimations(vector<shared_ptr<Visuel>> &newValue){animations = newValue;}
-
-        inline queue<Lambda> getAllSequences(){return allSequences;}
-        inline void setAllSequences(queue<Lambda> &newValue){allSequences = newValue;}
 
         inline float getSpeedAnimation(){return speedAnimation;}
         inline void setSpeedAnimation(float &newValue){speedAnimation = newValue;}
@@ -45,7 +49,6 @@ class FactoryEnnemy
         float posX = 0;
         float posY = 0;
         vector<shared_ptr<Visuel>> animations;
-        queue<Lambda> allSequences;
         float speedAnimation = 0;
         float frequencyShoot = 0;
         int scoreWorth = 0;

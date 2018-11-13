@@ -41,45 +41,10 @@ void Ennemi::update(float &deltaTime, Hero * her)
         isEnabled = false;
     }
 
-    if (isEnabled)
-    {
-        Perso::update(time);
-        time += deltaTime;
-        float x(dir.first);
-        float y(dir.second);
-        moveBy(x,y);
-        if (time - timeSinceLastShoot > frequencyShoot && !dying)
-        {
-            std::pair<float ,float> dir;
-            dir.first = her->getPos().first - getPos().first;
-            dir.second = her->getPos().second - getPos().second;
-            Positionable::normalizeDirection(dir);
-            timeSinceLastShoot = time;
-            Projectile * p = (Projectile *)pool->getInPool(typePosable::Proj);
-            p->isEnabled = true;
-
-            //A supprimer (sert juste pour le test)
-            /*std::function<void()> lamb = [p, her]{
-                std::pair<float,float> direction;
-                direction.first = her->getPos().first - p->getPos().first;
-                direction.second = her->getPos().second - p->getPos().second;
-                p->normalizeDirection(direction);
-                direction.first /= 100;
-                direction.second /= 100;
-                p->setDirection(direction);
-            };*/
-            x = posX + 2;
-            bool isPlayer(false);
-            std::pair<float, float> dirTemp(dir.first / 100 ,dir.second / 100);
-            p->init(x,posY,dirTemp,isPlayer);
-            //p->addLambda(lamb , 1 , true);
-            p->removeAllAnimation();
-            string defaultSprite("sprites/ProjectileHero.txt");
-            p->addAnimation(Visuel::createFromFile(defaultSprite,
-                                                   Visuel::getColor(Visuel::Couleur::Rouge,
-                                                                    Visuel::Couleur::Transparent)));
-        }
-    }
+    float x(deltaTime * dir.first);
+    float y(deltaTime * dir.second);
+    moveBy(x,y);
+    Positionable::update(deltaTime);
 }
 
 typePosable Ennemi::getTypePosable(){
