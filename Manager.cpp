@@ -197,16 +197,6 @@ bool Manager::MainLoop(float time)
 
     bufferManager->draw();
 
-    //Apparition d'ennemis
-    if (timeSpent > frequencySpawn )
-    {
-        timeSpent -= frequencySpawn;
-        Ennemi * e = fact->build(TypeEnnemy::StraightDown);
-        float random(std::rand() % (SIZEX -2));
-        float y(1);
-        e->setPosition(random,y);
-    }
-
     //Parcours des ennemies
     Positionable ** ennemies(static_cast<Positionable **>(poolManager->getEnnemies()));
     for (int i = 0; i < poolManager->getEnnPoolSize(); i++)
@@ -286,14 +276,59 @@ void Manager::init()
     input.push_back(Visuel::createFromFile(destroy1,Visuel::getColor(Visuel::Couleur::Rouge, Visuel::Couleur::Transparent)));
     input.push_back(Visuel::createFromFile(destroy2,Visuel::getColor(Visuel::Couleur::Rouge, Visuel::Couleur::Transparent)));
     fact = new FactoryEnnemy(poolManager, input);
+    float anim(0.07);
+    fact->setSpeedAnimation(anim);
+
     float freq(1);
     fact->setFrequencyShoot(freq);
-    std::pair<float,float> firstDirection(0,1);
+    std::pair<float,float> firstDirection(3,10);
     fact->setDirection(firstDirection);
+    FactoryEnnemy * tempFact(fact);
+
+    std::function<void()> func;
+    //pattern 1
+    func = [this,tempFact]
+    {
+        Ennemi * e = tempFact->build(TypeEnnemy::StraightDown);
+        float x(2);
+        float y(1);
+        e->setPosition(x,y);
+    };
+    h->addLambda(func,2,false);
+    for (int i = 0; i < 10 ; i++)
+    {
+        h->addLambda(func,0.2,false);
+    };
+
+    //Pattern 2
+    func = [this,tempFact]
+    {
+        Ennemi * e = tempFact->build(TypeEnnemy::StraightDown);
+        float x(SIZEX - 2);
+        float y(1);
+        e->setPosition(x,y);
+    };
+    h->addLambda(func,2,false);
+    for (int i = 0; i < 10 ; i++)
+    {
+        h->addLambda(func,0.2,false);
+    };
+
+    //Pattern 3
+    func = [this,tempFact]
+    {
+        Ennemi * e = tempFact->build(TypeEnnemy::Circle);
+        float random(std::rand() % (SIZEX -2));
+        float y(1);
+        e->setPosition(random,y);
+    };
+    h->addLambda(func,2,false);
+    for (int i = 0; i < 10; i++)
+    {
+        h->addLambda(func,0.2,false);
+    }
+
 }
-
-
-
 
 //Trying things
 void Manager::is_input_key_supported(InputKey inputKey)

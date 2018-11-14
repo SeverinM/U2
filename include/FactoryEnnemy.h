@@ -10,7 +10,6 @@ enum TypeEnnemy
 {
     StraightDown,
     Circle,
-    CircleMirror
 };
 
 class FactoryEnnemy

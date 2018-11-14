@@ -79,6 +79,7 @@ class Positionable
 
         //directions
         inline void setDirection(std::pair<float, float> &newDir){dir = newDir;}
+        inline std::pair<float, float> getDirection(){return dir;}
         static void normalizeDirection(std::pair<float,float> &direction)
         {
             float hypo = (direction.first * direction.first) + (direction.second * direction.second);

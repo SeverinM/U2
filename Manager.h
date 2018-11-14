@@ -46,7 +46,7 @@ class Manager
         void drawAllElementIn(Positionable ** listElement, int sizeA);
         int score = 0;
 
-        FactoryEnnemy * fact;
+        FactoryEnnemy * fact = 0;
 
         map<pair<int,int>,Positionable *> collisionBuffer;//add : max size == 70 / 70
 
