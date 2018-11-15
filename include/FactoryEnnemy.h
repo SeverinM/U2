@@ -15,7 +15,7 @@ enum TypeEnnemy
 class FactoryEnnemy
 {
     public:
-        FactoryEnnemy(PoolManager * newPool , vector<shared_ptr<Visuel>> &anim);
+        FactoryEnnemy(PoolManager * newPool);
         Ennemi * build(TypeEnnemy enn);
 
         inline std::pair<float, float> getDirection(){return direction;}
@@ -27,9 +27,6 @@ class FactoryEnnemy
             posX = newValue.first;
             posY = newValue.second;
         }
-
-        inline vector<shared_ptr<Visuel>> getAnimations(){return animations;}
-        inline void setAnimations(vector<shared_ptr<Visuel>> &newValue){animations = newValue;}
 
         inline float getSpeedAnimation(){return speedAnimation;}
         inline void setSpeedAnimation(float &newValue){speedAnimation = newValue;}
@@ -47,7 +44,6 @@ class FactoryEnnemy
         std::pair<float, float> direction;
         float posX = 0;
         float posY = 0;
-        vector<shared_ptr<Visuel>> animations;
         float speedAnimation = 0;
         float frequencyShoot = 0;
         int scoreWorth = 0;

@@ -1,10 +1,9 @@
 #include "FactoryEnnemy.h"
 #include <math.h>
 
-FactoryEnnemy::FactoryEnnemy(PoolManager * newPool , vector<shared_ptr<Visuel>> &anim)
+FactoryEnnemy::FactoryEnnemy(PoolManager * newPool)
 {
     pool = newPool;
-    animations = anim;
 }
 
 Ennemi * FactoryEnnemy::build(TypeEnnemy enn)
@@ -15,10 +14,6 @@ Ennemi * FactoryEnnemy::build(TypeEnnemy enn)
     output->init(posX, posY);
     output->setDirection(direction);
     output->removeAllAnimation();
-    for (auto &anim : animations)
-    {
-        output->addAnimation(anim);
-    }
     output->cleanQueue();
     output->setSpeedAnimation(speedAnimation);
     output->setFrequencyShoot(frequencyShoot);
@@ -94,6 +89,14 @@ Ennemi * FactoryEnnemy::build(TypeEnnemy enn)
             }
             break;
     }
+
+    string spaceship("sprites/Spaceship.txt");
+    string destroy1("sprites/Destroy1.txt");
+    string destroy2("sprites/Destroy2.txt");
+
+    output->addAnimation(Visuel::createFromFile(spaceship,Visuel::getColor(Visuel::Couleur::Rouge, Visuel::Couleur::Transparent)));
+    output->addAnimation(Visuel::createFromFile(destroy1,Visuel::getColor(Visuel::Couleur::Rouge, Visuel::Couleur::Transparent)));
+    output->addAnimation(Visuel::createFromFile(destroy2,Visuel::getColor(Visuel::Couleur::Rouge, Visuel::Couleur::Transparent)));
 
     return output;
 }

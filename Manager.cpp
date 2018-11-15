@@ -270,12 +270,7 @@ void Manager::init()
     float x(37);
     float y(40);
     h->setPosition(x,y);
-
-    vector<shared_ptr<Visuel>> input;
-    input.push_back(Visuel::createFromFile(spaceship,Visuel::getColor(Visuel::Couleur::Rouge, Visuel::Couleur::Transparent)));
-    input.push_back(Visuel::createFromFile(destroy1,Visuel::getColor(Visuel::Couleur::Rouge, Visuel::Couleur::Transparent)));
-    input.push_back(Visuel::createFromFile(destroy2,Visuel::getColor(Visuel::Couleur::Rouge, Visuel::Couleur::Transparent)));
-    fact = new FactoryEnnemy(poolManager, input);
+    fact = new FactoryEnnemy(poolManager);
     float anim(0.07);
     fact->setSpeedAnimation(anim);
 
