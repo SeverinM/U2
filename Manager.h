@@ -7,6 +7,7 @@
 #include "include/Ennemi.h"
 #include "include/BufferManager.h"
 #include "include/PoolManager.h"
+#include "FactoryEnnemy.h"
 
 
 typedef enum InputKey
@@ -44,6 +45,8 @@ class Manager
         PoolManager * poolManager;
         void drawAllElementIn(Positionable ** listElement, int sizeA);
         int score = 0;
+
+        FactoryEnnemy * fact = 0;
 
         map<pair<int,int>,Positionable *> collisionBuffer;//add : max size == 70 / 70
 

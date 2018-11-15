@@ -20,7 +20,7 @@ void Positionable::update(float &time)
 {
     timerFunc += time;
 
-    if (funcQueue.size() > 0 && funcQueue.front().time <= timerFunc)
+    while (funcQueue.size() > 0 && funcQueue.front().time <= timerFunc)
     {
         funcQueue.front().func();
         if (!funcQueue.front().repeatItself)

@@ -58,6 +58,16 @@ class Positionable
         virtual void update(float &time);
         inline int sizeLambda(){return funcQueue.size();};
         Lambda& addLambda(std::function<void()> lambda, float time,bool repeat = false);
+        inline Lambda& addLambda(Lambda &lamb)
+        {
+            funcQueue.push(lamb);
+            return lamb;
+        }
+
+        inline void addLambda(queue<Lambda> &newValue)
+        {
+            funcQueue = newValue;
+        }
 
         inline void cleanQueue()
         {
@@ -69,6 +79,7 @@ class Positionable
 
         //directions
         inline void setDirection(std::pair<float, float> &newDir){dir = newDir;}
+        inline std::pair<float, float> getDirection(){return dir;}
         static void normalizeDirection(std::pair<float,float> &direction)
         {
             float hypo = (direction.first * direction.first) + (direction.second * direction.second);
@@ -76,6 +87,9 @@ class Positionable
             direction.first /= hypo;
             direction.second /= hypo;
         }
+
+        inline void setFlag(int &newValue){flag = newValue;}
+        inline int getFlag(){return flag;}
 
 
     protected:
@@ -87,6 +101,7 @@ class Positionable
         float timerFunc;
         float posX;
         float posY;
+        int flag;
 
         queue<Lambda> funcQueue;
 };

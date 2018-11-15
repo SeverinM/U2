@@ -197,27 +197,6 @@ bool Manager::MainLoop(float time)
 
     bufferManager->draw();
 
-    //Apparition d'ennemis
-    if (timeSpent > frequencySpawn )
-    {
-        timeSpent -= frequencySpawn;
-        Ennemi * e = (Ennemi *)poolManager->getInPool(typePosable::Enn);
-        float random(std::rand() % (SIZEX -2));
-        float y(1);
-        e->init(random,y);
-        e->removeAllAnimation();
-        std::pair<float , float> speed(0,0.01);
-        e->setDirection(speed);
-        e->isEnabled = true;
-        string anim1("sprites/Spaceship.txt");
-        string anim2("sprites/Destroy1.txt");
-        string anim3("sprites/Destroy2.txt");
-        e->addAnimation(Visuel::createFromFile(anim1,Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));
-        e->addAnimation(Visuel::createFromFile(anim2,Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));
-        e->addAnimation(Visuel::createFromFile(anim3,Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));
-        e->addAnimation(Visuel::createFromFile(anim3,Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent)));
-    }
-
     //Parcours des ennemies
     Positionable ** ennemies(static_cast<Positionable **>(poolManager->getEnnemies()));
     for (int i = 0; i < poolManager->getEnnPoolSize(); i++)
@@ -291,10 +270,65 @@ void Manager::init()
     float x(37);
     float y(40);
     h->setPosition(x,y);
+
+    vector<shared_ptr<Visuel>> input;
+    input.push_back(Visuel::createFromFile(spaceship,Visuel::getColor(Visuel::Couleur::Rouge, Visuel::Couleur::Transparent)));
+    input.push_back(Visuel::createFromFile(destroy1,Visuel::getColor(Visuel::Couleur::Rouge, Visuel::Couleur::Transparent)));
+    input.push_back(Visuel::createFromFile(destroy2,Visuel::getColor(Visuel::Couleur::Rouge, Visuel::Couleur::Transparent)));
+    fact = new FactoryEnnemy(poolManager, input);
+    float anim(0.07);
+    fact->setSpeedAnimation(anim);
+
+    float freq(1);
+    fact->setFrequencyShoot(freq);
+    std::pair<float,float> firstDirection(3,10);
+    fact->setDirection(firstDirection);
+    FactoryEnnemy * tempFact(fact);
+
+    std::function<void()> func;
+    //pattern 1
+    func = [this,tempFact]
+    {
+        Ennemi * e = tempFact->build(TypeEnnemy::StraightDown);
+        float x(2);
+        float y(1);
+        e->setPosition(x,y);
+    };
+    h->addLambda(func,2,false);
+    for (int i = 0; i < 10 ; i++)
+    {
+        h->addLambda(func,0.2,false);
+    };
+
+    //Pattern 2
+    func = [this,tempFact]
+    {
+        Ennemi * e = tempFact->build(TypeEnnemy::StraightDown);
+        float x(SIZEX - 2);
+        float y(1);
+        e->setPosition(x,y);
+    };
+    h->addLambda(func,2,false);
+    for (int i = 0; i < 10 ; i++)
+    {
+        h->addLambda(func,0.2,false);
+    };
+
+    //Pattern 3
+    func = [this,tempFact]
+    {
+        Ennemi * e = tempFact->build(TypeEnnemy::Circle);
+        float random(std::rand() % (SIZEX -2));
+        float y(1);
+        e->setPosition(random,y);
+    };
+    h->addLambda(func,2,false);
+    for (int i = 0; i < 10; i++)
+    {
+        h->addLambda(func,0.2,false);
+    }
+
 }
-
-
-
 
 //Trying things
 void Manager::is_input_key_supported(InputKey inputKey)

@@ -16,6 +16,13 @@ class Ennemi : public Perso
         virtual typePosable getTypePosable();
         inline int getScore(){return score;}
         inline void setScore(int &value){score = value;}
+
+        inline float getSpeedAnimation(){return speedAnimation;}
+        inline void setSpeedAnimation(float &newValue){speedAnimation = newValue;}
+
+        inline float getFrequencyShoot(){return frequencyShoot;}
+        inline void setFrequencyShoot(float &newValue){frequencyShoot = newValue;}
+
         void Mourir();
 
     private:

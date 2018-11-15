@@ -37,6 +37,7 @@ void Hero::update(float &time)
     }
     //cout << "recharge ! " << shotPower << endl;
     shotPower = shotPower > SHOT_POWER_MAX ? SHOT_POWER_MAX : shotPower;
+    Perso::update(time);
     //cout << "apres    ! " << shotPower << endl;
 }
 
