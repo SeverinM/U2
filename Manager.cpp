@@ -271,10 +271,10 @@ void Manager::init()
     float y(40);
     h->setPosition(x,y);
     fact = new FactoryEnnemy(poolManager);
-    float anim(0.07);
+    float anim(0.001);
     fact->setSpeedAnimation(anim);
 
-    float freq(1);
+    float freq(2);
     fact->setFrequencyShoot(freq);
     std::pair<float,float> firstDirection(3,10);
     fact->setDirection(firstDirection);
