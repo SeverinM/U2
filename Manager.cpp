@@ -253,6 +253,13 @@ void Manager::drawAllElementIn(Positionable * listElement[], int sizeA){
             map<pair<int,int>, CHAR_INFO *> temp(listElement[i]->getAnimation());
             for (auto& a : temp)
             {
+                //Try on the PV information :
+                if(a.second->Char.AsciiChar >= 48 && a.second->Char.AsciiChar <= 57 ){
+                    int pvalue = (static_cast<Perso *>(listElement[i]))->getPV();
+                    //string s = std::to_string (pvalue);
+                    a.second->Char.AsciiChar = 48+pvalue;//s[0];
+                }
+                //End try
                 bufferManager->placeInBuffer(a.second,a.first.first,a.first.second);
             }
         }

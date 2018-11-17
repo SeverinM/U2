@@ -18,6 +18,9 @@ class Perso : public Positionable
         void update(float time);
         virtual std::pair<float,float> directionTir() = 0;
         bool isShot = false;
+        inline int getPV(){
+            return pv;
+        }
 
     protected:
         int pv;
