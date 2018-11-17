@@ -145,6 +145,7 @@ bool Manager::MainLoop(float time)
                 if(it != collisionBuffer.end()){
                     Projectile * proj (static_cast<Projectile *>(pp));
                     switch ((it->second)->getTypePosable()){
+                        cout << "k" << endl;
                         case typePosable::Her :
                             if(!proj->getIsFromPlayer() && !h->getIsInRecovery())
                             {
@@ -222,13 +223,15 @@ bool Manager::MainLoop(float time)
                                 if (currentEnnPos->physicEnabled && currentEnnPos->takeDamage(dmg))
                                 {
                                     score += currentEnnPos->getScore();
+                                    proj->isEnabled = false;
                                 }
-                                proj->isEnabled = false;
                             }
                             break;
                     }
                 }
             }
+
+            //Reecriture du buffer physique
             if (currentEnnPos->isEnabled)
             {
                 for (auto &a : currentEnnPos->getAllPosition())
@@ -276,7 +279,7 @@ void Manager::init()
 
     float freq(2);
     fact->setFrequencyShoot(freq);
-    std::pair<float,float> firstDirection(3,10);
+    std::pair<float,float> firstDirection(0,10);
     fact->setDirection(firstDirection);
     FactoryEnnemy * tempFact(fact);
 
@@ -286,7 +289,7 @@ void Manager::init()
     func = [this,tempFact]
     {
         Ennemi * e = tempFact->build(TypeEnnemy::StraightDown);
-        float x(2);
+        float x(37);
         float y(1);
         e->setPosition(x,y);
     };

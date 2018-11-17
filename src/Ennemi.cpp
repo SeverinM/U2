@@ -41,11 +41,14 @@ void Ennemi::update(float &deltaTime, Hero * her)
     {
         isEnabled = false;
     }
-
     float x(deltaTime * dir.first);
     float y(deltaTime * dir.second);
     moveBy(x,y);
-    Positionable::update(deltaTime);
+
+    if (!dying)
+    {
+        Positionable::update(deltaTime);
+    }
 }
 
 typePosable Ennemi::getTypePosable(){
