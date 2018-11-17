@@ -281,6 +281,7 @@ void Manager::init()
     FactoryEnnemy * tempFact(fact);
 
     std::function<void()> func;
+
     //pattern 1
     func = [this,tempFact]
     {
@@ -290,7 +291,7 @@ void Manager::init()
         e->setPosition(x,y);
     };
     h->addLambda(func,2,false);
-    for (int i = 0; i < 10 ; i++)
+    for (int i = 0; i < 5 ; i++)
     {
         h->addLambda(func,0.2,false);
     };
@@ -298,13 +299,15 @@ void Manager::init()
     //Pattern 2
     func = [this,tempFact]
     {
+        std::pair<float,float> direction(-3,10);
+        tempFact->setDirection(direction);
         Ennemi * e = tempFact->build(TypeEnnemy::StraightDown);
         float x(SIZEX - 2);
         float y(1);
         e->setPosition(x,y);
     };
     h->addLambda(func,2,false);
-    for (int i = 0; i < 10 ; i++)
+    for (int i = 0; i < 5 ; i++)
     {
         h->addLambda(func,0.2,false);
     };
@@ -312,6 +315,8 @@ void Manager::init()
     //Pattern 3
     func = [this,tempFact]
     {
+        std::pair<float,float> direction(-3,10);
+        tempFact->setDirection(direction);
         Ennemi * e = tempFact->build(TypeEnnemy::Circle);
         float random(std::rand() % (SIZEX -2));
         float y(1);
@@ -323,6 +328,21 @@ void Manager::init()
         h->addLambda(func,0.2,false);
     }
 
+    //Pattern 4
+    func = [this,tempFact]
+    {
+        std::pair<float,float> direction(0,10);
+        tempFact->setDirection(direction);
+        Ennemi * e = tempFact->build(TypeEnnemy::StraightDownStop);
+        float random(std::rand() % (SIZEX - 2));
+        float y(1);
+        e->setPosition(random, y);
+    };
+    h->addLambda(func,2,false);
+    for (int i = 0; i < 5; i++)
+    {
+        h->addLambda(func,0.2,false);
+    }
 }
 
 //Trying things

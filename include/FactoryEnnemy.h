@@ -10,6 +10,7 @@ enum TypeEnnemy
 {
     StraightDown,
     Circle,
+    StraightDownStop
 };
 
 class FactoryEnnemy
@@ -29,16 +30,16 @@ class FactoryEnnemy
         }
 
         inline float getSpeedAnimation(){return speedAnimation;}
-        inline void setSpeedAnimation(float &newValue){speedAnimation = newValue;}
+        inline void setSpeedAnimation(float newValue){speedAnimation = newValue;}
 
-        inline float getFrequenceyShoot(){return frequencyShoot;}
-        inline void setFrequencyShoot(float &newValue){frequencyShoot = newValue;}
+        inline float getFrequencyShoot(){return frequencyShoot;}
+        inline void setFrequencyShoot(float newValue){frequencyShoot = newValue;}
 
         inline int getScoreWorth(){return scoreWorth;}
-        inline void setScoreWorth(float &newValue){scoreWorth = newValue;}
+        inline void setScoreWorth(float newValue){scoreWorth = newValue;}
 
         inline PoolManager * getPoolManager(){return pool;}
-        inline void setPoolManager(PoolManager * &newValue){pool = newValue;}
+        inline void setPoolManager(PoolManager * newValue){pool = newValue;}
 
     protected:
         std::pair<float, float> direction;

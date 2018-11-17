@@ -18,6 +18,7 @@ void Ennemi::init(float &posX,float &posY){
     indexAnimation = 0;
     physicEnabled = true;
     pv = 1;
+    alreadyShot = false;
 }
 
 void Ennemi::Mourir()

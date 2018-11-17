@@ -543,3 +543,144 @@
 1541256543 source:c:\users\severin.michaut\documents\u2\src\visuel.cpp
 	"../include/Visuel.h"
 
+1540810197 source:c:\users\séverin\documents\u2\main.cpp
+	<iostream>
+	<windows.h>
+	<stdio.h>
+	"NYTimer.h"
+	"Manager.h"
+	"./include/GameWrapper.h"
+	"./include/BufferManager.h"
+	"Texte.h"
+
+1538411817 c:\users\séverin\documents\u2\nytimer.h
+
+1542228491 c:\users\séverin\documents\u2\manager.h
+	<windows.h>
+	"include/Hero.h"
+	"include/Ennemi.h"
+	"include/BufferManager.h"
+	"include/PoolManager.h"
+	"FactoryEnnemy.h"
+
+1540809643 c:\users\séverin\documents\u2\include\hero.h
+	"Perso.h"
+
+1540587198 c:\users\séverin\documents\u2\include\perso.h
+	"Positionable.h"
+
+1542218879 c:\users\séverin\documents\u2\include\positionable.h
+	<stdio.h>
+	"Visuel.h"
+	<vector>
+	<map>
+	<iostream>
+	<tgmath.h>
+	<queue>
+	<functional>
+	<math.h>
+	<memory>
+
+1540587426 c:\users\séverin\documents\u2\include\visuel.h
+	<windows.h>
+	<map>
+	<fstream>
+	<string>
+	<memory>
+
+1542462420 c:\users\séverin\documents\u2\include\ennemi.h
+	"Perso.h"
+	"PoolManager.h"
+
+1542461076 c:\users\séverin\documents\u2\include\poolmanager.h
+	"Hero.h"
+	"Ennemi.h"
+	"Projectile.h"
+
+1540585470 c:\users\séverin\documents\u2\include\projectile.h
+	"Positionable.h"
+
+1540812692 c:\users\séverin\documents\u2\include\buffermanager.h
+	"Positionable.h"
+	<vector>
+	"PoolManager.h"
+	<windows.h>
+
+1542467599 c:\users\séverin\documents\u2\include\factoryennemy.h
+	<queue>
+	"Positionable.h"
+	<memory>
+	"PoolManager.h"
+	"Ennemi.h"
+
+1540110755 c:\users\séverin\documents\u2\include\gamewrapper.h
+	<windows.h>
+	"BufferManager.h"
+	"Texte.h"
+
+1540587288 c:\users\séverin\documents\u2\include\texte.h
+	"Positionable.h"
+
+1540813710 source:c:\users\séverin\documents\u2\src\buffermanager.cpp
+	"../include/BufferManager.h"
+
+1542462186 source:c:\users\séverin\documents\u2\src\ennemi.cpp
+	"../include/Ennemi.h"
+
+1540812418 source:c:\users\séverin\documents\u2\src\gamewrapper.cpp
+	"../include/GameWrapper.h"
+	<conio.h>
+
+1542228848 source:c:\users\séverin\documents\u2\src\hero.cpp
+	"../include/Hero.h"
+	"../include/Positionable.h"
+
+1540810191 source:c:\users\séverin\documents\u2\src\nytimer.cpp
+	"../include/NYTimer.h"
+
+1540810078 c:\users\séverin\documents\u2\include\nytimer.h
+	<windows.h>
+
+1540587291 source:c:\users\séverin\documents\u2\src\perso.cpp
+	"../include/Perso.h"
+	"../include/Positionable.h"
+
+1542138989 source:c:\users\séverin\documents\u2\src\poolmanager.cpp
+	"../include/PoolManager.h"
+	<typeinfo>
+	<iostream>
+	<string>
+
+1542227858 source:c:\users\séverin\documents\u2\src\positionable.cpp
+	"../include/Positionable.h"
+	<windows.h>
+	<algorithm>
+	<iostream>
+	<tgmath.h>
+	<math.h>
+
+1542461753 source:c:\users\séverin\documents\u2\src\projectile.cpp
+	<iostream>
+	"../include/Projectile.h"
+
+1540587313 source:c:\users\séverin\documents\u2\src\texte.cpp
+	"Texte.h"
+	<jansson.h>
+
+1540587368 source:c:\users\séverin\documents\u2\src\visuel.cpp
+	"../include/Visuel.h"
+
+1542467158 source:c:\users\séverin\documents\u2\manager.cpp
+	"Manager.h"
+	<conio.h>
+	"include/Visuel.h"
+	<iostream>
+	<map>
+	<typeinfo>
+	<cstdlib>
+	<time.h>
+
+1542467314 source:c:\users\séverin\documents\u2\src\factoryennemy.cpp
+	"FactoryEnnemy.h"
+	<math.h>
+

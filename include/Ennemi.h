@@ -23,6 +23,9 @@ class Ennemi : public Perso
         inline float getFrequencyShoot(){return frequencyShoot;}
         inline void setFrequencyShoot(float &newValue){frequencyShoot = newValue;}
 
+        inline void setAlreadyShot(bool &value){alreadyShot = value;}
+        inline float getAlreadyShot(){return alreadyShot;}
+
         void Mourir();
 
     private:
@@ -33,6 +36,9 @@ class Ennemi : public Perso
         int score = 1;
         PoolManager * pool;
         bool dying = false;
+
+        //Utilisé par certains types d'ennemis seulement
+        bool alreadyShot = false;
 };
 
 #endif // ENNEMI_H
