@@ -5,12 +5,13 @@
 #include <memory>
 #include "PoolManager.h"
 #include "Ennemi.h"
+#include "FactoryProjectile.h"
 
 enum TypeEnnemy
 {
     StraightDown,
     Circle,
-    StraightDownStop
+    StraightDownStop,
 };
 
 class FactoryEnnemy
@@ -49,6 +50,7 @@ class FactoryEnnemy
         float frequencyShoot = 0;
         int scoreWorth = 0;
         PoolManager * pool;
+        FactoryProjectile * factProj;
 };
 
 #endif // FACTORYENNEMY_H

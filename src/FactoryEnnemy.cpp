@@ -4,6 +4,7 @@
 FactoryEnnemy::FactoryEnnemy(PoolManager * newPool)
 {
     pool = newPool;
+    factProj = new FactoryProjectile(newPool);
 }
 
 Ennemi * FactoryEnnemy::build(TypeEnnemy enn)
@@ -29,20 +30,11 @@ Ennemi * FactoryEnnemy::build(TypeEnnemy enn)
             {
                 std::pair<float,float> dir(getDirection());
                 output->setDirection(dir);
-                Projectile * proj = static_cast<Projectile *>(pool->getInPool(typePosable::Proj));
                 Positionable * her = pool->getHero()[0];
-                std::pair<float,float> direction
-                {
-                    her->getPos().first - output->getPos().first,
-                    her->getPos().second - output->getPos().second
-                };
-                Positionable::normalizeDirection(direction2);
-                direction.first /= 1000;
-                direction.second /= 1000;
-                float x(output->getPos().first);
-                float y(output->getPos().second);
-                bool isAlly(false);
-                proj->init(x,y,direction,isAlly);
+
+                Projectile * proj = factProj->build(TypeProjectile::ToTarget,
+                                                    {output->getPos().first,output->getPos().second,her->getPos().first,her->getPos().second,10});
+
                 proj->removeAllAnimation();
                 int color(Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent));
                 string sprt("sprites/ProjectileHero.txt");

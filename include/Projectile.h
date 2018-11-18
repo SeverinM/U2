@@ -11,6 +11,10 @@ class Projectile : public Positionable
         int hit();
         bool getIsFromPlayer();
         virtual typePosable getTypePosable();
+        inline void setIsFromPlayer(bool newValue)
+        {
+            isFromPlayer = newValue;
+        }
 
     protected:
         bool isFromPlayer;
