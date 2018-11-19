@@ -19,9 +19,9 @@ Projectile * FactoryProjectile::build(TypeProjectile typeproj, Arguments argumen
                 //Arg 4 : destination y
                 //Arg 5 : speed
                 std::pair<float,float> direction(arguments.arg3 - arguments.arg1 , arguments.arg4 - arguments.arg2);
-                /*Positionable::normalizeDirection(direction);
+                Positionable::normalizeDirection(direction);
                 direction.first *= arguments.arg5;
-                direction.second *= arguments.arg5;*/
+                direction.second *= arguments.arg5;
                 proj->setPosition(arguments.arg1, arguments.arg2);
                 proj->setDirection(direction);
     }
