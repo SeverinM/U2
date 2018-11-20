@@ -1,7 +1,7 @@
 #ifndef POOLMANAGER_H
 #define POOLMANAGER_H
-#define SIZE_PROJ 100
-#define SIZE_ENN 40
+#define SIZE_PROJ 150
+#define SIZE_ENN 100
 #include "Hero.h"
 #include "Ennemi.h"
 #include "Projectile.h"

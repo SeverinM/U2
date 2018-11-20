@@ -145,7 +145,6 @@ bool Manager::MainLoop(float time)
                 if(it != collisionBuffer.end()){
                     Projectile * proj (static_cast<Projectile *>(pp));
                     switch ((it->second)->getTypePosable()){
-                        cout << "k" << endl;
                         case typePosable::Her :
                             if(!proj->getIsFromPlayer() && !h->getIsInRecovery())
                             {
@@ -353,6 +352,17 @@ void Manager::init()
     {
         h->addLambda(func,0.2,false);
     }
+
+    //Pattern 5
+    func = [this, tempFact]
+    {
+        std::pair<float,float> direction(8,3);
+        std::pair<float,float> position(0,0);
+        tempFact->setPosition(position);
+        tempFact->setDirection(direction);
+        tempFact->build(TypeEnnemy::Boss);
+    };
+    h->addLambda(func,5,false);
 }
 
 //Trying things

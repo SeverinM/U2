@@ -5,6 +5,8 @@
 enum TypeProjectile
 {
     ToTarget,
+    ToDirection,
+    ToTargetProgressive,
     CircleProj,
 };
 
@@ -21,7 +23,8 @@ class FactoryProjectile
 {
     public:
         FactoryProjectile(PoolManager * manager);
-        Projectile * build(TypeProjectile typeproj, Arguments arguments);
+        Projectile * build(TypeProjectile typeproj, std::pair<float,float> origin, Arguments arguments);
+        void setDefaultProjectileSprite(Projectile * proj);
 
     private:
         PoolManager * manager;

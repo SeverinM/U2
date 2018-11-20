@@ -67,7 +67,7 @@ std::pair<float,float> Positionable::getPos(){
 
 map<pair<int,int>, CHAR_INFO *> Positionable::getAnimation()
 {
-    map<pair<int,int>, CHAR_INFO *> output = *new map<pair<int,int>, CHAR_INFO *>();
+    map<pair<int,int>, CHAR_INFO *> output;
     map<pair<int,int>, CHAR_INFO *> inputRef = animations[floor(indexAnimation)]->getPositions();
     map<pair<int,int>, CHAR_INFO *>::iterator i = inputRef.begin();
     while (i != inputRef.end())

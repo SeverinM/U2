@@ -26,20 +26,17 @@ Ennemi * FactoryEnnemy::build(TypeEnnemy enn)
     switch (enn)
     {
         case StraightDown:
-            pattern = [output, this, &direction2]
+            pattern = [output, this, direction2]
             {
                 std::pair<float,float> dir(getDirection());
                 output->setDirection(dir);
                 Positionable * her = pool->getHero()[0];
-
                 Projectile * proj = factProj->build(TypeProjectile::ToTarget,
-                                                    {output->getPos().first,output->getPos().second,her->getPos().first,her->getPos().second,10});
+                                                    {output->getPos().first,output->getPos().second},
+                                                    {her->getPos().first,her->getPos().second,10});
 
-                proj->removeAllAnimation();
-                int color(Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent));
-                string sprt("sprites/ProjectileHero.txt");
-                proj->addAnimation(Visuel::createFromFile(sprt, color));
-                proj->isEnabled = true;
+
+                factProj->setDefaultProjectileSprite(proj);
             };
 
             output->addLambda(pattern,frequencyShoot,true);
@@ -56,25 +53,19 @@ Ennemi * FactoryEnnemy::build(TypeEnnemy enn)
                     output->setDirection(dir);
                     if (angle == M_PI / 2)
                     {
-                        Projectile * proj = static_cast<Projectile *>(pool->getInPool(typePosable::Proj));
                         Positionable * her = pool->getHero()[0];
                         std::pair<float,float> deltaDirection
                         {
                             her->getPos().first - output->getPos().first,
                             her->getPos().second - output->getPos().second
                         };
-                        Positionable::normalizeDirection(deltaDirection);
-                        deltaDirection.first /= 100;
-                        deltaDirection.second /= 100;
-                        float x(output->getPos().first);
-                        float y(output->getPos().second);
-                        bool isAlly(false);
-                        proj->init(x,y,deltaDirection,isAlly);
-                        proj->removeAllAnimation();
-                        int color(Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent));
-                        string sprt("sprites/ProjectileHero.txt");
-                        proj->addAnimation(Visuel::createFromFile(sprt, color));
-                        proj->isEnabled = true;
+
+                        Projectile * proj = factProj->build(TypeProjectile::ToDirection,
+                                                            {output->getPos().first, output->getPos().second},
+                                                            {deltaDirection.first, deltaDirection.second, 10}
+                                                            );
+
+                        factProj->setDefaultProjectileSprite(proj);
                     }
                 };
                 output->addLambda(pattern,0.2,false);
@@ -82,8 +73,7 @@ Ennemi * FactoryEnnemy::build(TypeEnnemy enn)
             break;
 
         case StraightDownStop:
-            std::pair<float,float> dir = direction;
-            pattern = [this , output, dir]
+            pattern = [this , output, direction2]
             {
                 std::pair<float,float> temp(output->getDirection().first / 1.3, output->getDirection().second / 1.3);
                 output->setDirection(temp);
@@ -93,21 +83,43 @@ Ennemi * FactoryEnnemy::build(TypeEnnemy enn)
                     output->setAlreadyShot(alreadyShot);
                     for (float angle = 0; angle < M_PI ; angle += M_PI / 8)
                     {
-                        Projectile * proj = static_cast<Projectile *>(pool->getInPool(typePosable::Proj));
                         std::pair<float,float> directionProj(cos(angle) / 100, sin(angle) / 100);
-                        float x(output->getPos().first);
-                        float y(output->getPos().second);
-                        bool isAlly(false);
-                        string sprt("sprites/ProjectileHero.txt");
-                        proj->init(x,y,directionProj,isAlly);
-                        proj->removeAllAnimation();
-                        int color(Visuel::getColor(Visuel::Couleur::Rouge,Visuel::Couleur::Transparent));
-                        proj->addAnimation(Visuel::createFromFile(sprt,color));
-                        proj->isEnabled = true;
+
+                        Projectile * proj = factProj->build(TypeProjectile::ToDirection,
+                                                            {output->getPos().first,output->getPos().second},
+                                                            {directionProj.first, directionProj.second, 10});
+
+                        factProj->setDefaultProjectileSprite(proj);
                     }
                 }
             };
             output->addLambda(pattern,0.2,true);
+            break;
+
+        case Boss:
+            pattern = [this, output, direction2]
+            {
+                std::pair<float,float> speed(0,0);
+                output->setDirection(speed);
+            };
+            output->addLambda(pattern , 2, false);
+            pattern = [this, output]
+            {
+                Projectile * proj;
+                for (float angle = 0; angle < M_PI; angle += M_PI / 8)
+                {
+                    for (int i = 0; i < 3; i++)
+                    {
+                        proj = factProj->build(TypeProjectile::ToDirection,
+                                               {output->getPos().first, output->getPos().second},
+                                               {cos(angle),sin(angle),10 + (i * 1.1)}
+                                               );
+
+                        factProj->setDefaultProjectileSprite(proj);
+                    }
+                }
+            };
+            output->addLambda(pattern,2,false);
             break;
     }
 

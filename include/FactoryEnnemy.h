@@ -12,6 +12,7 @@ enum TypeEnnemy
     StraightDown,
     Circle,
     StraightDownStop,
+    Boss
 };
 
 class FactoryEnnemy
