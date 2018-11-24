@@ -14,6 +14,7 @@ Positionable::Positionable(float &startPosX,float &startPosY){
     physicEnabled = true;
     dir = std::pair<float , float>(0.001,0.001);
     timerFunc = 0;
+    animations = {};
 }
 
 void Positionable::update(float &time)

@@ -103,7 +103,8 @@ Ennemi * FactoryEnnemy::build(TypeEnnemy enn)
                 output->setDirection(speed);
             };
             output->addLambda(pattern , 2, false);
-            pattern = [this, output]
+
+            /*pattern = [this, output]
             {
                 Projectile * proj;
                 for (float angle = 0; angle < M_PI; angle += M_PI / 8)
@@ -119,7 +120,73 @@ Ennemi * FactoryEnnemy::build(TypeEnnemy enn)
                     }
                 }
             };
-            output->addLambda(pattern,2,false);
+            output->addLambda(pattern,2,false);*/
+            /*pattern = [this, output]
+            {
+                for (float angle = 0 ; angle < M_PI * 2; angle += M_PI / 8)
+                {
+                    std::function<void()> forwardProj;
+                    Projectile * proj;
+                    for (int i = 3; i < 6 ; i++)
+                    {
+                        std::pair<float,float> normalAngle;
+                        std::pair<float,float> delayedAngle;
+
+                        normalAngle.first = cos(angle);
+                        normalAngle.second = sin(angle);
+
+                        delayedAngle.first = cos(angle + M_PI / 3);
+                        delayedAngle.second = sin(angle + M_PI / 3);
+
+                        proj = factProj->build(TypeProjectile::ToDirection,
+                                           {output->getPos().first + 2 + (normalAngle.first * i) + (i - 3) * delayedAngle.first,
+                                            output->getPos().second + (normalAngle.second * i) + (i - 3) * delayedAngle.second
+                                           },
+                                           {
+                                               1,1,0
+                                           }
+                                           );
+
+                        factProj->setDefaultProjectileSprite(proj);
+                        forwardProj = [this,proj,normalAngle, &i]
+                        {
+                            std::pair<float,float> direction;
+                            direction.first = normalAngle.first;
+                            direction.second = normalAngle.second;
+                            Positionable::normalizeDirection(direction);
+                            direction.first *= 10;
+                            direction.second *= 10;
+                            proj->setDirection(direction);
+                        };
+                        proj->addLambda(forwardProj, 1,false);
+                    }
+                }
+            };*/
+
+            for (int i = 0; i < 3; i++)
+            {
+                pattern = [this, output, i]
+                {
+                    float offset(M_PI / 15);
+                    Projectile * proj;
+                    for (float angle = 0 + (i * offset); angle < 2 * M_PI + (i * offset); angle += M_PI / 8)
+                    {
+                        for (int j = 0 ; j < 2 ; j++)
+                        {
+                            proj = factProj->build(TypeProjectile::ToDirection,
+                                        {
+                                           output->getPos().first + (j * cos(angle)), output->getPos().second + (j * sin(angle))
+                                        },
+                                        {
+                                           cos(angle), sin(angle), 10
+                                        });
+
+                            factProj->setDefaultProjectileSprite(proj);
+                        }
+                    }
+                };
+                output->addLambda(pattern,0.5,false);
+            }
             break;
     }
 

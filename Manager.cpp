@@ -292,7 +292,7 @@ void Manager::init()
     std::function<void()> func;
 
     //pattern 1
-    func = [this,tempFact]
+    /*func = [this,tempFact]
     {
         Ennemi * e = tempFact->build(TypeEnnemy::StraightDown);
         float x(37);
@@ -351,7 +351,7 @@ void Manager::init()
     for (int i = 0; i < 5; i++)
     {
         h->addLambda(func,0.2,false);
-    }
+    }*/
 
     //Pattern 5
     func = [this, tempFact]

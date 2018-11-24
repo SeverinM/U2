@@ -6,7 +6,7 @@ enum TypeProjectile
 {
     ToTarget,
     ToDirection,
-    ToTargetProgressive,
+    ToDirectionProgressive,
     CircleProj,
 };
 
