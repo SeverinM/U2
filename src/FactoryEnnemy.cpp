@@ -187,6 +187,35 @@ Ennemi * FactoryEnnemy::build(TypeEnnemy enn)
                 };
                 output->addLambda(pattern,0.5,false);
             }
+
+            bool firstTime(true);
+            int offset;
+            for (int i = 0 ; i < 5 ; i++)
+            {
+                pattern = [this, output, &offset]
+                {
+                    for (float angle = 0 ; angle < M_PI * 2; angle += M_PI / 6)
+                    {
+                        offset = std::rand() % 4;
+                        Projectile * proj = factProj->build(TypeProjectile::ToDirection,
+                                                            {
+                                                                output->getPos().first,
+                                                                output->getPos().second
+                                                            },
+                                                            {
+                                                                cos(angle + (offset * (M_PI / 16))),
+                                                                sin(angle + (offset * (M_PI / 16))),
+                                                                ((std::rand() % 8) * 3) + 3
+                                                            });
+                        factProj->setDefaultProjectileSprite(proj);
+                    }
+                };
+                output->addLambda(pattern,firstTime ? 2 : 0.25,false);
+                if (firstTime)
+                {
+                    firstTime = false;
+                }
+            }
             break;
     }
 
