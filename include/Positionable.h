@@ -90,6 +90,7 @@ class Positionable
 
         inline void setFlag(int &newValue){flag = newValue;}
         inline int getFlag(){return flag;}
+        void stop();
 
 
     protected:

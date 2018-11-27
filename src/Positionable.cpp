@@ -139,3 +139,8 @@ Lambda& Positionable::addLambda(std::function<void()> lambda,float time,bool rep
     funcQueue.push(lamb);
     return funcQueue.back();
 }
+
+void Positionable::stop()
+{
+    dir = {0,0};
+}

@@ -163,10 +163,18 @@ Ennemi * FactoryEnnemy::build(TypeEnnemy enn)
                 }
             };*/
 
+            std::pair<float, float> * directionTransition = new std::pair<float, float>(-3,1);
+            pattern = [this, output, directionTransition]
+            {
+                output->setDirection(*directionTransition);
+            };
+            output->addLambda(pattern,2,false);
+
             for (int i = 0; i < 3; i++)
             {
                 pattern = [this, output, i]
                 {
+                    output->stop();
                     float offset(M_PI / 15);
                     Projectile * proj;
                     for (float angle = 0 + (i * offset); angle < 2 * M_PI + (i * offset); angle += M_PI / 8)
@@ -188,12 +196,20 @@ Ennemi * FactoryEnnemy::build(TypeEnnemy enn)
                 output->addLambda(pattern,0.5,false);
             }
 
+            std::pair<float, float> * directionTransition2 = new std::pair<float, float>(15,0);
+            pattern = [this, output, directionTransition2]
+            {
+                output->setDirection(*directionTransition2);
+            };
+            output->addLambda(pattern,1,false);
+
             bool firstTime(true);
             int offset;
             for (int i = 0 ; i < 5 ; i++)
             {
                 pattern = [this, output, &offset]
                 {
+                    output->stop();
                     for (float angle = 0 ; angle < M_PI * 2; angle += M_PI / 6)
                     {
                         offset = std::rand() % 4;
