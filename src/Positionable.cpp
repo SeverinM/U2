@@ -81,6 +81,8 @@ map<pair<int,int>, CHAR_INFO *> Positionable::getAnimation()
 
 void Positionable::setPosition(float &newX,float &newY)
 {
+    float tempX(posX);
+    float tempY(posY);
     posX = newX;
     posY = newY;
     if (posX < 0 || posX >= SIZEX || posY < 0 || posY >= SIZEY)

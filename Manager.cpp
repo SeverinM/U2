@@ -134,7 +134,7 @@ bool Manager::MainLoop(float time)
     Positionable ** posList = poolManager->getProjectiles();
     int sizeA = poolManager->getProPoolSize();
     for(int i = 0; i < sizeA ; i ++){
-        Positionable * pp = posList[i];
+        Projectile * pp = static_cast<Projectile *>(posList[i]);
         if(pp != nullptr){
             if(pp->isEnabled){
                 pp->update(time);
@@ -195,7 +195,7 @@ bool Manager::MainLoop(float time)
     drawAllElementIn(poolManager->getEnnemies(),poolManager->getEnnPoolSize());
     drawAllElementIn(poolManager->getHero(),poolManager->getHerPoolSize());
 
-    //bufferManager->draw();
+    bufferManager->draw();
 
     //Parcours des ennemies
     Positionable ** ennemies(static_cast<Positionable **>(poolManager->getEnnemies()));

@@ -425,10 +425,10 @@
 1541256543 c:\users\severin.michaut\documents\u2\include\hero.h
 	"Perso.h"
 
-1541256543 c:\users\severin.michaut\documents\u2\include\perso.h
+1542702189 c:\users\severin.michaut\documents\u2\include\perso.h
 	"Positionable.h"
 
-1542273669 c:\users\severin.michaut\documents\u2\include\positionable.h
+1543262817 c:\users\severin.michaut\documents\u2\include\positionable.h
 	<stdio.h>
 	"Visuel.h"
 	<vector>
@@ -447,30 +447,31 @@
 	<string>
 	<memory>
 
-1542273669 c:\users\severin.michaut\documents\u2\include\ennemi.h
+1542702189 c:\users\severin.michaut\documents\u2\include\ennemi.h
 	"Perso.h"
 	"PoolManager.h"
 
-1541256543 c:\users\severin.michaut\documents\u2\include\poolmanager.h
+1543222410 c:\users\severin.michaut\documents\u2\include\poolmanager.h
 	"Hero.h"
 	"Ennemi.h"
 	"Projectile.h"
 
-1541256543 c:\users\severin.michaut\documents\u2\include\projectile.h
+1542702189 c:\users\severin.michaut\documents\u2\include\projectile.h
 	"Positionable.h"
 
-1541256543 c:\users\severin.michaut\documents\u2\include\buffermanager.h
+1543222572 c:\users\severin.michaut\documents\u2\include\buffermanager.h
 	"Positionable.h"
 	<vector>
 	"PoolManager.h"
 	<windows.h>
 
-1542276796 c:\users\severin.michaut\documents\u2\include\factoryennemy.h
+1543222410 c:\users\severin.michaut\documents\u2\include\factoryennemy.h
 	<queue>
 	"Positionable.h"
 	<memory>
 	"PoolManager.h"
 	"Ennemi.h"
+	"FactoryProjectile.h"
 
 1539807554 c:\users\severin.michaut\documents\u2\include\gamewrapper.h
 	<windows.h>
@@ -480,7 +481,7 @@
 1541256543 c:\users\severin.michaut\documents\u2\include\texte.h
 	"Positionable.h"
 
-1542276740 source:c:\users\severin.michaut\documents\u2\manager.cpp
+1543501701 source:c:\users\severin.michaut\documents\u2\manager.cpp
 	"Manager.h"
 	<conio.h>
 	"include/Visuel.h"
@@ -493,10 +494,10 @@
 1541256543 source:c:\users\severin.michaut\documents\u2\src\buffermanager.cpp
 	"../include/BufferManager.h"
 
-1542273669 source:c:\users\severin.michaut\documents\u2\src\ennemi.cpp
+1542702189 source:c:\users\severin.michaut\documents\u2\src\ennemi.cpp
 	"../include/Ennemi.h"
 
-1542276773 source:c:\users\severin.michaut\documents\u2\src\factoryennemy.cpp
+1543501808 source:c:\users\severin.michaut\documents\u2\src\factoryennemy.cpp
 	"FactoryEnnemy.h"
 	<math.h>
 
@@ -518,13 +519,13 @@
 	"../include/Perso.h"
 	"../include/Positionable.h"
 
-1541256543 source:c:\users\severin.michaut\documents\u2\src\poolmanager.cpp
+1543502343 source:c:\users\severin.michaut\documents\u2\src\poolmanager.cpp
 	"../include/PoolManager.h"
 	<typeinfo>
 	<iostream>
 	<string>
 
-1542273669 source:c:\users\severin.michaut\documents\u2\src\positionable.cpp
+1543502688 source:c:\users\severin.michaut\documents\u2\src\positionable.cpp
 	"../include/Positionable.h"
 	<windows.h>
 	<algorithm>
@@ -532,13 +533,12 @@
 	<tgmath.h>
 	<math.h>
 
-1541256543 source:c:\users\severin.michaut\documents\u2\src\projectile.cpp
+1543502872 source:c:\users\severin.michaut\documents\u2\src\projectile.cpp
 	<iostream>
 	"../include/Projectile.h"
 
-1541256543 source:c:\users\severin.michaut\documents\u2\src\texte.cpp
+1543500868 source:c:\users\severin.michaut\documents\u2\src\texte.cpp
 	"Texte.h"
-	<jansson.h>
 
 1541256543 source:c:\users\severin.michaut\documents\u2\src\visuel.cpp
 	"../include/Visuel.h"
@@ -689,5 +689,11 @@
 	"PoolManager.h"
 
 1542918376 source:c:\users\séverin\documents\u2\src\factoryprojectile.cpp
+	"FactoryProjectile.h"
+
+1543222410 c:\users\severin.michaut\documents\u2\include\factoryprojectile.h
+	"PoolManager.h"
+
+1543502271 source:c:\users\severin.michaut\documents\u2\src\factoryprojectile.cpp
 	"FactoryProjectile.h"
 

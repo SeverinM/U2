@@ -1,5 +1,4 @@
 #include "Texte.h"
-#include <jansson.h>
 
 Texte::Texte(float &startPosX,float &startPosY) : Positionable(startPosX, startPosY){}
 

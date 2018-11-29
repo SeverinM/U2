@@ -17,7 +17,9 @@ void Projectile::init(float &posX,float &posY, std::pair<float, float> &directio
 }
 
 void Projectile::update(float &time){
-    moveBy(dir.first,dir.second);
+    float newX(dir.first * time);
+    float newY(dir.second * time);
+    moveBy(newX,newY);
     Positionable::update(time);
 }
 

@@ -16,7 +16,8 @@ void FactoryProjectile::setDefaultProjectileSprite(Projectile * proj)
 
 Projectile * FactoryProjectile::build(TypeProjectile typeproj, std::pair<float,float> origin, Arguments arguments)
 {
-    Projectile * proj = static_cast<Projectile *>(manager->getInPool(typePosable::Enn));
+    Projectile * proj = static_cast<Projectile *>(manager->getInPool(typePosable::Proj));
+    proj->isEnabled = true;
     proj->setIsFromPlayer(false);
     proj->removeAllAnimation();
     std::pair<float,float> direction;
