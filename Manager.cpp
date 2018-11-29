@@ -75,7 +75,7 @@ bool Manager::MainLoop(float time)
         inputAutorisation[1][1] = moveTimerRightLeft;
     }
     if(is_input_key_down(INPUT_KEY_SPACE)){
-        //h->tryToShoot();
+        h->tryToShoot();
     }
 
     if(inputAutorisation[0][0] > 0)
@@ -102,7 +102,7 @@ bool Manager::MainLoop(float time)
         proj->addAnimation(Visuel::createFromFile(defaultSprite,
                                                    Visuel::getColor(Visuel::Couleur::Cyan,
                                                                     Visuel::Couleur::Transparent)));
-        std::pair<float , float> direction(0,-0.07);
+        std::pair<float , float> direction(0,-6);
         float x(h->getPos().first + 2);
         float y(h->getPos().second);
         bool isPlayer(true);
