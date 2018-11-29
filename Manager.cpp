@@ -75,7 +75,7 @@ bool Manager::MainLoop(float time)
         inputAutorisation[1][1] = moveTimerRightLeft;
     }
     if(is_input_key_down(INPUT_KEY_SPACE)){
-        h->tryToShoot();
+        //h->tryToShoot();
     }
 
     if(inputAutorisation[0][0] > 0)
@@ -195,7 +195,7 @@ bool Manager::MainLoop(float time)
     drawAllElementIn(poolManager->getEnnemies(),poolManager->getEnnPoolSize());
     drawAllElementIn(poolManager->getHero(),poolManager->getHerPoolSize());
 
-    bufferManager->draw();
+    //bufferManager->draw();
 
     //Parcours des ennemies
     Positionable ** ennemies(static_cast<Positionable **>(poolManager->getEnnemies()));
@@ -231,7 +231,7 @@ bool Manager::MainLoop(float time)
             }
 
             //Reecriture du buffer physique
-            if (currentEnnPos->isEnabled)
+            if (currentEnnPos->isEnabled && currentEnnPos->physicEnabled)
             {
                 for (auto &a : currentEnnPos->getAllPosition())
                 {
@@ -292,7 +292,7 @@ void Manager::init()
     std::function<void()> func;
 
     //pattern 1
-    /*func = [this,tempFact]
+    func = [this,tempFact]
     {
         Ennemi * e = tempFact->build(TypeEnnemy::StraightDown);
         float x(37);
@@ -306,7 +306,7 @@ void Manager::init()
     };
 
     //Pattern 2
-    func = [this,tempFact]
+    /*func = [this,tempFact]
     {
         std::pair<float,float> direction(-3,10);
         tempFact->setDirection(direction);
