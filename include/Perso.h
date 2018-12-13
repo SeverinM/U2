@@ -21,8 +21,13 @@ class Perso : public Positionable
         inline int getPV(){
             return pv;
         }
+        inline void setLambdaEnd(std::function<void()> newValue)
+        {
+            endLambda = newValue;
+        }
 
     protected:
+        std::function<void()> endLambda = []{};
         int pv;
         float timerShoot;
         float timerHit;

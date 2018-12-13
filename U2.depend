@@ -402,7 +402,7 @@
 	"PoolManager.h"
 	"Ennemi.h"
 
-1541256543 source:c:\users\severin.michaut\documents\u2\main.cpp
+1544704508 source:c:\users\severin.michaut\documents\u2\main.cpp
 	<iostream>
 	<windows.h>
 	<stdio.h>
@@ -414,7 +414,7 @@
 
 1539604877 c:\users\severin.michaut\documents\u2\nytimer.h
 
-1542273669 c:\users\severin.michaut\documents\u2\manager.h
+1544704406 c:\users\severin.michaut\documents\u2\manager.h
 	<windows.h>
 	"include/Hero.h"
 	"include/Ennemi.h"
@@ -425,7 +425,7 @@
 1541256543 c:\users\severin.michaut\documents\u2\include\hero.h
 	"Perso.h"
 
-1542702189 c:\users\severin.michaut\documents\u2\include\perso.h
+1544702808 c:\users\severin.michaut\documents\u2\include\perso.h
 	"Positionable.h"
 
 1543262817 c:\users\severin.michaut\documents\u2\include\positionable.h
@@ -473,7 +473,7 @@
 	"Ennemi.h"
 	"FactoryProjectile.h"
 
-1539807554 c:\users\severin.michaut\documents\u2\include\gamewrapper.h
+1544704049 c:\users\severin.michaut\documents\u2\include\gamewrapper.h
 	<windows.h>
 	"BufferManager.h"
 	"Texte.h"
@@ -481,7 +481,7 @@
 1541256543 c:\users\severin.michaut\documents\u2\include\texte.h
 	"Positionable.h"
 
-1543501701 source:c:\users\severin.michaut\documents\u2\manager.cpp
+1544703487 source:c:\users\severin.michaut\documents\u2\manager.cpp
 	"Manager.h"
 	<conio.h>
 	"include/Visuel.h"
@@ -515,11 +515,11 @@
 1541256543 c:\users\severin.michaut\documents\u2\include\nytimer.h
 	<windows.h>
 
-1541256543 source:c:\users\severin.michaut\documents\u2\src\perso.cpp
+1544703672 source:c:\users\severin.michaut\documents\u2\src\perso.cpp
 	"../include/Perso.h"
 	"../include/Positionable.h"
 
-1543502343 source:c:\users\severin.michaut\documents\u2\src\poolmanager.cpp
+1543502908 source:c:\users\severin.michaut\documents\u2\src\poolmanager.cpp
 	"../include/PoolManager.h"
 	<typeinfo>
 	<iostream>

@@ -33,9 +33,13 @@ class Manager
         void stopLoop();
         bool isStop();
         void init();
-        Hero * h;
+        inline void setStop(bool newValue)
+        {
+            stop = newValue;
+        }
 
     private:
+        Hero * h;
         bool wasHitThisFrame = false;
         bool stop;
         int timeUpdate;

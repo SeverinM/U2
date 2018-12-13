@@ -12,6 +12,10 @@ class GameWrapper
         void GameOver();
         bool isStop();
         void switchStop();
+        inline void setStop(bool value)
+        {
+            stop = value;
+        }
 
     protected:
 

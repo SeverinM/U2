@@ -26,10 +26,11 @@ int main()
     {
         if (man.MainLoop(time.getElapsedSeconds(true)))
         {
-            gw.switchStop();
-            break;
+            man.setStop(false);
         }
     }
+
+    gw.setStop(false);
     while (!gw.isStop())
     {
         gw.GameOver();

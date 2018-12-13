@@ -300,13 +300,14 @@ void Manager::init()
         e->setPosition(x,y);
     };
     h->addLambda(func,2,false);
+
     for (int i = 0; i < 5 ; i++)
     {
         h->addLambda(func,0.2,false);
     };
 
     //Pattern 2
-    /*func = [this,tempFact]
+    func = [this,tempFact]
     {
         std::pair<float,float> direction(-3,10);
         tempFact->setDirection(direction);
@@ -351,7 +352,7 @@ void Manager::init()
     for (int i = 0; i < 5; i++)
     {
         h->addLambda(func,0.2,false);
-    }*/
+    }
 
     //Pattern 5
     func = [this, tempFact]
@@ -360,7 +361,11 @@ void Manager::init()
         std::pair<float,float> position(0,0);
         tempFact->setPosition(position);
         tempFact->setDirection(direction);
-        tempFact->build(TypeEnnemy::Boss);
+        Perso * pers = tempFact->build(TypeEnnemy::Boss);
+        pers->setLambdaEnd([this]
+                           {
+                                stop = true;
+                           });
     };
     h->addLambda(func,5,false);
 }

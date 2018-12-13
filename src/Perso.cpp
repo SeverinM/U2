@@ -23,6 +23,7 @@ bool Perso::takeDamage(int &damage){
     pv -= damage;
     if(pv <= 0){
         Mourir();
+        endLambda();
         output = true;
     }
     return output;
