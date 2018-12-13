@@ -26,14 +26,26 @@ int main()
     {
         if (man.MainLoop(time.getElapsedSeconds(true)))
         {
-            man.setStop(false);
+            man.setStop(true);
+            gw.setWon(false);
         }
     }
 
     gw.setStop(false);
-    while (!gw.isStop())
+
+    if (gw.getWon())
     {
-        gw.GameOver();
+        while (!gw.isStop())
+        {
+            gw.Win();
+        }
+    }
+    else
+    {
+        while (!gw.isStop())
+        {
+            gw.GameOver();
+        }
     }
 
     return 0;

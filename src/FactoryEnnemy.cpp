@@ -33,7 +33,7 @@ Ennemi * FactoryEnnemy::build(TypeEnnemy enn)
                 Positionable * her = pool->getHero()[0];
                 Projectile * proj = factProj->build(TypeProjectile::ToTarget,
                                                     {output->getPos().first,output->getPos().second},
-                                                    {her->getPos().first,her->getPos().second,10});
+                                                    {her->getPos().first + 2,her->getPos().second,10});
 
 
                 factProj->setDefaultProjectileSprite(proj);
@@ -163,16 +163,21 @@ Ennemi * FactoryEnnemy::build(TypeEnnemy enn)
                 }
             };*/
 
-            std::pair<float, float> * directionTransition = new std::pair<float, float>(-3,1);
-            pattern = [this, output, directionTransition]
+            //Mouvement 1
+            std::vector<std::function<void()>> attack1;
+            std::pair<float, float> * directionTransition = new std::pair<float, float>(20,4);
+            std::function<void()> mvmt1;
+            mvmt1 = [this, output, directionTransition]
             {
                 output->setDirection(*directionTransition);
+                directionTransition->first *= -1;
+                directionTransition->second *= -1;
             };
-            output->addLambda(pattern,2,false);
 
+            //Attaque 1
             for (int i = 0; i < 3; i++)
             {
-                pattern = [this, output, i]
+                attack1.push_back([this, output, i]
                 {
                     output->stop();
                     float offset(M_PI / 15);
@@ -192,22 +197,36 @@ Ennemi * FactoryEnnemy::build(TypeEnnemy enn)
                             factProj->setDefaultProjectileSprite(proj);
                         }
                     }
-                };
-                output->addLambda(pattern,0.5,false);
+                });
             }
 
+            for (int j = 0; j < 10; j++)
+            {
+                output->addLambda(mvmt1,2,false);
+                for (auto &fc : attack1)
+                {
+                    output->addLambda(fc,1,false);
+                }
+            }
+
+            //Mouvement 2
+            /*std::function<void()> mvmt2;
             std::pair<float, float> * directionTransition2 = new std::pair<float, float>(15,0);
-            pattern = [this, output, directionTransition2]
+            mvmt2 = [this, output, directionTransition2, mvmt2]
             {
                 output->setDirection(*directionTransition2);
+                directionTransition2->first *= -1;
+                output->addLambda(mvmt2,1,false);
             };
-            output->addLambda(pattern,1,false);
+            output->addLambda(mvmt2,1,false);
 
-            bool firstTime(true);
+
+            //Attaque 2
+            std::function<void()> attack2;
             int offset;
             for (int i = 0 ; i < 5 ; i++)
             {
-                pattern = [this, output, &offset]
+                attack2 = [this, output, &offset, &i, attack2]
                 {
                     output->stop();
                     for (float angle = 0 ; angle < M_PI * 2; angle += M_PI / 6)
@@ -225,13 +244,11 @@ Ennemi * FactoryEnnemy::build(TypeEnnemy enn)
                                                             });
                         factProj->setDefaultProjectileSprite(proj);
                     }
+                    output->addLambda(attack2,i == 0 ? 2 : 0.25, false);
                 };
-                output->addLambda(pattern,firstTime ? 2 : 0.25,false);
-                if (firstTime)
-                {
-                    firstTime = false;
-                }
-            }
+                output->addLambda(attack2,i == 0 ? 2 : 0.25, false);
+            }*/
+
             break;
     }
 

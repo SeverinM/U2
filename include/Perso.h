@@ -21,6 +21,10 @@ class Perso : public Positionable
         inline int getPV(){
             return pv;
         }
+        inline void setPv(int newValue)
+        {
+            pv = newValue;
+        }
         inline void setLambdaEnd(std::function<void()> newValue)
         {
             endLambda = newValue;
